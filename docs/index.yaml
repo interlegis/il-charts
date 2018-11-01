@@ -2,10 +2,10 @@ apiVersion: v1
 entries:
   solr:
   - appVersion: 7.5.0
-    created: 2018-10-31T14:38:17.018087542-03:00
+    created: 2018-11-01T11:04:23.216108006-03:00
     description: Solr is the popular, blazing-fast, open source enterprise search
       platform built on Apache Lucene™
-    digest: c3a61ac525b80162263a54d8f436d85059021b48f8a276b4ac3f9298145d94e6
+    digest: 0fe502c52cfc32c01daec886554313a2531990dc2ee45477bbdd6f88e54b7596
     home: http://lucene.apache.org/solr/
     icon: http://lucene.apache.org/solr/5_0_0/images/solr.svg
     maintainers:
@@ -18,4 +18,4 @@ entries:
     urls:
     - https://interlegis.github.io/il-charts/solr-0.2.1.tgz
     version: 0.2.1
-generated: 2018-10-31T14:38:17.016551865-03:00
+generated: 2018-11-01T11:04:23.214851252-03:00

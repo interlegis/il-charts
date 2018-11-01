@@ -61,6 +61,8 @@ spec:
               value: "{{ .Values.heap }}"
             - name: SOLR_LOG_LEVEL
               value: "{{ .Values.logLevel }}"
+            - name: SOLR_PORT
+              value: "{{ .Values.ports.client.containerPort }}"
           ports:
             - name: solr-port
               containerPort: {{ .Values.ports.client.containerPort }}
