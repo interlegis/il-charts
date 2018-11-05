@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   solr:
   - appVersion: 7.5.0
-    created: 2018-11-05T12:26:56.83263189-02:00
+    created: 2018-11-05T14:17:26.001429006-02:00
     description: Solr is the popular, blazing-fast, open source enterprise search
       platform built on Apache Lucene™
     digest: 0fe502c52cfc32c01daec886554313a2531990dc2ee45477bbdd6f88e54b7596
@@ -21,12 +21,12 @@ entries:
   zabbix-agent:
   - apiVersion: v1
     appVersion: "4.0"
-    created: 2018-11-05T12:26:56.817156019-02:00
+    created: 2018-11-05T14:17:26.001587622-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
-    digest: 1b3a0b7940b2ec94c4b4f154ba7d53da4e0d83833d6a0f1a547a5551c69b744f
+    digest: a48d34c7d6cf095b3443a92f9f118ef7f366f25b42476b57428c7684095c4af9
     icon: https://assets.zabbix.com/img/logo.svg
     name: zabbix-agent
     urls:
-    - https://interlegis.github.io/il-charts/zabbix-agent-0.1.0.tgz
+    - https://interlegis.github.io/il-charts/docs/zabbix-agent-0.1.0.tgz
     version: 0.1.0
-generated: 2018-11-05T12:26:56.816906819-02:00
+generated: 2018-11-05T14:17:26.000557706-02:00
