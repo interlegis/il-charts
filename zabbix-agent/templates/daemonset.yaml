@@ -1,0 +1,74 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: {{ include "zabbix-agent.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "zabbix-agent.name" . }}
+    helm.sh/chart: {{ include "zabbix-agent.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+
+spec:
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "zabbix-agent.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      hostPID: true
+      hostIPC: true
+      hostNetwork: true
+      containers:
+        - resources:
+            limits:
+              cpu: 100m
+              memory: 54Mi
+            requests:
+              cpu: 100m
+              memory: 54Mi
+          securityContext:
+            privileged: true
+          ports:
+          - containerPort: 10050
+             name: {{ .Chart.Name }}
+          env:
+            - name: ZBX_DEBUGLEVEL
+              value: "{{ .Values.zabbix.debugLevel }}"
+            - name: ZBX_ENABLEREMOTECOMMANDS
+              value: "{{ .Values.zabbix.enableRemoteCommands }}"
+            - name: ZBX_METADATAITEM
+              value: "{{ .Values.zabbix.metadataItem }}"
+            - name: ZBX_HOSTNAMEITEM
+              value: "{{ .Values.zabbix.hostnameItem }}"
+            - name: ZBX_REFRESHACTIVECHECKS
+              value: "{{ .Values.zabbix.refreshActiveChecks }}"
+            - name: ZBX_SERVER_HOST
+              value: "{{ .Values.zabbix.serverHost }}"
+            - name: ZBX_STARTAGENTS
+              value: "{{ .Values.zabbix.startAgents }}"
+            - name: ZBX_TIMEOUT
+              value: "{{ .Values.zabbix.timeout }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          name: {{ .Chart.Name }}
+          volumeMounts:
+            - name: proc
+              mountPath: /data/proc
+            - name: sys
+              mountPath: /sys
+            - name: dev
+              mountPath: /data/dev
+            - name: dockersock
+              mountPath: /var/run/docker.sock
+      volumes:
+        - name: proc
+          hostPath: 
+              path: /proc
+        - name: sys
+          hostPath:
+              path: /sys
+        - name: dev
+          hostPath:
+              path: /dev
+        - name: dockersock
+          hostPath:
+              path: /var/run/docker.sock
