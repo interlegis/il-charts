@@ -1,0 +1,1 @@
+If you have auto registration configured correctly, your Zabbix monitored hosts will appear automatically in your Zabbix Server installation.
