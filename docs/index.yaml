@@ -16,7 +16,7 @@ entries:
     - https://hub.docker.com/_/solr/
     - https://github.com/apache/lucene-solr
     urls:
-    - https://interlegis.github.io/il-charts/docs/solr-0.2.1.tgz
+    - https://interlegis.github.io/il-charts/solr-0.2.1.tgz
     version: 0.2.1
   zabbix-agent:
   - apiVersion: v1
@@ -27,6 +27,6 @@ entries:
     icon: https://assets.zabbix.com/img/logo.svg
     name: zabbix-agent
     urls:
-    - https://interlegis.github.io/il-charts/docs/zabbix-agent-0.1.0.tgz
+    - https://interlegis.github.io/il-charts/zabbix-agent-0.1.0.tgz
     version: 0.1.0
 generated: 2018-11-05T14:30:59.188195669-02:00
