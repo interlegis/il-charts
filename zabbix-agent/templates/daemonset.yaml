@@ -58,6 +58,11 @@ spec:
               mountPath: /data/dev
             - name: dockersock
               mountPath: /var/run/docker.sock
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/controlplane
+      - effect: NoExecute
+        key: node-role.kubernetes.io/etcd
       volumes:
         - name: proc
           hostPath: 
