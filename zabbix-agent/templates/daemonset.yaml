@@ -30,7 +30,6 @@ spec:
             privileged: true
           ports:
           - containerPort: 10050
-             name: {{ .Chart.Name }}
           env:
             - name: ZBX_DEBUGLEVEL
               value: "{{ .Values.zabbix.debugLevel }}"
