@@ -10,7 +10,7 @@ zabbix:
   enableRemoteCommands: 0
   metadataItem: system.uname
   hostnameItem: system.hostname
-  refreshActiveChecks: '120'
+  refreshActiveChecks: 120
   startAgents: 10
   timeout: 30
   serverHost: localhost
