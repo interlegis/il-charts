@@ -1,0 +1,26 @@
+# Default values for keepalived.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: interlegis/keepalived
+  tag: 1.2.24-r1-1
+  pullPolicy: IfNotPresent
+
+keepalived:
+  auth_pass: agoodpwd
+  check_port: 443
+  check_script: ss -ltn | grep :443
+  interface: eth0
+  virtual_ip: 192.168.1.1
+  virtual_mask: 24
+  vrid: 124
+
+nodeSelector:
+  role: ingress
+
+tolerations: []
+
+affinity: {}

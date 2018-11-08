@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "keepalived.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "keepalived.name" . }}
+    helm.sh/chart: {{ include "keepalived.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "keepalived.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "keepalived.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      hostNetwork: true
+      containers:
+      - env:
+        - name: AUTH_PASS
+          value: "{{ .Values.keepalived.auth_pass }}"
+        - name: CHECK_PORT
+          value: "{{ .Values.keepalived.check_port }}"
+        - name: CHECK_SCRIPT
+          value: "{{ .Values.keepalived.check_script }}"
+        - name: INTERFACE
+          value: "{{ .Values.keepalived.interface }}"
+        - name: VIRTUAL_IP
+          value: "{{ .Values.keepalived.virtual_ip }}"
+        - name: VIRTUAL_MASK
+          value: "{{ .Values.keepalived.virtual_mask }}"
+        - name: VRID
+          value: "{{ .Values.keepalived.vrid }}"
+        name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        resources: {}
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - NET_BROADCAST
+        stdin: true
+        tty: true
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+      restartPolicy: Always
+

@@ -1,0 +1,1 @@
+Do not forget to create labels on your keepalived hosts! The default is "role: ingress"
