@@ -1,0 +1,61 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "portalmodelo.fullname" . }}-plone
+  labels:
+    app: {{ template "portalmodelo.name" . }}
+    chart: {{ template "portalmodelo.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "portalmodelo.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "portalmodelo.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      initContainers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        name: {{ .Release.Name }}-plonecfg
+        entrypoint: [ "/configure.sh" ]
+        env:
+          - name: ZEO_ADDRESS
+            value: {{ template "portalmodelo.fullname" . }}-zeoserver:8100
+          - name: EMAIL
+            value: {{ .Values.portal.adminEmail }}
+          - name: PASSWORD
+            value: {{ .Values.portal.adminPassword }}
+          - name:  TITLE
+            value: {{ .Values.portal.title }}
+          - name: DESCR
+            value: {{ .Values.portal.description }}
+          - name: HOSTNAME
+            value: {{ .Values.portal.hostname }}
+        volumeMounts:
+        - mountPath: /data
+          name: {{ .Release.Name }}-data
+      containers:
+      - env:
+        - name: ZEO_ADDRESS
+          value: {{ template "portalmodelo.fullname" . }}-zeoserver:8100
+        - name: ZEO_SHARED_BLOB_DIR
+          value: "on"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        name: {{ .Release.Name }}-plone
+        ports:
+        - containerPort: 8080
+        - containerPort: 8881
+        resources: {}
+        volumeMounts:
+        - mountPath: /data
+          name: {{ .Release.Name }}-data
+      restartPolicy: Always
+      volumes:
+      - name: {{ .Release.Name }}-data
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-data

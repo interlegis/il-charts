@@ -1,0 +1,46 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "portalmodelo.fullname" . }}-zeoserver
+  labels:
+    app: {{ template "portalmodelo.name" . }}-zeoserver
+    chart: {{ template "portalmodelo.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "portalmodelo.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "portalmodelo.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      initContainers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        name: {{ .Release.Name }}-initzeo
+        command: [ "mkdir", "-p", "/data/filestorage", "/data/zeoserver" ]
+        volumeMounts:
+        - mountPath: /data
+          name: {{ .Release.Name }}-data
+      containers:
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        args:
+        - zeoserver
+        env:
+        - name: ZEO_SHARED_BLOB_DIR
+          value: "on"
+        name: {{ .Release.Name }}-zeoserver
+        volumeMounts:
+        - mountPath: /data
+          name: {{ .Release.Name }}-data
+        ports:
+        - containerPort: 8100
+      restartPolicy: Always
+      volumes:
+      - name: {{ .Release.Name }}-data
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-data
