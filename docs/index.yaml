@@ -3,16 +3,17 @@ entries:
   keepalived:
   - apiVersion: v1
     appVersion: 1.2.24
-    created: 2018-11-09T09:15:15.986250653-02:00
+    created: 2018-11-09T09:19:27.698708956-02:00
     description: Highly available IP addresses with VRRP
-    digest: c8dd706a27d59d08c5ee84dae059df0ea2583b45f1723edadaaa8cf375cbb197
+    digest: 994dc73475e1293935f33f92277c3cd871737dc226e342a91025161074265418
+    icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
     name: keepalived
     urls:
-    - https://interlegis.github.io/il-charts/keepalived-0.1.0.tgz
-    version: 0.1.0
+    - https://interlegis.github.io/il-charts/keepalived-0.1.1.tgz
+    version: 0.1.1
   solr:
   - appVersion: 7.5.0
-    created: 2018-11-09T09:15:15.987415606-02:00
+    created: 2018-11-09T09:19:27.69950971-02:00
     description: Solr is the popular, blazing-fast, open source enterprise search
       platform built on Apache Lucene™
     digest: 0fe502c52cfc32c01daec886554313a2531990dc2ee45477bbdd6f88e54b7596
@@ -31,7 +32,7 @@ entries:
   zabbix-agent:
   - apiVersion: v1
     appVersion: "4"
-    created: 2018-11-09T09:15:15.987801364-02:00
+    created: 2018-11-09T09:19:27.699843306-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: 45c096000ed57ef8de7433d796d0d1d881afac631a7bc12a7daa43c97119973b
     icon: https://assets.zabbix.com/img/logo.svg
@@ -41,7 +42,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "4"
-    created: 2018-11-09T09:15:15.98761691-02:00
+    created: 2018-11-09T09:19:27.699672269-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: c1eebb05c6843f26ee127aca2682c2a6177bb6995d8b1ce0fb79362ba850f871
     icon: https://assets.zabbix.com/img/logo.svg
@@ -49,4 +50,4 @@ entries:
     urls:
     - https://interlegis.github.io/il-charts/zabbix-agent-0.1.1.tgz
     version: 0.1.1
-generated: 2018-11-09T09:15:15.98602377-02:00
+generated: 2018-11-09T09:19:27.698463799-02:00
