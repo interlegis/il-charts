@@ -25,6 +25,9 @@ portal:
   description: Cidade - UF
   hostname: teste.df.leg.br
 
+instance:
+  zeoclient: false
+
 ingress:
   enabled: true
   annotations: {}

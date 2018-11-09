@@ -19,3 +19,4 @@ Este é um Helm Chart para instalação de um Portal Modelo para Casas Legislati
 | portal.title              | Título na página inicial do portal         | `Câmara Municipal`    |
 | portal.description        | Descrição abaixo do título do portal       | `Cidade - UF`         |
 | portal.hostname           | Nome de domínio utilizado para acessá-lo   | `teste.df.leg.br`     |
+| instance.zeoclient        | Se o Portal rodará com Zeoserver ou sem    | `false` (sem zeo)     |

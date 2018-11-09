@@ -24,8 +24,10 @@ spec:
         name: {{ .Release.Name }}-plonecfg
         entrypoint: [ "/configure.sh" ]
         env:
+          {{- if .Values.instance.zeoclient }}
           - name: ZEO_ADDRESS
             value: {{ template "portalmodelo.fullname" . }}-zeoserver:8100
+          {{- end }}
           - name: EMAIL
             value: {{ .Values.portal.adminEmail }}
           - name: PASSWORD
@@ -41,10 +43,12 @@ spec:
           name: {{ .Release.Name }}-data
       containers:
       - env:
+        {{- if .Values.instance.zeoclient }}
         - name: ZEO_ADDRESS
           value: {{ template "portalmodelo.fullname" . }}-zeoserver:8100
         - name: ZEO_SHARED_BLOB_DIR
           value: "on"
+        {{- end }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         name: {{ .Release.Name }}-plone
         ports:
