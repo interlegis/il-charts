@@ -23,7 +23,13 @@ spec:
       initContainers:
       - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         name: {{ .Release.Name }}-initzeo
-        command: [ "mkdir", "-p", "/data/filestorage", "/data/zeoserver" ]
+        command: 
+        - "mkdir"
+        - "-p"
+        - "/data/filestorage"
+        - "/data/blobstorage"
+        - "/data/zeoserver"
+        - "/data/log"
         volumeMounts:
         - mountPath: /data
           name: {{ .Release.Name }}-data

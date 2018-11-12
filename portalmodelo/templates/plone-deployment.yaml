@@ -21,6 +21,18 @@ spec:
     spec:
       initContainers:
       - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        name: {{ .Release.Name }}-initplone
+        command: 
+        - "mkdir"
+        - "-p"
+        - "/data/filestorage"
+        - "/data/blobstorage"
+        - "/data/instance"
+        - "/data/log"
+        volumeMounts:
+        - mountPath: /data
+          name: {{ .Release.Name }}-data
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         name: {{ .Release.Name }}-plonecfg
         entrypoint: [ "/configure.sh" ]
         env:
