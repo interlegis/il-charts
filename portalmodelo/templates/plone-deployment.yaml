@@ -41,6 +41,9 @@ spec:
           {{- if .Values.instance.zeoclient }}
           - name: ZEO_ADDRESS
             value: {{ template "portalmodelo.fullname" . }}-zeoserver:8100
+          {{- else }}
+          - name: ZEO_ADDRESS
+            value: ""
           {{- end }}
           - name: EMAIL
             value: {{ .Values.portal.adminEmail }}
