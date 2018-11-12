@@ -36,7 +36,7 @@ spec:
           name: {{ .Release.Name }}-data
       - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         name: {{ .Release.Name }}-plonecfg
-        entrypoint: [ "/configure.sh" ]
+        command: [ "/configure.sh" ]
         env:
           {{- if .Values.instance.zeoclient }}
           - name: ZEO_ADDRESS
