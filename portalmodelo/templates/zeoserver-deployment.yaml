@@ -49,6 +49,10 @@ spec:
       restartPolicy: Always
       volumes:
       - name: {{ .Release.Name }}-data
+      {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
           claimName: {{ .Release.Name }}-data
-{{- end -}}
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+{{- end }}

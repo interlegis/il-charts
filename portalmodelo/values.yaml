@@ -13,10 +13,11 @@ service:
   type: ClusterIP
   port: 80
 
-volume:
-  storageClass: managed-nfs-storage
+persistence:
+  enabled: true
+  #storageClass: ""
   accessMode: ReadWriteOnce
-  size: 100Mi
+  size: 500Mi
 
 portal:
   adminPassword: altereme

@@ -1,12 +1,19 @@
+{{- if .Values.persistence.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  annotations:
-    volume.beta.kubernetes.io/storage-class: {{ .Values.volume.storageClass }}
   name: {{ .Release.Name }}-data 
 spec:
   accessModes:
-  - {{ .Values.volume.accessMode }}
+  - {{ .Values.persistence.accessMode }}
   resources:
     requests:
-      storage: {{ .Values.volume.size }}
+      storage: {{ .Values.persistence.size }}
+{{- if .Values.persistence.storageClass }}
+{{- if (eq "-" .Values.persistence.storageClass) }}
+  storageClassName: ""
+{{- else }}
+  storageClassName: "{{ .Values.persistence.storageClass }}"
+{{- end }}
+{{- end }}
+{{- end }}

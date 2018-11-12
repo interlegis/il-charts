@@ -11,9 +11,10 @@ Este é um Helm Chart para instalação de um Portal Modelo para Casas Legislati
 | Parametro                 | Description                                | Default               |
 |---------------------------|--------------------------------------------|-----------------------|
 | replicaCount              | Numero de instâncias do Plone              | `1`                   |
-| volume.storageClass       | Classe de armazenamento dos volumes        | `managed-nfs-storage` |
-| volume.accessMode         | Modo de acesso do volume                   | `ReadWriteOnce`       |
-| volume.size               | Tamanho do volume provisionado             | `100Mi`               |
+| persistence.enabled       | Habilita o uso de volumes persistentes     | `true`                |
+| persistence.storageClass  | Classe de armazenamento dos volumes        | `managed-nfs-storage` |
+| persistence.accessMode    | Modo de acesso do volume                   | `ReadWriteOnce`       |
+| persistence.size          | Tamanho do volume provisionado             | `100Mi`               |
 | portal.adminPassword      | Senha de Administrador inicial do portal   | `altereme`            |
 | portal.adminEmail         | E-mail do administrador do portal          | `contato@tecnico.net` |
 | portal.title              | Título na página inicial do portal         | `Câmara Municipal`    |

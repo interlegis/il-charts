@@ -9,6 +9,8 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: {{ template "portalmodelo.name" . }}
@@ -73,5 +75,9 @@ spec:
       restartPolicy: Always
       volumes:
       - name: {{ .Release.Name }}-data
+      {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
           claimName: {{ .Release.Name }}-data
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
