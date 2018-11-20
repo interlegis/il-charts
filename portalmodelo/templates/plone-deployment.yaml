@@ -71,6 +71,20 @@ spec:
         ports:
         - containerPort: 8080
         - containerPort: 8881
+        livenessProbe:
+          exec:
+            command:
+            - /plone/instance/bin/instance
+            - monitor
+            - health_ok
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
         resources: {}
         volumeMounts:
         - mountPath: /data
