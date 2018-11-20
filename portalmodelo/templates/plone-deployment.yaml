@@ -10,7 +10,11 @@ metadata:
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
+  {{- if .Values.instance.zeoclient }}
     type: RollingUpdate
+  {{- else }}
+    type: Recreate
+  {{- end }}
   selector:
     matchLabels:
       app: {{ template "portalmodelo.name" . }}
