@@ -1,0 +1,8 @@
+apiVersion: v1
+version: 2.3.0
+description: Provisioner for local machine volumes 
+name: local-volume-provisioner
+keywords:
+  - storage
+  - local
+engine: gotpl
