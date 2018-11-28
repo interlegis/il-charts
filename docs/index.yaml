@@ -3,7 +3,7 @@ entries:
   keepalived:
   - apiVersion: v1
     appVersion: 1.2.24
-    created: 2018-11-28T11:22:29.518191259-02:00
+    created: 2018-11-28T11:39:59.702140332-02:00
     description: Highly available IP addresses with VRRP
     digest: 994dc73475e1293935f33f92277c3cd871737dc226e342a91025161074265418
     icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
@@ -14,16 +14,16 @@ entries:
   local-path-provisioner:
   - apiVersion: v1
     appVersion: 0.0.2
-    created: 2018-11-28T11:22:29.518414177-02:00
+    created: 2018-11-28T11:39:59.702335218-02:00
     description: Provisions hostPath based persistent volumes on the nodes automatically.
-    digest: 3a8b104ed93b2abb31126f9e6568c3bbb2aead07fae2d23eb1230f410525fdcb
+    digest: 58ddaaf1747c25b44185fd80152bddced8034dd3405d52c4e0dc8e45de644b19
     name: local-path-provisioner
     urls:
     - https://interlegis.github.io/il-charts/local-path-provisioner-0.0.1.tgz
     version: 0.0.1
   local-volume-provisioner:
   - apiVersion: v1
-    created: 2018-11-28T11:22:29.518913336-02:00
+    created: 2018-11-28T11:39:59.702829442-02:00
     description: Provisioner for local machine volumes
     digest: eb406a7db6877c5547936f4c34620c2ae4455fc0e1c700a1b60d5dc6173f5c21
     engine: gotpl
@@ -35,7 +35,7 @@ entries:
     - https://interlegis.github.io/il-charts/local-volume-provisioner-2.3.1.tgz
     version: 2.3.1
   - apiVersion: v1
-    created: 2018-11-28T11:22:29.518668372-02:00
+    created: 2018-11-28T11:39:59.702600808-02:00
     description: Provisioner for local machine volumes
     digest: f0d67b6247024e923a466c975ec0a6c0a4e62f0f0e47a3ec98e9d364119f9afe
     engine: gotpl
@@ -49,7 +49,7 @@ entries:
   portalmodelo:
   - apiVersion: v1
     appVersion: 3.0-17
-    created: 2018-11-28T11:22:29.519808434-02:00
+    created: 2018-11-28T11:39:59.703690488-02:00
     description: Portal Modelo para Casas Legislativas
     digest: 544b0eec6afb91d5f1ac82ebf7f4e7e5c3edb375ae9b723c970edbc4ea3f3a0f
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -59,7 +59,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: 3.0-17
-    created: 2018-11-28T11:22:29.519580959-02:00
+    created: 2018-11-28T11:39:59.703467865-02:00
     description: Portal Modelo para Casas Legislativas
     digest: 7bda3d34da4aa3639ef875f5aad9e22629a190db7cb6ee0dfaf98f1832bd006e
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -69,7 +69,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: 3.0-15
-    created: 2018-11-28T11:22:29.519359992-02:00
+    created: 2018-11-28T11:39:59.703237219-02:00
     description: Portal Modelo para Casas Legislativas
     digest: 67ab768da7a592d030f52cec23c8bd7dd0595408fab25ce549aafa4b86ba660c
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -79,7 +79,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 3.0-13
-    created: 2018-11-28T11:22:29.519138233-02:00
+    created: 2018-11-28T11:39:59.703035851-02:00
     description: Portal Modelo para Casas Legislativas
     digest: 5e5d0b7716679af0307eaba65b8c2d17ad1b03124d8d5713650bc26259326e63
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -89,7 +89,7 @@ entries:
     version: 0.1.1
   solr:
   - appVersion: 7.5.0
-    created: 2018-11-28T11:22:29.5206536-02:00
+    created: 2018-11-28T11:39:59.704472417-02:00
     description: Solr is the popular, blazing-fast, open source enterprise search
       platform built on Apache Lucene™
     digest: 0fe502c52cfc32c01daec886554313a2531990dc2ee45477bbdd6f88e54b7596
@@ -108,7 +108,7 @@ entries:
   zabbix-agent:
   - apiVersion: v1
     appVersion: "4"
-    created: 2018-11-28T11:22:29.521026695-02:00
+    created: 2018-11-28T11:39:59.704951204-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: 45c096000ed57ef8de7433d796d0d1d881afac631a7bc12a7daa43c97119973b
     icon: https://assets.zabbix.com/img/logo.svg
@@ -118,7 +118,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "4"
-    created: 2018-11-28T11:22:29.520837308-02:00
+    created: 2018-11-28T11:39:59.704643278-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: c1eebb05c6843f26ee127aca2682c2a6177bb6995d8b1ce0fb79362ba850f871
     icon: https://assets.zabbix.com/img/logo.svg
@@ -126,4 +126,4 @@ entries:
     urls:
     - https://interlegis.github.io/il-charts/zabbix-agent-0.1.1.tgz
     version: 0.1.1
-generated: 2018-11-28T11:22:29.517930372-02:00
+generated: 2018-11-28T11:39:59.701904446-02:00
