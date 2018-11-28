@@ -1,5 +1,5 @@
-apiVersion: apps/v1beta2
-kind: Daemonset
+apiVersion: apps/v1
+kind: DaemonSet
 metadata:
   name: {{ .Values.daemonset.name }}
   namespace: {{ .Values.common.namespace }}
