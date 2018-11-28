@@ -58,12 +58,6 @@ daemonset:
   # NodeSelector constraint for local-volume-provisioner scheduling to nodes.
   # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
   nodeSelector: {}
-  # List of node labels to be copied to the PVs created by the provisioner in a format:
-  #
-  #  nodeLabels:
-  #    - failure-domain.beta.kubernetes.io/zone
-  #    - failure-domain.beta.kubernetes.io/region
-  #
   # If configured, tolerations will add a toleration field to the DaemonSet PodSpec.
   #
   # Node tolerations for local-volume-provisioner scheduling to nodes with taints.
