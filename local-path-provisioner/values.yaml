@@ -1,0 +1,75 @@
+# Default values for local-path-provisioner.
+
+#
+# Common options.
+#
+common:
+  #
+  # Defines whether to generate service account and role bindings.
+  #
+  rbac: true
+  #
+  # Defines the namespace where provisioner runs
+  #
+  namespace: default
+  #
+  # Defines whether to create provisioner namespace
+  # 
+  createNamespace: false
+  #
+  # Defines the name of configmap used by Provisioner
+  #
+  configMapName: "local-provisioner-config"
+
+#
+# Configure storage class
+#
+class:
+  name: local-path # Defines name of storage class.
+  # Path on the host where local volumes of this storage class are mounted
+  # under.
+  hostDir: /opt/local-path-provisioner
+  # Create storage class object with default configuration.
+  storageClass: true
+  reclaimPolicy: Delete # Avaiable reclaim policies: Delete/Retain, defaults: Delete.
+
+#
+# Configure DaemonSet for provisioner.
+# 
+daemonset:
+  #
+  # Defines the name of a Provisioner
+  #
+  name: "local-path-provisioner"
+  #
+  # Defines Provisioner's image name including container registry.
+  #
+  image: rancher/local-path-provisioner:v0.0.2
+  #
+  # Defines Image download policy, see kubernetes documentation for available values.
+  #
+  imagePullPolicy: Always
+  #
+  # Defines a name of the service account which Provisioner will use to communicate with API server.
+  #
+  serviceAccount: local-path-provisioner-service-account
+  # If configured, nodeSelector will add a nodeSelector field to the DaemonSet PodSpec.
+  #
+  # NodeSelector constraint for local-volume-provisioner scheduling to nodes.
+  # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
+  nodeSelector: {}
+  # List of node labels to be copied to the PVs created by the provisioner in a format:
+  #
+  #  nodeLabels:
+  #    - failure-domain.beta.kubernetes.io/zone
+  #    - failure-domain.beta.kubernetes.io/region
+  #
+  # If configured, tolerations will add a toleration field to the DaemonSet PodSpec.
+  #
+  # Node tolerations for local-volume-provisioner scheduling to nodes with taints.
+  # Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+  tolerations: []
+  #
+  # If configured, resources will set the requests/limits field to the Daemonset PodSpec.
+  # Ref: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+  resources: {}
