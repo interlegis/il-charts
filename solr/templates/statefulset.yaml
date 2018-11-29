@@ -73,7 +73,7 @@ spec:
 {{ toYaml .Values.readinessProbe | indent 12 }}
           volumeMounts:
           - name: data
-            mountPath: /opt/solr/server/data
+            mountPath: /opt/solr/server/solr
             subPath: data
           lifecycle:
             preStop:
