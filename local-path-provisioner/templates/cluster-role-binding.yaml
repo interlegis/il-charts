@@ -33,7 +33,7 @@ metadata:
     chart: {{ replace "+" "_" .Chart.Version | printf "%s-%s" .Chart.Name }}
 subjects:
 - kind: ServiceAccount
-  name: {{ .Values.daemonset.serviceAccount }}
+  name: {{ .Values.deployment.serviceAccount }}
   namespace: {{ .Values.common.namespace }}
 roleRef:
   kind: ClusterRole

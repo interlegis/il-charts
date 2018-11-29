@@ -34,11 +34,11 @@ class:
   reclaimPolicy: Delete # Avaiable reclaim policies: Delete/Retain, defaults: Delete.
 
 #
-# Configure DaemonSet for provisioner.
+# Configure Deployment for provisioner.
 # 
-daemonset:
+deployment:
   #
-  # Defines the name of a Provisioner
+  # Defines the name of the Provisioner
   #
   name: "local-path-provisioner"
   #
