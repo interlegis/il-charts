@@ -63,6 +63,10 @@ spec:
               value: "{{ .Values.logLevel }}"
             - name: SOLR_PORT
               value: "{{ .Values.ports.client.containerPort }}"
+            - name: SOLR_HOME
+              value: "/opt/solr/server/data"
+            - name: INIT_SOLR_HOME
+              value: "yes"
           ports:
             - name: solr-port
               containerPort: {{ .Values.ports.client.containerPort }}
@@ -73,8 +77,7 @@ spec:
 {{ toYaml .Values.readinessProbe | indent 12 }}
           volumeMounts:
           - name: data
-            mountPath: /opt/solr/server/solr
-            subPath: data
+            mountPath: /opt/solr/server/data
           lifecycle:
             preStop:
               exec:

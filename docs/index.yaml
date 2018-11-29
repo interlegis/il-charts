@@ -3,7 +3,7 @@ entries:
   keepalived:
   - apiVersion: v1
     appVersion: 1.2.24
-    created: 2018-11-29T11:41:21.447660823-02:00
+    created: 2018-11-29T13:45:34.081523702-02:00
     description: Highly available IP addresses with VRRP
     digest: 994dc73475e1293935f33f92277c3cd871737dc226e342a91025161074265418
     icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
@@ -14,7 +14,7 @@ entries:
   local-path-provisioner:
   - apiVersion: v1
     appVersion: 0.0.2
-    created: 2018-11-29T11:41:21.447849459-02:00
+    created: 2018-11-29T13:45:34.081716097-02:00
     description: Provisions hostPath based persistent volumes on the nodes automatically.
     digest: bcf09db18c57948724f5c439f6deecf81478a16b0fd0c1e8067cd6abb6dc466b
     name: local-path-provisioner
@@ -23,7 +23,7 @@ entries:
     version: 0.1.0
   local-volume-provisioner:
   - apiVersion: v1
-    created: 2018-11-29T11:41:21.448319197-02:00
+    created: 2018-11-29T13:45:34.082179754-02:00
     description: Provisioner for local machine volumes
     digest: eb406a7db6877c5547936f4c34620c2ae4455fc0e1c700a1b60d5dc6173f5c21
     engine: gotpl
@@ -35,7 +35,7 @@ entries:
     - https://interlegis.github.io/il-charts/local-volume-provisioner-2.3.1.tgz
     version: 2.3.1
   - apiVersion: v1
-    created: 2018-11-29T11:41:21.448086326-02:00
+    created: 2018-11-29T13:45:34.081950428-02:00
     description: Provisioner for local machine volumes
     digest: f0d67b6247024e923a466c975ec0a6c0a4e62f0f0e47a3ec98e9d364119f9afe
     engine: gotpl
@@ -49,7 +49,7 @@ entries:
   portalmodelo:
   - apiVersion: v1
     appVersion: 3.0-17
-    created: 2018-11-29T11:41:21.449151989-02:00
+    created: 2018-11-29T13:45:34.083050834-02:00
     description: Portal Modelo para Casas Legislativas
     digest: 544b0eec6afb91d5f1ac82ebf7f4e7e5c3edb375ae9b723c970edbc4ea3f3a0f
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -59,7 +59,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: 3.0-17
-    created: 2018-11-29T11:41:21.448938392-02:00
+    created: 2018-11-29T13:45:34.08283139-02:00
     description: Portal Modelo para Casas Legislativas
     digest: 7bda3d34da4aa3639ef875f5aad9e22629a190db7cb6ee0dfaf98f1832bd006e
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -69,7 +69,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: 3.0-15
-    created: 2018-11-29T11:41:21.448727813-02:00
+    created: 2018-11-29T13:45:34.082605529-02:00
     description: Portal Modelo para Casas Legislativas
     digest: 67ab768da7a592d030f52cec23c8bd7dd0595408fab25ce549aafa4b86ba660c
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -79,7 +79,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 3.0-13
-    created: 2018-11-29T11:41:21.448524912-02:00
+    created: 2018-11-29T13:45:34.082397188-02:00
     description: Portal Modelo para Casas Legislativas
     digest: 5e5d0b7716679af0307eaba65b8c2d17ad1b03124d8d5713650bc26259326e63
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -89,7 +89,24 @@ entries:
     version: 0.1.1
   solr:
   - appVersion: 7.5.0
-    created: 2018-11-29T11:41:21.449903032-02:00
+    created: 2018-11-29T13:45:34.084668965-02:00
+    description: Solr is the popular, blazing-fast, open source enterprise search
+      platform built on Apache Lucene™
+    digest: 86b081408bef5e0740a5ff865941bf89296ac025274068cc09993a139517022a
+    home: http://lucene.apache.org/solr/
+    icon: http://lucene.apache.org/solr/5_0_0/images/solr.svg
+    maintainers:
+    - email: tliddle30@gmail.com
+      name: thomasliddledba
+    name: solr
+    sources:
+    - https://hub.docker.com/_/solr/
+    - https://github.com/apache/lucene-solr
+    urls:
+    - https://interlegis.github.io/il-charts/solr-0.2.3.tgz
+    version: 0.2.3
+  - appVersion: 7.5.0
+    created: 2018-11-29T13:45:34.08381375-02:00
     description: Solr is the popular, blazing-fast, open source enterprise search
       platform built on Apache Lucene™
     digest: d66abb733b2d24013470bb7524c1b25eb9e7ec5e835662262592ffface25a175
@@ -108,7 +125,7 @@ entries:
   zabbix-agent:
   - apiVersion: v1
     appVersion: "4"
-    created: 2018-11-29T11:41:21.450229396-02:00
+    created: 2018-11-29T13:45:34.085017236-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: 45c096000ed57ef8de7433d796d0d1d881afac631a7bc12a7daa43c97119973b
     icon: https://assets.zabbix.com/img/logo.svg
@@ -118,7 +135,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "4"
-    created: 2018-11-29T11:41:21.450073638-02:00
+    created: 2018-11-29T13:45:34.084844801-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: c1eebb05c6843f26ee127aca2682c2a6177bb6995d8b1ce0fb79362ba850f871
     icon: https://assets.zabbix.com/img/logo.svg
@@ -126,4 +143,4 @@ entries:
     urls:
     - https://interlegis.github.io/il-charts/zabbix-agent-0.1.1.tgz
     version: 0.1.1
-generated: 2018-11-29T11:41:21.447419562-02:00
+generated: 2018-11-29T13:45:34.081257789-02:00
