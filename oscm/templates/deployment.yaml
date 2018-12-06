@@ -1,0 +1,77 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "oscm.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "oscm.name" . }}
+    helm.sh/chart: {{ include "oscm.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "oscm.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "oscm.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: DB_HOST_BES
+            value: {{ template "postgresql.fullname" . }}
+          - name: DB_HOST_JMS
+            value: {{ template "postgresql.fullname" . }}
+          - name: DB_TIMEOUT_BES
+            value: "5"
+          - name: DB_WAIT_BES
+            value: "5000"
+          - name: DB_RETRY_INTERVAL_BES
+            value: "3"
+          - name: DB_TIMEOUT_MI
+            value: "5"
+          - name: DB_WAIT_MI
+            value: "5000"
+          - name: DB_RETRY_INTERVAL_MI
+            value: "3"
+          - name: SMTP_HOST
+            value: "{{ .Values.smtp.host }}"
+          - name: SMTP_PORT
+            value: "{{ .Values.smtp.port }}"
+          - name: SMTP_FROM
+            value: "{{ .Values.smtp.from }}"
+          - name: SMTP_USER
+            value: "{{ .Values.smtp.user }}"
+          - name: SMTP_PWD
+            value: "{{ .Values.smtp.password }}"
+          - name: SMTP_AUTH
+            value: "{{ .Values.smtp.auth }}"
+          - name: SMTP_TLS_ENABLE
+            value: "{{ .Values.smtp.tls }}"
+          ports:
+          - name: http-port
+            containerPort: 8080
+          - name: https-port
+            containerPort: 8081
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
