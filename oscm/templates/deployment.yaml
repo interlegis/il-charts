@@ -33,8 +33,12 @@ spec:
             value: "INIT"
           - name: AUTH_MODE
             value: "INTERNAL"
-          - name: DB_HOST_BES
+          - name: DB_HOST_CORE
             value: {{ template "postgresql.fullname" . }}
+          - name: DB_PORT_CORE
+            value: {{ .Values.postgresql.service.port | quote }}
+          - name: DB_SUPERPWD
+            value: {{ .Values.postgresql.postgresqlPassword | quote }}
           - name: KAFKA_BOOTSTRAP_SERVERS
             value: "kafka:9092"
           - name: BASE_URL
@@ -63,15 +67,15 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: DB_HOST_BES
+          - name: DB_HOST_CORE
             value: {{ template "postgresql.fullname" . }}
           - name: DB_HOST_JMS
             value: {{ template "postgresql.fullname" . }}
-          - name: DB_TIMEOUT_BES
+          - name: DB_TIMEOUT_CORE
             value: "5"
-          - name: DB_WAIT_BES
+          - name: DB_WAIT_CORE
             value: "5000"
-          - name: DB_RETRY_INTERVAL_BES
+          - name: DB_RETRY_INTERVAL_CORE
             value: "3"
           - name: DB_TIMEOUT_MI
             value: "5"
