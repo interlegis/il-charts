@@ -19,7 +19,7 @@ kafka:
   persistence:
     enabled: true
     size: 10Gi
-    acccessMode: ReadWriteOnce
+    accessMode: ReadWriteOnce
     #storageClass:
 
 zookeeper:
@@ -30,7 +30,7 @@ zookeeper:
   persistence:
     enabled: true
     size: 10Gi
-    acccessMode: ReadWriteOnce
+    accessMode: ReadWriteOnce
     #storageClass:
 
 service:
