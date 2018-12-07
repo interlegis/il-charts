@@ -11,6 +11,28 @@ initdb:
   tag: latest
   pullPolicy: IfNotPresent
 
+kafka:
+  repository: servicecatalog/kafka
+  tag: latest
+  pullPolicy: IfNotPresent
+  replicaCount: 1
+  persistence:
+    enabled: true
+    size: 10Gi
+    acccessMode: ReadWriteOnce
+    #storageClass:
+
+zookeeper:
+  repository: zookeeper
+  tag: 3.4.10
+  pullPolicy: IfNotPresent
+  replicaCount: 1
+  persistence:
+    enabled: true
+    size: 10Gi
+    acccessMode: ReadWriteOnce
+    #storageClass:
+
 service:
   type: ClusterIP
   port: 8080
@@ -44,6 +66,9 @@ postgresql:
     enabled: true
     size: 10Gi
   postgresqlPassword: postgres
+
+provisioning:
+  kubernetes: false
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

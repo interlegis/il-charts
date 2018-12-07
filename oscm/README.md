@@ -19,10 +19,7 @@ Find more details on the OSCM homepage [https://openservicecatalogmanager.org/ui
 | replicaCount              | Number of OSCM Replicas                   | `1`                       |
 | service.type              | Kubernetes Service Type                   | `ClusterIP`               |
 | service.port              | Kubernetes Service Port                   | `8080`                    |
-| persistence.enabled       | Habilita o uso de volumes persistentes    | `true`                    |
-| persistence.storageClass  | Classe de armazenamento dos volumes       | `managed-nfs-storage`     |
-| persistence.accessMode    | Modo de acesso do volume                  | `ReadWriteOnce`           |
-| persistence.size          | Tamanho do volume provisionado            | `100Mi`                   |
+| provisioning.kubernetes   | Whether to install K8S provisioning       | `false`                   |
 | ingress.enabled           | Whether to enable Ingress                 | `true`                    |
 | ingress.annotations       | Annotations for the Ingress Controller    | `{}`                      |
 | ingress.path              | Path on the backend for the Ingress       | `/`                       |
@@ -38,4 +35,3 @@ Find more details on the OSCM homepage [https://openservicecatalogmanager.org/ui
 | postgresql                | Options as defined in Postgresql chart    | see values.yaml           |
 | resources                 | Resources definition, defined by the user | {}                        |
 | tolerations               | Tolerations definitions                   | {}                        |
-| affinity                  | Node affinity definitions                 | {}                        |

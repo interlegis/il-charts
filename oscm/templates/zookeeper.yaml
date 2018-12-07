@@ -1,0 +1,108 @@
+{{- if .Values.provisioning.kubernetes -}}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ include "oscm.fullname" . }}-zookeeper
+  labels:
+    app.kubernetes.io/name: {{ include "oscm.name" . }}-zookeeper
+    helm.sh/chart: {{ include "oscm.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  selector:
+    app.kubernetes.io/name: {{ include "oscm.name" . }}-zookeeper
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  ports:
+  - port: 2181
+    protocol: TCP
+    name: tcp-client
+  - port: 2888
+    protocol: TCP
+    name: tcp-follower
+  - port: 3888
+    protocol: TCP
+    name: tcp-election
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ include "oscm.fullname" . }}-zookeeper
+spec:
+  replicas: {{ .Values.zookeeper.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "oscm.name" . }}-zookeeper
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "oscm.name" . }}-zookeeper
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: "{{ .Chart.Name }}-zookeeper"
+        image: "{{ .Values.zookeeper.repository }}:{{ .Values.zookeeper.tag }}"
+        imagePullPolicy: {{ .Values.zookeeper.pullPolicy }}
+        ports:
+        - containerPort: 2181
+          name: client
+        - containerPort: 2888
+          name: follower
+        - containerPort: 3888
+          name: election
+        volumeMounts:
+        - name: zookeeper-data
+          mountPath: /data
+        - name: zookeeper-datalog
+          mountPath: /datalog
+      volumes:
+      - name: zookeeper-data
+        persistentVolumeClaim:
+          claimName: zookeeper-data
+      - name: zookeeper-datalog
+        persistentVolumeClaim:
+          claimName: zookeeper-datalog
+---
+{{- if .Values.zookeeper.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zookeeper-data
+spec:
+  accessModes:
+  - {{ .Values.zookeeper.persistence.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.zookeeper.persistence.size }}
+  {{- if .Values.zookeeper.persistence.storageClass }}
+    {{- if (eq "-" .Values.zookeeper.persistence.storageClass) }}
+  storageClassName: ""
+    {{- else }}
+  storageClassName: "{{ .Values.zookeeper.persistence.storageClass }}"
+    {{- end }}
+  {{- end }}
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zookeeper-datalog
+spec:
+  accessModes:
+  - {{ .Values.zookeeper.persistence.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.zookeeper.persistence.size }}
+  {{- if .Values.zookeeper.persistence.storageClass }}
+    {{- if (eq "-" .Values.zookeeper.persistence.storageClass) }}
+  storageClassName: ""
+    {{- else }} 
+  storageClassName: "{{ .Values.zookeeper.persistence.storageClass }}"
+    {{- end }}
+  {{- end }}
+
+{{- end }}
+{{- end }}

@@ -40,7 +40,7 @@ spec:
           - name: DB_SUPERPWD
             value: {{ .Values.postgresql.postgresqlPassword | quote }}
           - name: KAFKA_BOOTSTRAP_SERVERS
-            value: "kafka:9092"
+            value: {{ include "oscm.name" . }}-kafka:9092
           - name: BASE_URL
             value: "http://{{ $hostname }}:8080/oscm-portal"
           - name: BASE_URL_HTTPS
