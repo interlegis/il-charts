@@ -23,7 +23,7 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       initContainers:
-        - name: "{{ .Chart.Name }}-initdb"
+        - name: "{{ .Chart.Name }}-initdb-core"
           image: "{{ .Values.initdb.repository }}:{{ .Values.initdb.tag }}"
           imagePullPolicy: {{ .Values.initdb.pullPolicy }}
           env:
@@ -61,6 +61,21 @@ spec:
             value: "http://{{ $hostname }}/adfs/services/trust"
           - name: SSO_LOGOUT_URL
             value: "https://{{ $hostname }}/adfs/ls/"
+
+        - name: "{{ .Chart.Name }}-initdb-jms"
+          image: "{{ .Values.initdb.repository }}:{{ .Values.initdb.tag }}"
+          imagePullPolicy: {{ .Values.initdb.pullPolicy }}
+          env:
+          - name: TARGET
+            value: "JMS"
+          - name: SOURCE
+            value: "INIT"
+          - name: DB_HOST_JMS
+            value: {{ template "postgresql.fullname" . }}
+          - name: DB_PORT_JMS
+            value: {{ .Values.postgresql.service.port | quote }}
+          - name: DB_SUPERPWD
+            value: {{ .Values.postgresql.postgresqlPassword | quote }}
 
       containers:
         - name: {{ include "oscm.name" . }}-core
