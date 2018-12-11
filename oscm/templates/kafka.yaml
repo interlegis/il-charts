@@ -46,7 +46,7 @@ spec:
         imagePullPolicy: {{ .Values.kafka.pullPolicy }}
         env:
         - name: ZOOKEEPER_CONNECTION_STRING
-          value: "zookeeper:2181"
+          value: {{ include "oscm.name" . }}-zookeeper:2181
         - name: KAFKA_ADVERTISED_HOST_NAME
           value: {{ include "oscm.fullname" . }}-kafka
         - name: KAFKA_CREATE_TOPICS

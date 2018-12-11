@@ -18,13 +18,13 @@ spec:
 {{- if .Values.ingress.tls }}
   tls:
   - hosts:
-    {{- if  .Values.ingress.hostName }}
-    - {{ .Values.ingress.hostName }}
+    {{- if  .Values.ingress.hostname }}
+    - {{ .Values.ingress.hostname }}
     secretName: {{  .Values.ingress.tlsSecret }}
     {{- end }}
 {{- end }}
   rules:
-    - host: {{ .Values.ingress.hostName }}
+    - host: {{ .Values.ingress.hostname }}
       http:
         paths:
           - path: {{ $ingressPath }}
