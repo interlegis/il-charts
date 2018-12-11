@@ -2,9 +2,9 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ include "oscm.fullname" . }}
+  name: {{ include "oscm.fullname" . }}-core
   labels:
-    app.kubernetes.io/name: {{ include "oscm.name" . }}
+    app.kubernetes.io/name: {{ include "oscm.name" . }}-core
     helm.sh/chart: {{ include "oscm.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
@@ -14,12 +14,12 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "oscm.name" . }}
+      app.kubernetes.io/name: {{ include "oscm.name" . }}-core
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "oscm.name" . }}
+        app.kubernetes.io/name: {{ include "oscm.name" . }}-core
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       initContainers:
@@ -63,7 +63,7 @@ spec:
             value: "https://{{ $hostname }}/adfs/ls/"
 
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ include "oscm.name" . }}-core
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
