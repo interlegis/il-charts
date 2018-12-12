@@ -67,11 +67,11 @@ postgresql:
     size: 10Gi
   postgresqlPassword: postgres
   postgresqlConfiguration:
-    listenAddresses: '*'
-    maxWalSize: '400MB'
+    listenAddresses: "'*'"
+    maxWalSize: "'400MB'"
     maxWalSenders: '16'
     walKeepSegments: '32'
-    hotStandby: 'on'
+    hotStandby: "'on'"
     maxPreparedTransactions: '50'
     maxConnections: '250'
 
