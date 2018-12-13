@@ -112,6 +112,12 @@ spec:
             value: "{{ .Values.smtp.auth }}"
           - name: SMTP_TLS_ENABLE
             value: "{{ .Values.smtp.tls }}"
+          {{- if .Values.debug -}}
+          - name: TOMEE_DEBUG
+            value: false
+          - name: LOG_LEVEL
+            value: "DEBUG"
+          {{- end -}}
           ports:
           - name: http-port
             containerPort: 8080
