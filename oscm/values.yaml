@@ -3,12 +3,12 @@ replicaCount: 1
 
 image:
   repository: servicecatalog/oscm-core
-  tag: latest
+  tag: v17.8
   pullPolicy: IfNotPresent
 
 initdb:
   repository: servicecatalog/oscm-initdb
-  tag: latest
+  tag: v17.8
   pullPolicy: IfNotPresent
 
 kafka:
