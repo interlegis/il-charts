@@ -3,7 +3,7 @@ entries:
   keepalived:
   - apiVersion: v1
     appVersion: 1.2.24
-    created: 2018-12-13T10:55:19.465452835-02:00
+    created: 2018-12-13T11:58:22.62445365-02:00
     description: Highly available IP addresses with VRRP
     digest: 994dc73475e1293935f33f92277c3cd871737dc226e342a91025161074265418
     icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
@@ -14,7 +14,7 @@ entries:
   local-path-provisioner:
   - apiVersion: v1
     appVersion: 0.0.2
-    created: 2018-12-13T10:55:19.465643358-02:00
+    created: 2018-12-13T11:58:22.624644505-02:00
     description: Provisions hostPath based persistent volumes on the nodes automatically.
     digest: bcf09db18c57948724f5c439f6deecf81478a16b0fd0c1e8067cd6abb6dc466b
     name: local-path-provisioner
@@ -23,7 +23,7 @@ entries:
     version: 0.1.0
   local-volume-provisioner:
   - apiVersion: v1
-    created: 2018-12-13T10:55:19.466120173-02:00
+    created: 2018-12-13T11:58:22.62512419-02:00
     description: Provisioner for local machine volumes
     digest: eb406a7db6877c5547936f4c34620c2ae4455fc0e1c700a1b60d5dc6173f5c21
     engine: gotpl
@@ -35,7 +35,7 @@ entries:
     - https://interlegis.github.io/il-charts/local-volume-provisioner-2.3.1.tgz
     version: 2.3.1
   - apiVersion: v1
-    created: 2018-12-13T10:55:19.46589272-02:00
+    created: 2018-12-13T11:58:22.624894407-02:00
     description: Provisioner for local machine volumes
     digest: f0d67b6247024e923a466c975ec0a6c0a4e62f0f0e47a3ec98e9d364119f9afe
     engine: gotpl
@@ -49,7 +49,17 @@ entries:
   oscm:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-12-13T10:55:19.466875256-02:00
+    created: 2018-12-13T11:58:22.626639435-02:00
+    description: Open Service Catalog Manager Asynchronous Provisioning Platform
+    digest: fc2ce4323bc97a2c60c2b0ee996d69c4b9fed51b61e25e58627ab33cb994de80
+    icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
+    name: oscm
+    urls:
+    - https://interlegis.github.io/il-charts/oscm-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2018-12-13T11:58:22.625876131-02:00
     description: Open Service Catalog Manager Asynchronous Provisioning Platform
     digest: fdd940f0c2a374212057d540333b6f9e0196b2189e950db990af1a24735bab63
     icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
@@ -60,7 +70,7 @@ entries:
   portalmodelo:
   - apiVersion: v1
     appVersion: 3.0-17
-    created: 2018-12-13T10:55:19.467093106-02:00
+    created: 2018-12-13T11:58:22.62685702-02:00
     description: Portal Modelo para Casas Legislativas
     digest: ee52a8909e49182d28507478818d88352302587718079c42055da876ccd73cc6
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -70,7 +80,7 @@ entries:
     version: 0.1.5
   solr:
   - appVersion: 7.5.0
-    created: 2018-12-13T10:55:19.46782919-02:00
+    created: 2018-12-13T11:58:22.627602795-02:00
     description: Solr is the popular, blazing-fast, open source enterprise search
       platform built on Apache Lucene™
     digest: 86b081408bef5e0740a5ff865941bf89296ac025274068cc09993a139517022a
@@ -89,7 +99,7 @@ entries:
   zabbix-agent:
   - apiVersion: v1
     appVersion: "4"
-    created: 2018-12-13T10:55:19.468172864-02:00
+    created: 2018-12-13T11:58:22.627930679-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: 45c096000ed57ef8de7433d796d0d1d881afac631a7bc12a7daa43c97119973b
     icon: https://assets.zabbix.com/img/logo.svg
@@ -99,7 +109,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "4"
-    created: 2018-12-13T10:55:19.467986593-02:00
+    created: 2018-12-13T11:58:22.627761563-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: c1eebb05c6843f26ee127aca2682c2a6177bb6995d8b1ce0fb79362ba850f871
     icon: https://assets.zabbix.com/img/logo.svg
@@ -107,4 +117,4 @@ entries:
     urls:
     - https://interlegis.github.io/il-charts/zabbix-agent-0.1.1.tgz
     version: 0.1.1
-generated: 2018-12-13T10:55:19.465187708-02:00
+generated: 2018-12-13T11:58:22.624217302-02:00
