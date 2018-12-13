@@ -69,7 +69,6 @@ postgresql:
   postgresqlConfiguration:
     listenAddresses: "'*'"
     maxWalSize: "'400MB'"
-    maxWalSenders: '16'
     walKeepSegments: '32'
     hotStandby: "'on'"
     maxPreparedTransactions: '50'
