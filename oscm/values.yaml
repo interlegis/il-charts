@@ -22,6 +22,14 @@ kafka:
     accessMode: ReadWriteOnce
     #storageClass:
 
+app:
+  repository: servicecatalog/oscm-app
+  tag: latest
+  pullPolicy: IfNotPresent
+  replicaCount: 1
+  deploy: false
+  dbpwd: 'appuser'
+
 zookeeper:
   repository: zookeeper
   tag: 3.4.10

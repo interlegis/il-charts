@@ -3,4 +3,4 @@ appVersion: "1.0"
 description: Open Service Catalog Manager Asynchronous Provisioning Platform
 name: oscm
 icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
-version: 0.1.4
+version: 0.1.5
