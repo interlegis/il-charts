@@ -32,6 +32,8 @@ spec:
             value: "APP"
           - name: SOURCE
             value: "INIT"
+          - name: AUTH_MODE
+            value: "INTERNAL"
           - name: OVERWRITE
             value: "false"
           - name: DB_HOST_APP

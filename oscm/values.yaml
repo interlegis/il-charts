@@ -29,6 +29,8 @@ app:
   replicaCount: 1
   deploy: false
   dbpwd: 'appuser'
+  ingress:
+    path: /oscm-app
 
 zookeeper:
   repository: zookeeper

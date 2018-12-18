@@ -1,0 +1,21 @@
+{{- if .Values.app.deploy -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "oscm.fullname" . }}-app
+  labels:
+    app.kubernetes.io/name: {{ include "oscm.name" . }}-app
+    helm.sh/chart: {{ include "oscm.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8880
+      targetPort: 8880
+      protocol: TCP
+      name: tcp-8880
+  selector:
+    app.kubernetes.io/name: {{ include "oscm.name" . }}-app
+    app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
