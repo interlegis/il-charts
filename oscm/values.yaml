@@ -31,6 +31,12 @@ app:
   dbpwd: 'appuser'
   ingress:
     path: /oscm-app
+  controller:
+    shell: true
+    orgId: "PLATFORM_OPERATOR"
+    userKey: "1000"
+    userName: "administrator"
+    userPass: "admin123"
 
 zookeeper:
   repository: zookeeper

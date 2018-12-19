@@ -3,7 +3,7 @@ entries:
   keepalived:
   - apiVersion: v1
     appVersion: 1.2.24
-    created: 2018-12-18T16:25:55.067795789-02:00
+    created: 2018-12-19T12:00:57.9291621-02:00
     description: Highly available IP addresses with VRRP
     digest: 994dc73475e1293935f33f92277c3cd871737dc226e342a91025161074265418
     icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
@@ -14,7 +14,7 @@ entries:
   local-path-provisioner:
   - apiVersion: v1
     appVersion: 0.0.2
-    created: 2018-12-18T16:25:55.074594501-02:00
+    created: 2018-12-19T12:00:57.935875894-02:00
     description: Provisions hostPath based persistent volumes on the nodes automatically.
     digest: bcf09db18c57948724f5c439f6deecf81478a16b0fd0c1e8067cd6abb6dc466b
     name: local-path-provisioner
@@ -23,7 +23,7 @@ entries:
     version: 0.1.0
   local-volume-provisioner:
   - apiVersion: v1
-    created: 2018-12-18T16:25:55.075230167-02:00
+    created: 2018-12-19T12:00:57.936552997-02:00
     description: Provisioner for local machine volumes
     digest: eb406a7db6877c5547936f4c34620c2ae4455fc0e1c700a1b60d5dc6173f5c21
     engine: gotpl
@@ -35,7 +35,7 @@ entries:
     - https://interlegis.github.io/il-charts/local-volume-provisioner-2.3.1.tgz
     version: 2.3.1
   - apiVersion: v1
-    created: 2018-12-18T16:25:55.074916269-02:00
+    created: 2018-12-19T12:00:57.93619252-02:00
     description: Provisioner for local machine volumes
     digest: f0d67b6247024e923a466c975ec0a6c0a4e62f0f0e47a3ec98e9d364119f9afe
     engine: gotpl
@@ -49,7 +49,17 @@ entries:
   oscm:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-12-18T16:25:55.079831107-02:00
+    created: 2018-12-19T12:00:57.940576391-02:00
+    description: Open Service Catalog Manager Asynchronous Provisioning Platform
+    digest: 1d53e86f2b0e50029bce966a57752a425409f00e6d1758baef77c451564e6e6e
+    icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
+    name: oscm
+    urls:
+    - https://interlegis.github.io/il-charts/oscm-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2018-12-19T12:00:57.939790476-02:00
     description: Open Service Catalog Manager Asynchronous Provisioning Platform
     digest: 0f9a58d79213c60b3399e75ed31db2e3988ed6cbc55f51051287d6cbc7f3693f
     icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
@@ -59,7 +69,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-12-18T16:25:55.079055134-02:00
+    created: 2018-12-19T12:00:57.938923582-02:00
     description: Open Service Catalog Manager Asynchronous Provisioning Platform
     digest: 81bd41a3e6aaad9a52069239838a3d942f1ffc4ca106e9a95c26604c3e000d64
     icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
@@ -67,30 +77,10 @@ entries:
     urls:
     - https://interlegis.github.io/il-charts/oscm-0.1.5.tgz
     version: 0.1.5
-  - apiVersion: v1
-    appVersion: "1.0"
-    created: 2018-12-18T16:25:55.078203106-02:00
-    description: Open Service Catalog Manager Asynchronous Provisioning Platform
-    digest: fc2ce4323bc97a2c60c2b0ee996d69c4b9fed51b61e25e58627ab33cb994de80
-    icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
-    name: oscm
-    urls:
-    - https://interlegis.github.io/il-charts/oscm-0.1.4.tgz
-    version: 0.1.4
-  - apiVersion: v1
-    appVersion: "1.0"
-    created: 2018-12-18T16:25:55.077365144-02:00
-    description: Open Service Catalog Manager Asynchronous Provisioning Platform
-    digest: fdd940f0c2a374212057d540333b6f9e0196b2189e950db990af1a24735bab63
-    icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
-    name: oscm
-    urls:
-    - https://interlegis.github.io/il-charts/oscm-0.1.3.tgz
-    version: 0.1.3
   portalmodelo:
   - apiVersion: v1
     appVersion: 3.0-17
-    created: 2018-12-18T16:25:55.080216635-02:00
+    created: 2018-12-19T12:00:57.940963643-02:00
     description: Portal Modelo para Casas Legislativas
     digest: ee52a8909e49182d28507478818d88352302587718079c42055da876ccd73cc6
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -100,7 +90,7 @@ entries:
     version: 0.1.5
   solr:
   - appVersion: 7.5.0
-    created: 2018-12-18T16:25:55.087799534-02:00
+    created: 2018-12-19T12:00:57.970671906-02:00
     description: Solr is the popular, blazing-fast, open source enterprise search
       platform built on Apache Lucene™
     digest: 86b081408bef5e0740a5ff865941bf89296ac025274068cc09993a139517022a
@@ -119,7 +109,7 @@ entries:
   zabbix-agent:
   - apiVersion: v1
     appVersion: "4"
-    created: 2018-12-18T16:25:55.088419549-02:00
+    created: 2018-12-19T12:00:57.97586807-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: 45c096000ed57ef8de7433d796d0d1d881afac631a7bc12a7daa43c97119973b
     icon: https://assets.zabbix.com/img/logo.svg
@@ -129,7 +119,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "4"
-    created: 2018-12-18T16:25:55.088086079-02:00
+    created: 2018-12-19T12:00:57.975546012-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: c1eebb05c6843f26ee127aca2682c2a6177bb6995d8b1ce0fb79362ba850f871
     icon: https://assets.zabbix.com/img/logo.svg
@@ -137,4 +127,4 @@ entries:
     urls:
     - https://interlegis.github.io/il-charts/zabbix-agent-0.1.1.tgz
     version: 0.1.1
-generated: 2018-12-18T16:25:55.05736241-02:00
+generated: 2018-12-19T12:00:57.913425374-02:00

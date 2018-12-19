@@ -45,6 +45,39 @@ spec:
           - name: DB_SUPERPWD
             value: {{ .Values.postgresql.postgresqlPassword | quote }}
 
+        {{- if .Values.app.controller.shell }}
+        - name: "{{ .Chart.Name }}-initdb-controller-shell"
+          image: "{{ .Values.initdb.repository }}:{{ .Values.initdb.tag }}"
+          imagePullPolicy: {{ .Values.initdb.pullPolicy }}
+          env:
+          - name: TARGET
+            value: "CONTROLLER"
+          - name: SOURCE
+            value: "NONE"
+          - name: AUTH_MODE
+            value: "INTERNAL"
+          - name: OVERWRITE
+            value: "true"
+          - name: CONTROLLER_ID
+            value: "ess.shell"
+          - name: CONTROLLER_ORG_ID
+            value: {{ .Values.app.controller.orgId | quote }}
+          - name: CONTROLLER_USER_KEY
+            value: {{ .Values.app.controller.userKey | quote }}
+          - name: CONTROLLER_USER_NAME
+            value: {{ .Values.app.controller.userName | quote }} 
+          - name: CONTROLLER_USER_PASS
+            value: {{ .Values.app.controller.userPass | quote }}
+          - name: DB_HOST_APP
+            value: {{ template "postgresql.fullname" . }}
+          - name: DB_PORT_APP
+            value: {{ .Values.postgresql.service.port | quote }}
+          - name: DB_PWD_APP
+            value: {{ .Values.app.dbpwd | quote }}
+          - name: DB_SUPERPWD
+            value: {{ .Values.postgresql.postgresqlPassword | quote }}
+        {{- end }} 
+
       containers:
         - name: {{ include "oscm.name" . }}-app
           image: "{{ .Values.app.repository }}:{{ .Values.app.tag }}"
