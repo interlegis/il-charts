@@ -32,7 +32,12 @@ app:
   ingress:
     path: /oscm-app
   controller:
-    shell: true
+    shell:
+      deploy: true
+      persistence:
+        #storageClass: ""
+        accessMode: ReadWriteOnce
+        size: 500Mi
     orgId: "PLATFORM_OPERATOR"
     userKey: "1000"
     userName: "administrator"

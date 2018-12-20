@@ -45,7 +45,7 @@ spec:
           - name: DB_SUPERPWD
             value: {{ .Values.postgresql.postgresqlPassword | quote }}
 
-        {{- if .Values.app.controller.shell }}
+        {{- if .Values.app.controller.shell.deploy }}
         - name: "{{ .Chart.Name }}-initdb-controller-shell"
           image: "{{ .Values.initdb.repository }}:{{ .Values.initdb.tag }}"
           imagePullPolicy: {{ .Values.initdb.pullPolicy }}
@@ -118,8 +118,19 @@ spec:
             containerPort: 8080
           - name: https-port
             containerPort: 8081
+          {{- if .Values.app.controller.shell.deploy }}
+          volumeMounts:
+          - mountPath: /opt/scripts
+            name: {{ include "oscm.fullname" . }}-app-scripts
+          {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+      {{- if .Values.app.controller.shell.deploy }}
+      volumes:
+      - name: {{ include "oscm.fullname" . }}-app-scripts
+        persistentVolumeClaim:
+          claimName: {{ include "oscm.fullname" . }}-app-scripts
+      {{- end }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
