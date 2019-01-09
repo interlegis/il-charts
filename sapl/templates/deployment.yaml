@@ -29,23 +29,23 @@ spec:
               protocol: TCP
           env:
             - name: DATABASE_URL
-              value: postgresql://sapl:{{ .Values.sapl.adminPassword }}@{{ template "postgresql.fullname" . }}:5432/sapl
+              value: {{ printf "postgresql://sapl:%s@%s:5432/sapl" .Values.sapl.adminPassword (include "postgresql.fullname" .) | quote }}
             - name: ADMIN_PASSWORD
-              value: {{ .Values.sapl.adminPassword }}
+              value: "{{ .Values.sapl.adminPassword }}"
             - name: ADMIN_EMAIL
-              value: {{ .Values.sapl.adminEmail }}
+              value: "{{ .Values.sapl.adminEmail }}"
             - name: EMAIL_SEND_USER
-              value: {{ .Values.sapl.emailSendUser }}
+              value: "{{ .Values.sapl.emailSendUser }}"
             - name: DEBUG
-              value: {{ .Values.sapl.debug }}
+              value: "{{ .Values.sapl.debug }}"
             - name: USE_TLS
-              value: {{ .Values.sapl.useTls }}
+              value: "{{ .Values.sapl.useTls }}"
             - name: EMAIL_PORT
-              value: {{ .Values.sapl.emailPort }}
+              value: "{{ .Values.sapl.emailPort }}"
             - name: EMAIL_HOST
-              value: {{ .Values.sapl.emailHost }}
+              value: "{{ .Values.sapl.emailHost }}"
             - name: TZ
-              value: {{ .Values.sapl.timeZone }}
+              value: "{{ .Values.sapl.timeZone }}"
           volumeMounts:
             - mountPath: /var/interlegis/sapl/data
               name: {{ .Release.Name }}-data
