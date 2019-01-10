@@ -55,7 +55,9 @@ postgresql:
   persistence:
     enabled: true
     size: 10Gi
-  postgresqlPassword: postgres
+  postgresqlPassword: altereme
+  postgresqlUsername: sapl
+  postgresqlDatabase: sapl
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
