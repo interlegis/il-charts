@@ -61,7 +61,6 @@ spec:
               port: http
           resources:
 {{ toYaml .Values.resources | indent 12 }}
-    {{- with .Values.nodeSelector }}
       volumes:
       - name: {{ .Release.Name }}-data
       {{- if .Values.persistence.enabled }}
@@ -77,6 +76,7 @@ spec:
       {{- else }}
         emptyDir: {}
       {{- end }}
+    {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
     {{- end }}
