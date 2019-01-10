@@ -55,10 +55,20 @@ spec:
             httpGet:
               path: /
               port: http
+            initialDelaySeconds: 20
+            failureThreshold: 3
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
           readinessProbe:
             httpGet:
               path: /
               port: http
+            initialDelaySeconds: 20
+            failureThreshold: 3
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
           resources:
 {{ toYaml .Values.resources | indent 12 }}
       volumes:
