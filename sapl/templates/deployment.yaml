@@ -29,7 +29,7 @@ spec:
               protocol: TCP
           env:
             - name: DATABASE_URL
-              value: {{ printf "postgresql://sapl:%s@%s:5432/sapl" .Values.sapl.adminPassword (include "postgresql.fullname" .) | quote }}
+              value: {{ printf "postgresql://%s:%s@%s:5432/%s" .Values.postgresql.postgresqlUsername .Values.postgresql.postgresqlPassword (include "postgresql.fullname" .) .Values.postgresql.postgresqlDatabase| quote }}
             - name: ADMIN_PASSWORD
               value: "{{ .Values.sapl.adminPassword }}"
             - name: ADMIN_EMAIL

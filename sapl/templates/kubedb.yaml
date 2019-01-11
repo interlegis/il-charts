@@ -1,0 +1,53 @@
+{{- if and (not .Values.postgresql.internal) .Values.kubedb.enabled }}
+apiVersion: v1
+data:
+  POSTGRES_PASSWORD: {{ .Values.postgresql.postgresqlPassword }}
+  POSTGRES_USER: {{ .Values.postgresql.postgresqlUsername }}
+kind: Secret
+metadata:
+  name: {{ include "sapl.fullname" . }}-auth
+  labels:
+    app.kubernetes.io/name: {{ include "sapl.name" . }}
+    helm.sh/chart: {{ include "sapl.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+type: Opaque
+---
+apiVersion: kubedb.com/v1alpha1
+kind: Postgres
+metadata:
+  name: {{ include "postgresql.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "sapl.name" . }}
+    helm.sh/chart: {{ include "sapl.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  version: "{{ .Values.kubedb.postgresVersion }}"
+  databaseSecret:
+    secretName: {{ include "sapl.fullname" . }}-auth
+  podTemplate:
+    spec:
+      env:
+      - name: POSTGRES_DB
+        value: "{{ .Values.postgresql.postgresqlDatabase }}"
+  {{- if .Values.persistence.enabled }}
+  storageType: Durable
+  storage:
+    {{- if .Values.persistence.storageClass }}
+      {{- if (eq "-" .Values.persistence.storageClass) }}
+    storageClassName: ""
+      {{- else }}
+    storageClassName: "{{ .Values.persistence.storageClass }}"
+      {{- end }}
+    {{- end }}
+    accessModes:
+    - {{ .Values.persistence.accessMode }}
+    resources:
+      requests:
+        storage: 1Gi
+  {{- else }}
+  storageType: Ephemeral
+  {{- end }}
+  terminationPolicy: "{{ .Values.kubedb.terminationPolicy }}"
+{{- end }}

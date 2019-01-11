@@ -46,6 +46,7 @@ ingress:
   #      - chart-example.local
 
 postgresql:
+  internal: true
   image:
     tag: 9.6.11-r7
     pullPolicy: IfNotPresent
@@ -58,6 +59,11 @@ postgresql:
   postgresqlPassword: altereme
   postgresqlUsername: sapl
   postgresqlDatabase: sapl
+
+kubedb:
+  enabled: false
+  postgresVersion: "9.6.7-v1"
+  terminationPolicy: WipeOut
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
