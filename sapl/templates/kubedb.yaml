@@ -1,8 +1,8 @@
 {{- if and (not .Values.postgresql.internal) .Values.kubedb.enabled }}
 apiVersion: v1
 data:
-  POSTGRES_PASSWORD: {{ .Values.postgresql.postgresqlPassword }}
-  POSTGRES_USER: {{ .Values.postgresql.postgresqlUsername }}
+  POSTGRES_PASSWORD: {{ .Values.postgresql.postgresqlPassword | b64enc | quote }}
+  POSTGRES_USER: {{ .Values.postgresql.postgresqlUsername | b64enc | quote }}
 kind: Secret
 metadata:
   name: {{ include "sapl.fullname" . }}-auth
