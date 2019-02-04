@@ -1,9 +1,27 @@
 apiVersion: v1
 entries:
+  external-dns:
+  - apiVersion: v1
+    appVersion: 0.5.9
+    created: 2019-02-04T16:07:08.736911482-02:00
+    description: Configure external DNS servers (AWS Route53, Google CloudDNS and
+      others) for Kubernetes Ingresses and Services
+    digest: bc29d77acf578b12959c5ef9a41aa2527b3dca7ffce8e44c5872a9bd0a39671e
+    engine: gotpl
+    home: https://github.com/kubernetes-incubator/external-dns
+    maintainers:
+    - email: rabadin@cisco.com
+      name: rabadin
+    name: external-dns
+    sources:
+    - https://github.com/kubernetes-incubator/external-dns
+    urls:
+    - https://interlegis.github.io/il-charts/external-dns-1.6.1.tgz
+    version: 1.6.1
   keepalived:
   - apiVersion: v1
     appVersion: 1.2.24
-    created: 2019-01-11T12:00:22.255906141-02:00
+    created: 2019-02-04T16:07:08.737077292-02:00
     description: Highly available IP addresses with VRRP
     digest: 994dc73475e1293935f33f92277c3cd871737dc226e342a91025161074265418
     icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
@@ -14,7 +32,7 @@ entries:
   local-path-provisioner:
   - apiVersion: v1
     appVersion: 0.0.2
-    created: 2019-01-11T12:00:22.256098306-02:00
+    created: 2019-02-04T16:07:08.737258074-02:00
     description: Provisions hostPath based persistent volumes on the nodes automatically.
     digest: bcf09db18c57948724f5c439f6deecf81478a16b0fd0c1e8067cd6abb6dc466b
     name: local-path-provisioner
@@ -23,7 +41,7 @@ entries:
     version: 0.1.0
   local-volume-provisioner:
   - apiVersion: v1
-    created: 2019-01-11T12:00:22.256553794-02:00
+    created: 2019-02-04T16:07:08.737702938-02:00
     description: Provisioner for local machine volumes
     digest: eb406a7db6877c5547936f4c34620c2ae4455fc0e1c700a1b60d5dc6173f5c21
     engine: gotpl
@@ -35,7 +53,7 @@ entries:
     - https://interlegis.github.io/il-charts/local-volume-provisioner-2.3.1.tgz
     version: 2.3.1
   - apiVersion: v1
-    created: 2019-01-11T12:00:22.256332597-02:00
+    created: 2019-02-04T16:07:08.737480376-02:00
     description: Provisioner for local machine volumes
     digest: f0d67b6247024e923a466c975ec0a6c0a4e62f0f0e47a3ec98e9d364119f9afe
     engine: gotpl
@@ -49,7 +67,7 @@ entries:
   oscm:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-01-11T12:00:22.258069352-02:00
+    created: 2019-02-04T16:07:08.739263912-02:00
     description: Open Service Catalog Manager Asynchronous Provisioning Platform
     digest: 68fca76eb15b0bc8727c301ef9c495b4849f60ff7e2959dcd9d7854c4c228bd2
     icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
@@ -59,7 +77,7 @@ entries:
     version: 0.1.8
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-01-11T12:00:22.257311103-02:00
+    created: 2019-02-04T16:07:08.738455328-02:00
     description: Open Service Catalog Manager Asynchronous Provisioning Platform
     digest: 1d53e86f2b0e50029bce966a57752a425409f00e6d1758baef77c451564e6e6e
     icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
@@ -70,7 +88,7 @@ entries:
   portalmodelo:
   - apiVersion: v1
     appVersion: 3.0-17
-    created: 2019-01-11T12:00:22.258289613-02:00
+    created: 2019-02-04T16:07:08.739499986-02:00
     description: Portal Modelo para Casas Legislativas
     digest: ee52a8909e49182d28507478818d88352302587718079c42055da876ccd73cc6
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -81,7 +99,7 @@ entries:
   sapl:
   - apiVersion: v1
     appVersion: 3.1.140
-    created: 2019-01-11T12:00:22.259742516-02:00
+    created: 2019-02-04T16:07:08.74819887-02:00
     description: Sistema de Apoio ao Processo Legislativo (SAPL)
     digest: cc2781cdefb84552afab0561da6c420d4ab78411cb596587ef8f62b08384a3d2
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/sapl.png
@@ -91,7 +109,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 3.1.140
-    created: 2019-01-11T12:00:22.259029975-02:00
+    created: 2019-02-04T16:07:08.747394453-02:00
     description: Sistema de Apoio ao Processo Legislativo (SAPL)
     digest: 164fc7e20508577f72f031b1100cb91240dc1d28ef176924061d3044b39c4ead
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/sapl.png
@@ -101,7 +119,7 @@ entries:
     version: 0.1.0
   solr:
   - appVersion: 7.5.0
-    created: 2019-01-11T12:00:22.261321246-02:00
+    created: 2019-02-04T16:07:08.748987805-02:00
     description: Solr is the popular, blazing-fast, open source enterprise search
       platform built on Apache Lucene™
     digest: 86b081408bef5e0740a5ff865941bf89296ac025274068cc09993a139517022a
@@ -120,7 +138,7 @@ entries:
   zabbix-agent:
   - apiVersion: v1
     appVersion: "4"
-    created: 2019-01-11T12:00:22.261629423-02:00
+    created: 2019-02-04T16:07:08.749291264-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: 45c096000ed57ef8de7433d796d0d1d881afac631a7bc12a7daa43c97119973b
     icon: https://assets.zabbix.com/img/logo.svg
@@ -130,7 +148,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "4"
-    created: 2019-01-11T12:00:22.261481296-02:00
+    created: 2019-02-04T16:07:08.749141499-02:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: c1eebb05c6843f26ee127aca2682c2a6177bb6995d8b1ce0fb79362ba850f871
     icon: https://assets.zabbix.com/img/logo.svg
@@ -138,4 +156,4 @@ entries:
     urls:
     - https://interlegis.github.io/il-charts/zabbix-agent-0.1.1.tgz
     version: 0.1.1
-generated: 2019-01-11T12:00:22.255661471-02:00
+generated: 2019-02-04T16:07:08.736449146-02:00
