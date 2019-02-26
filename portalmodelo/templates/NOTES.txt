@@ -1,4 +1,4 @@
-1. Get the application URL by running these commands:
+1. Seu Portal Modelo pode ser acessado através da URL:
 {{- if .Values.ingress.enabled }}
 {{- range .Values.ingress.hosts }}
   http{{ if $.Values.ingress.tls }}s{{ end }}://{{ . }}{{ $.Values.ingress.path }}
@@ -17,3 +17,6 @@
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl port-forward $POD_NAME 8080:80
 {{- end }}
+2. Utilize as seguintes credenciais para acesso inicial:
+   Usuario: adm
+   Senha: {{ .Values.portal.adminPassword }}
