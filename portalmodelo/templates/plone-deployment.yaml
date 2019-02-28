@@ -59,6 +59,8 @@ spec:
             value: {{ .Values.portal.description }}
           - name: HOSTNAME
             value: {{ .Values.portal.hostname }}
+          - name: ROOTPWD
+            value: {{ .Values.portal.adminPassword }}
         volumeMounts:
         - mountPath: /data
           name: {{ .Release.Name }}-data
