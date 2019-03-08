@@ -46,6 +46,18 @@ spec:
               value: "{{ .Values.sapl.emailHost }}"
             - name: TZ
               value: "{{ .Values.sapl.timeZone }}"
+            - name: USE_SOLR
+              value: "{{ .Values.sapl.useSolr }}"
+            - name: SOLR_COLLECTION
+              value: "{{ .Values.sapl.solrCollection }}"
+            - name: SOLR_URL
+              value: "{{ .Values.sapl.solrUrl }}"
+            - name: NUM_SHARDS
+              value: "{{ .Values.sapl.solrNumShards }}"
+            - name: RF
+              value: "{{ .Values.sapl.solrReplFactor }}"
+            - name: MAX_SHARDS_PER_NODE
+              value: "{{ .Values.sapl.solrMaxShardsPerNode }}"
           volumeMounts:
             - mountPath: /var/interlegis/sapl/data
               name: {{ .Release.Name }}-data
