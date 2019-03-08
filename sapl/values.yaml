@@ -31,7 +31,7 @@ sapl:
   emailPort: 25
   emailHost: smtp.domain.net
   timeZone: 'America/Sao_Paulo'
-  useSolr: 'false'
+  useSolr: 'true'
   solrCollection: 'sapl'
   solrUrl: 'http://localhost:8983'
   solrNumShards: 1
