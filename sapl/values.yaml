@@ -26,12 +26,12 @@ sapl:
   adminPassword: altereme
   adminEmail: contato@tecnico.net
   emailSendUser: no-reply@domain.net
-  debug: 'false'
-  useTls: 'false'
+  debug: 'False'
+  useTls: 'False'
   emailPort: 25
   emailHost: smtp.domain.net
   timeZone: 'America/Sao_Paulo'
-  useSolr: 'true'
+  useSolr: 'True'
   solrCollection: 'sapl'
   solrUrl: 'http://localhost:8983'
   solrNumShards: 1
