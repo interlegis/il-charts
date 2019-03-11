@@ -21,6 +21,7 @@ persistence:
 
 portal:
   adminPassword: altereme
+  rootPassword: altereme
   adminEmail: contato@tecnico.net
   title: Câmara Municipal
   description: Cidade - UF
