@@ -45,23 +45,6 @@ spec:
             value: "http://{{ $hostname }}:8080/oscm-portal"
           - name: BASE_URL_HTTPS
             value: "https://{{ $hostname }}:8081/oscm-portal"
-          - name: REPORT_ENGINEURL
-            value: "https://{{ $hostname }}/birt/frameset?__report=${reportname}.rptdesign&SessionId=${sessionid}&__locale=${locale}&WSDLURL=${wsdlurl}&SOAPEndPoint=${soapendpoint}&wsname=ReportSecure&wsport=ReportSecurePort"
-          - name: REPORT_WSDLURL
-            value: "https://{{ $hostname }}/ReportSecure/ReportingServiceSecureBean?wsdl"
-          - name: REPORT_SOAP_ENDPOINT
-            value: "https://{{ $hostname }}/ReportSecure/ReportingServiceSecureBean"
-          - name: SSO_STS_URL
-            value: "https://{{ $hostname }}/adfs/services/trust/13/usernamemixed"
-          - name: SSO_STS_METADATA_URL
-            value: "https://{{ $hostname }}/adfs/services/trust/mex"
-          - name: SSO_DEFAULT_TENANT_ID
-            value: "oscmaas1"
-          - name: SSO_IDP_SAML_ASSERTION_ISSUER_ID
-            value: "http://{{ $hostname }}/adfs/services/trust"
-          - name: SSO_LOGOUT_URL
-            value: "https://{{ $hostname }}/adfs/ls/"
-
         - name: "{{ .Chart.Name }}-initdb-jms"
           image: "{{ .Values.initdb.repository }}:{{ .Values.initdb.tag }}"
           imagePullPolicy: {{ .Values.initdb.pullPolicy }}
@@ -76,9 +59,12 @@ spec:
             value: {{ .Values.postgresql.service.port | quote }}
           - name: DB_SUPERPWD
             value: {{ .Values.postgresql.postgresqlPassword | quote }}
+          - name: OVERWRITE
+            value: "true"
 
       containers:
         - name: {{ include "oscm.name" . }}-core
+          hostname: oscm-core
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
