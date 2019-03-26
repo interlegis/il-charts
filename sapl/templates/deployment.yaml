@@ -27,6 +27,10 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
+          dnsConfig:
+            options:
+            - name: ndots
+              value: "3"
           env:
             - name: DATABASE_URL
               value: {{ printf "postgresql://%s:%s@%s:5432/%s" .Values.postgresql.postgresqlUsername .Values.postgresql.postgresqlPassword (include "postgresql.fullname" .) .Values.postgresql.postgresqlDatabase| quote }}
