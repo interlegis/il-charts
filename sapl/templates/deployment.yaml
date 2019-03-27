@@ -22,7 +22,7 @@ spec:
       dnsConfig:
         options:
         - name: ndots
-          value: "4"
+          value: "1"
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"

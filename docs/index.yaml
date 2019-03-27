@@ -3,7 +3,7 @@ entries:
   external-dns:
   - apiVersion: v1
     appVersion: 0.5.9
-    created: 2019-03-27T09:54:18.346813124-03:00
+    created: 2019-03-27T10:32:27.519228788-03:00
     description: Configure external DNS servers (AWS Route53, Google CloudDNS and
       others) for Kubernetes Ingresses and Services
     digest: bc29d77acf578b12959c5ef9a41aa2527b3dca7ffce8e44c5872a9bd0a39671e
@@ -21,7 +21,7 @@ entries:
   keepalived:
   - apiVersion: v1
     appVersion: 1.2.24
-    created: 2019-03-27T09:54:18.34699132-03:00
+    created: 2019-03-27T10:32:27.519381332-03:00
     description: Highly available IP addresses with VRRP
     digest: 994dc73475e1293935f33f92277c3cd871737dc226e342a91025161074265418
     icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
@@ -32,7 +32,7 @@ entries:
   local-path-provisioner:
   - apiVersion: v1
     appVersion: 0.0.2
-    created: 2019-03-27T09:54:18.347178232-03:00
+    created: 2019-03-27T10:32:27.519563853-03:00
     description: Provisions hostPath based persistent volumes on the nodes automatically.
     digest: bcf09db18c57948724f5c439f6deecf81478a16b0fd0c1e8067cd6abb6dc466b
     name: local-path-provisioner
@@ -41,7 +41,7 @@ entries:
     version: 0.1.0
   local-volume-provisioner:
   - apiVersion: v1
-    created: 2019-03-27T09:54:18.347713962-03:00
+    created: 2019-03-27T10:32:27.520043699-03:00
     description: Provisioner for local machine volumes
     digest: eb406a7db6877c5547936f4c34620c2ae4455fc0e1c700a1b60d5dc6173f5c21
     engine: gotpl
@@ -53,7 +53,7 @@ entries:
     - https://interlegis.github.io/il-charts/local-volume-provisioner-2.3.1.tgz
     version: 2.3.1
   - apiVersion: v1
-    created: 2019-03-27T09:54:18.347466908-03:00
+    created: 2019-03-27T10:32:27.519809536-03:00
     description: Provisioner for local machine volumes
     digest: f0d67b6247024e923a466c975ec0a6c0a4e62f0f0e47a3ec98e9d364119f9afe
     engine: gotpl
@@ -67,7 +67,7 @@ entries:
   oscm:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-27T09:54:18.350467752-03:00
+    created: 2019-03-27T10:32:27.523016825-03:00
     description: Open Service Catalog Manager Asynchronous Provisioning Platform
     digest: 2a3ca5d3c98f23be24d1220a3504b2f2be9b62929409c42343ebba2d1a7df306
     icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
@@ -77,7 +77,7 @@ entries:
     version: 0.1.9
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-27T09:54:18.349654009-03:00
+    created: 2019-03-27T10:32:27.522254129-03:00
     description: Open Service Catalog Manager Asynchronous Provisioning Platform
     digest: 68fca76eb15b0bc8727c301ef9c495b4849f60ff7e2959dcd9d7854c4c228bd2
     icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
@@ -87,7 +87,7 @@ entries:
     version: 0.1.8
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2019-03-27T09:54:18.348895209-03:00
+    created: 2019-03-27T10:32:27.521424122-03:00
     description: Open Service Catalog Manager Asynchronous Provisioning Platform
     digest: 1d53e86f2b0e50029bce966a57752a425409f00e6d1758baef77c451564e6e6e
     icon: https://blog.global.fujitsu.com/wp-content/uploads/2016/09/open_service_catalog_manager_banner.jpg
@@ -98,7 +98,7 @@ entries:
   portalmodelo:
   - apiVersion: v1
     appVersion: 3.0-17
-    created: 2019-03-27T09:54:18.351109596-03:00
+    created: 2019-03-27T10:32:27.523675373-03:00
     description: Portal Modelo para Casas Legislativas
     digest: 5bfe1b297e798ef0dd0b977e194ec7fa18c7f01d6a423f05ec776bd81d627a7a
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -108,7 +108,7 @@ entries:
     version: 0.1.7
   - apiVersion: v1
     appVersion: 3.0-17
-    created: 2019-03-27T09:54:18.350899779-03:00
+    created: 2019-03-27T10:32:27.523457594-03:00
     description: Portal Modelo para Casas Legislativas
     digest: d652d421b4c2ef03867fa14a3142966f95690c7c05f528388301075d2567fa5e
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -118,7 +118,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: 3.0-17
-    created: 2019-03-27T09:54:18.350691249-03:00
+    created: 2019-03-27T10:32:27.523233839-03:00
     description: Portal Modelo para Casas Legislativas
     digest: ee52a8909e49182d28507478818d88352302587718079c42055da876ccd73cc6
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -129,9 +129,9 @@ entries:
   sapl:
   - apiVersion: v1
     appVersion: 3.1.146
-    created: 2019-03-27T09:54:18.355277694-03:00
+    created: 2019-03-27T10:32:27.527708049-03:00
     description: Sistema de Apoio ao Processo Legislativo (SAPL)
-    digest: 40f09a285a9801cacb64e50c25a6230d6c1e69dca0a53ed40647c600f02244c6
+    digest: c46e0e3ad008cd2a990adff8cdd52bb5b53656393bbb59692bcb251deef82c86
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/sapl.png
     name: sapl
     urls:
@@ -139,7 +139,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: 3.1.146
-    created: 2019-03-27T09:54:18.353947885-03:00
+    created: 2019-03-27T10:32:27.526664684-03:00
     description: Sistema de Apoio ao Processo Legislativo (SAPL)
     digest: d54a54ca479cca3b3a6aca0337a8525b64dad0217499b0ae51f049b501eea9fd
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/sapl.png
@@ -149,7 +149,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: 3.1.146
-    created: 2019-03-27T09:54:18.353218003-03:00
+    created: 2019-03-27T10:32:27.525917299-03:00
     description: Sistema de Apoio ao Processo Legislativo (SAPL)
     digest: 4c1dcd86cb27c94ac838f271727aeb9acbe3541be76b3add81d951f5d7e93e1f
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/sapl.png
@@ -159,7 +159,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 3.1.140
-    created: 2019-03-27T09:54:18.35249159-03:00
+    created: 2019-03-27T10:32:27.525143534-03:00
     description: Sistema de Apoio ao Processo Legislativo (SAPL)
     digest: cc2781cdefb84552afab0561da6c420d4ab78411cb596587ef8f62b08384a3d2
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/sapl.png
@@ -169,7 +169,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 3.1.140
-    created: 2019-03-27T09:54:18.351775115-03:00
+    created: 2019-03-27T10:32:27.524370655-03:00
     description: Sistema de Apoio ao Processo Legislativo (SAPL)
     digest: 164fc7e20508577f72f031b1100cb91240dc1d28ef176924061d3044b39c4ead
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/sapl.png
@@ -179,7 +179,7 @@ entries:
     version: 0.1.0
   solr:
   - appVersion: 7.5.0
-    created: 2019-03-27T09:54:18.356138507-03:00
+    created: 2019-03-27T10:32:27.528730211-03:00
     description: Solr is the popular, blazing-fast, open source enterprise search
       platform built on Apache Lucene™
     digest: 86b081408bef5e0740a5ff865941bf89296ac025274068cc09993a139517022a
@@ -198,7 +198,7 @@ entries:
   zabbix-agent:
   - apiVersion: v1
     appVersion: "4"
-    created: 2019-03-27T09:54:18.35655624-03:00
+    created: 2019-03-27T10:32:27.529139078-03:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: 45c096000ed57ef8de7433d796d0d1d881afac631a7bc12a7daa43c97119973b
     icon: https://assets.zabbix.com/img/logo.svg
@@ -208,7 +208,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "4"
-    created: 2019-03-27T09:54:18.356340241-03:00
+    created: 2019-03-27T10:32:27.528939498-03:00
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: c1eebb05c6843f26ee127aca2682c2a6177bb6995d8b1ce0fb79362ba850f871
     icon: https://assets.zabbix.com/img/logo.svg
@@ -216,4 +216,4 @@ entries:
     urls:
     - https://interlegis.github.io/il-charts/zabbix-agent-0.1.1.tgz
     version: 0.1.1
-generated: 2019-03-27T09:54:18.346344072-03:00
+generated: 2019-03-27T10:32:27.518759677-03:00
