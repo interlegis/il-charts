@@ -91,7 +91,8 @@ spec:
             port: 8080
           initialDelaySeconds: 60
           periodSeconds: 10
-        resources: {}
+        resources:
+{{ toYaml .Values.resources.plone | indent 10 }}
         volumeMounts:
         - mountPath: /data
           name: {{ .Release.Name }}-data

@@ -48,6 +48,8 @@ spec:
           name: {{ .Release.Name }}-data
         ports:
         - containerPort: 8100
+        resources:
+{{ toYaml .Values.resources.zeo | indent 10 }}
       restartPolicy: Always
       volumes:
       - name: {{ .Release.Name }}-data

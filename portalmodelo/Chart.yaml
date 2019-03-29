@@ -3,4 +3,4 @@ appVersion: "3.0-17"
 description: Portal Modelo para Casas Legislativas
 name: portalmodelo
 icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
-version: 0.1.7
+version: 0.1.8
