@@ -83,14 +83,20 @@ spec:
             - /plone/instance/bin/instance
             - monitor
             - health_ok
-          initialDelaySeconds: 60
-          periodSeconds: 30
+          initialDelaySeconds: 90
+          failureThreshold: 2
+          periodSeconds: 200
+          successThreshold: 1
+          timeoutSeconds: 5
         readinessProbe:
+          failureThreshold: 3
           httpGet:
             path: /
             port: 8080
-          initialDelaySeconds: 60
+          initialDelaySeconds: 90
           periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
         resources:
 {{ toYaml .Values.resources.plone | indent 10 }}
         volumeMounts:
