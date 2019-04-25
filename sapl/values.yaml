@@ -54,7 +54,7 @@ ingress:
 postgresql:
   internal: true
   image:
-    tag: 9.6.11-r7
+    tag: 9.6.12-r66
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
