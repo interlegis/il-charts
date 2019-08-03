@@ -53,14 +53,14 @@ resources:
   #   memory: 128Mi
     requests:
       cpu: 100m
-      memory: 800Mi
+      memory: 600Mi
   zeo:
   #  limits:
   #   cpu: 100m
   #   memory: 128Mi
     requests:
       cpu: 100m
-      memory: 100Mi
+      memory: 64Mi
 
 nodeSelector: {}
 
