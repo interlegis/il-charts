@@ -26,6 +26,7 @@ portal:
   title: Câmara Municipal
   description: Cidade - UF
   hostname: teste.df.leg.br
+  timeZone: America/Sao_Paulo
 
 instance:
   zeoclient: false

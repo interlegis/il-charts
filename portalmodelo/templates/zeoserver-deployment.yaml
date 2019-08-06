@@ -42,6 +42,8 @@ spec:
         env:
         - name: ZEO_SHARED_BLOB_DIR
           value: "on"
+        - name: TZ
+          value: {{ .Values.portal.timeZone }}
         name: {{ .Release.Name }}-zeoserver
         volumeMounts:
         - mountPath: /data

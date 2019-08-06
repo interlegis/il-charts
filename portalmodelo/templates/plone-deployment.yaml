@@ -61,6 +61,8 @@ spec:
             value: {{ .Values.portal.hostname }}
           - name: ROOTPWD
             value: {{ .Values.portal.rootPassword }}
+          - name: TZ
+            value: {{ .Values.portal.timeZone }}
         volumeMounts:
         - mountPath: /data
           name: {{ .Release.Name }}-data
