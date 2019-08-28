@@ -31,10 +31,14 @@ spec:
           env:
             - name: INSTALL_SECRET
               value: "{{ .Values.installSecret }}"
+            - name: MYSQL_HOST
+              value: "{{ include "osticket.name" . }}-mysql"
             - name: MYSQL_PASSWORD
               value: "{{ .Values.mysql.mysqlPassword }}"
             - name: USE_MEMCACHE
               value: "true"
+            - name: MEMCACHE_NAME
+              value: "{{ include "osticket.name" . }}-memcached"
           volumeMounts:
             - mountPath: /data/upload/include/i18n
               name: {{ include "osticket.fullname" . }}-i18n
