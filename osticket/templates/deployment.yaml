@@ -38,9 +38,6 @@ spec:
           command:
             - "php"
             - "/data/bin/install.php"
-          volumeMounts:
-            - mountPath: /data/upload/include/i18n
-              name: {{ include "osticket.fullname" . }}-i18n
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -60,9 +57,6 @@ spec:
               value: "true"
             - name: MEMCACHE_NAME
               value: "{{ include "osticket.name" . }}-memcached"
-          volumeMounts:
-            - mountPath: /data/upload/include/i18n
-              name: {{ include "osticket.fullname" . }}-i18n
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -89,14 +83,6 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      volumes:
-        - name: {{ include "osticket.fullname" . }}-i18n
-        {{- if .Values.persistence.enabled }}
-          persistentVolumeClaim:
-          claimName: {{ include "osticket.fullname" . }}-i18n
-        {{- else }}
-          emptyDir: {}
-        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
