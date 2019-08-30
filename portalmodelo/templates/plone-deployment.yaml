@@ -38,6 +38,7 @@ spec:
         volumeMounts:
         - mountPath: /data
           name: {{ .Release.Name }}-data
+      {{- if .Values.portal.createAndUpgrade }}
       - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         name: {{ .Release.Name }}-plonecfg
         command: [ "/configure.sh" ]
@@ -53,7 +54,7 @@ spec:
             value: {{ .Values.portal.adminEmail }}
           - name: PASSWORD
             value: {{ .Values.portal.adminPassword }}
-          - name:  TITLE
+          - name: TITLE
             value: {{ .Values.portal.title }}
           - name: DESCR
             value: {{ .Values.portal.description }}
@@ -66,6 +67,7 @@ spec:
         volumeMounts:
         - mountPath: /data
           name: {{ .Release.Name }}-data
+      {{- end }}
       containers:
       - env:
         {{- if .Values.instance.zeoclient }}

@@ -27,6 +27,7 @@ portal:
   description: Cidade - UF
   hostname: teste.df.leg.br
   timeZone: America/Sao_Paulo
+  createAndUpgrade: true
 
 instance:
   zeoclient: false
