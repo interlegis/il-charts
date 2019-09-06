@@ -50,16 +50,16 @@ ingress:
 
 resources:
   plone:
-  #  limits:
-  #   cpu: 100m
-  #   memory: 128Mi
+    limits:
+      cpu: 1000m
+      memory: 1500Mi
     requests:
       cpu: 100m
       memory: 600Mi
   zeo:
-  #  limits:
-  #   cpu: 100m
-  #   memory: 128Mi
+    limits:
+      cpu: 1000m
+      memory: 512Mi
     requests:
       cpu: 100m
       memory: 64Mi
