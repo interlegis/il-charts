@@ -24,6 +24,15 @@ spec:
     spec:
       initContainers:
       - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        name: {{ .Release.Name }}-rmlock
+        command:
+        - "rm"
+        - "-f"
+        - "/data/filestorage/Data.fs.lock"
+        volumeMounts:
+        - mountPath: /data
+          name: {{ .Release.Name }}-data
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         name: {{ .Release.Name }}-initzeo
         command: 
         - "mkdir"

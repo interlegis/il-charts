@@ -26,6 +26,17 @@ spec:
         release: {{ .Release.Name }}
     spec:
       initContainers:
+      {{- if not .Values.instance.zeoclient }}
+      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        name: {{ .Release.Name }}-rmlock
+        command:
+        - "rm"
+        - "-f"
+        - "/data/filestorage/Data.fs.lock"
+        volumeMounts:
+        - mountPath: /data
+          name: {{ .Release.Name }}-data
+      {{- end }}
       - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         name: {{ .Release.Name }}-initplone
         command: 
