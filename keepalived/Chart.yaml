@@ -3,4 +3,4 @@ appVersion: "2.0.16"
 description: Highly available IP addresses with VRRP
 name: keepalived
 icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
-version: 0.2.1
+version: 0.2.2
