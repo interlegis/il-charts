@@ -87,6 +87,8 @@ spec:
         - name: ZEO_SHARED_BLOB_DIR
           value: "on"
         {{- end }}
+        - name: TZ
+          value: {{ .Values.portal.timeZone }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         name: {{ .Release.Name }}-plone
         ports:
