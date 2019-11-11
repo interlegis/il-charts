@@ -100,9 +100,9 @@ spec:
             - /plone/instance/bin/instance
             - monitor
             - health_ok
-          initialDelaySeconds: 90
+          initialDelaySeconds: 180
           failureThreshold: 2
-          periodSeconds: 200
+          periodSeconds: 400
           successThreshold: 1
           timeoutSeconds: 5
         readinessProbe:
