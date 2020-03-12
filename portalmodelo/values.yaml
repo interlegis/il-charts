@@ -55,7 +55,7 @@ resources:
       memory: 1500Mi
     requests:
       cpu: 100m
-      memory: 600Mi
+      memory: 650Mi
   zeo:
     limits:
       cpu: 1000m
