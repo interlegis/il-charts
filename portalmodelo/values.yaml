@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: interlegis/portalmodelo
-  tag: 3.0-17
+  tag: 3.0-21
   pullPolicy: IfNotPresent
 
 service:
@@ -28,6 +28,7 @@ portal:
   hostname: teste.df.leg.br
   timeZone: America/Sao_Paulo
   createAndUpgrade: true
+  zodbCacheSize: 2000
 
 instance:
   zeoclient: false
