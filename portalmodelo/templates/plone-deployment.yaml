@@ -76,7 +76,7 @@ spec:
           - name: TZ
             value: {{ .Values.portal.timeZone }}
           - name: ZODB_CACHE_SIZE
-            value: {{ .Values.portal.zodbCacheSize }}
+            value: "{{ .Values.portal.zodbCacheSize }}"
         volumeMounts:
         - mountPath: /data
           name: {{ .Release.Name }}-data
