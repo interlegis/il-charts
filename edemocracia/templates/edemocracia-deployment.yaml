@@ -69,15 +69,15 @@ spec:
             - name: EMAIL_BACKEND
               value: django.core.mail.backends.smtp.EmailBackend
             - name: EMAIL_HOST
-              value: {{ .Values.smtp.host }}
+              value: "{{ .Values.smtp.host }}"
             - name: EMAIL_HOST_PASSWORD
-              value: {{ .Values.smtp.password }}
+              value: "{{ .Values.smtp.password }}"
             - name: EMAIL_HOST_USER
-              value: {{ .Values.smtp.username }}
+              value: "{{ .Values.smtp.username }}"
             - name: EMAIL_PORT
-              value: {{ .Values.smtp.port }}
+              value: "{{ .Values.smtp.port }}"
             - name: EMAIL_USE_TLS
-              value: {{ .Values.smtp.tls }}
+              value: "{{ .Values.smtp.tls }}"
             - name: GOOGLE_ANALYTICS_ID
               value: {{ .Values.edemocracia.googleAnalyticsId }}
             - name: OLARK_ID

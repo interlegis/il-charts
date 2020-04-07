@@ -56,15 +56,15 @@ spec:
             - name: DEFAULT_FROM_EMAIL
               value: '"Portal e-Democracia[Wikilegis]" <{{ .Values.edemocracia.admin.email }}>'
             - name: EMAIL_HOST
-              value: {{ .Values.smtp.host }}
+              value: "{{ .Values.smtp.host }}"
             - name: EMAIL_HOST_PASSWORD
-              value: {{ .Values.smtp.password }}
+              value: "{{ .Values.smtp.password }}"
             - name: EMAIL_HOST_USER
-              value: {{ .Values.smtp.username }}
+              value: "{{ .Values.smtp.username }}"
             - name: EMAIL_PORT
-              value: {{ .Values.smtp.port }}
+              value: "{{ .Values.smtp.port }}"
             - name: EMAIL_USE_TLS
-              value: {{ .Values.smtp.tls }}
+              value: "{{ .Values.smtp.tls }}"
             - name: ENABLE_REMOTE_USER
               value: "True"
             - name: FORCE_SCRIPT_NAME

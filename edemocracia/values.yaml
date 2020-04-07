@@ -127,10 +127,10 @@ audiencias:
 
 
 smtp:
-  host: 127.0.0.1
+  host: "127.0.0.1"
   username: ""
   password: ""
-  port: 25
+  port: "25"
   tls: "False"
 
 

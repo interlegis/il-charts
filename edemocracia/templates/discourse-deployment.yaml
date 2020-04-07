@@ -60,13 +60,13 @@ spec:
             - name: DISCOURSE_RELATIVE_URL_ROOT
               value: /expressao
             - name: DISCOURSE_SMTP_ADDRESS
-              value: {{ .Values.smtp.host }}
+              value: "{{ .Values.smtp.host }}"
             - name: DISCOURSE_SMTP_PASSWORD
-              value: {{ .Values.smtp.password }}
+              value: "{{ .Values.smtp.password }}"
             - name: DISCOURSE_SMTP_PORT
-              value: {{ .Values.smtp.port }}
+              value: "{{ .Values.smtp.port }}"
             - name: DISCOURSE_SMTP_USER_NAME
-              value: {{ .Values.smtp.username }}
+              value: "{{ .Values.smtp.username }}"
             - name: DISCOURSE_SSO_SECRET
               value: {{ .Values.discourse.sso.secret }}
             - name: DISCOURSE_SSO_URL
