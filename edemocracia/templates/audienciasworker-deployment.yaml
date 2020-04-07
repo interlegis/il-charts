@@ -88,7 +88,7 @@ spec:
             - name: RECAPTCHA_SITE_KEY
               value: {{ .Values.edemocracia.recaptcha.siteKey }}
             - name: REDIS_SERVER
-              value: {{ (include "redis.fullname" .) }}
+              value: {{ (include "redis.fullname" .) }}-master
             - name: SESSION_COOKIE_NAME
               value: audiencias_session
             - name: SITE_DOMAIN

@@ -54,7 +54,7 @@ spec:
             - name: DISCOURSE_NOTIFICATION_EMAIL
               value: {{ .Values.edemocracia.admin.email }}
             - name: DISCOURSE_REDIS_HOST
-              value: {{ (include "redis.fullname" .) }}
+              value: {{ (include "redis.fullname" .) }}-master
             - name: DISCOURSE_REDIS_PORT
               value: "6379"
             - name: DISCOURSE_RELATIVE_URL_ROOT
