@@ -1,0 +1,128 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "edemocracia.fullname" . }}-audienciasweb
+  labels:
+    {{- include "edemocracia.labels" . | nindent 4 }}
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-audienciasweb
+spec:
+  selector:
+    matchLabels:
+      {{- include "edemocracia.selectorLabels" . | nindent 6 }}
+      io.kompose.service: {{ include "edemocracia.fullname" . }}-audienciasweb
+  strategy:
+      type: Recreate
+  template:
+    metadata:
+      labels:
+        {{- include "edemocracia.selectorLabels" . | nindent 8 }}
+        io.kompose.service: {{ include "edemocracia.fullname" . }}-audienciasweb
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ include "edemocracia.fullname" . }}-audienciasweb
+          image: "{{ .Values.audiencias.image.repository }}:{{ .Values.audiencias.image.tag }}"
+          imagePullPolicy: {{ .Values.audiencias.image.pullPolicy }}
+          args:
+            - ./start-web.sh
+          env:
+            - name: ADMIN_EMAIL
+              value: {{ .Values.edemocracia.admin.email }}
+            - name: ADMIN_PASSWORD
+              value: {{ .Values.edemocracia.admin.password }}
+            - name: ADMIN_USERNAME
+              value: admin
+            - name: ALLOWED_HOSTS
+              value: audienciasweb, localhost, 127.0.0.1, "{{ (index .Values.ingress.hosts 0).host }}"
+            - name: COMPRESS_OFFLINE
+              value: "True"
+            - name: DATABASE_ENGINE
+              value: postgresql_psycopg2
+            - name: DATABASE_HOST
+              value: (include "postgresql.fullname" .)
+            - name: DATABASE_NAME
+              value: audiencias
+            - name: DATABASE_PASSWORD
+              value: {{ .Values.edemocracia.admin.password }}
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_USER
+              value: root
+            - name: DEBUG
+              value: "False"
+            - name: DEFAULT_FROM_EMAIL
+              value: '"Portal e-Democracia[audiencias]" <{{ .Values.edemocracia.admin.email }}>'
+            - name: DJANGO_SECRET_KEY
+              value: {{ .Values.edemocracia.apikey }}
+            - name: EMAIL_HOST
+              value: {{ .Values.smtp.host }}
+            - name: EMAIL_HOST_PASSWORD
+              value: {{ .Values.smtp.password }}
+            - name: EMAIL_HOST_USER
+              value: {{ .Values.smtp.username }}
+            - name: EMAIL_PORT
+              value: {{ .Values.smtp.port }}
+            - name: EMAIL_USE_TLS
+              value: {{ .Values.smtp.tls }}
+            - name: ENABLE_REMOTE_USER
+              value: "True"
+            - name: FORCE_SCRIPT_NAME
+              value: /audiencias
+            - name: GOOGLE_ANALYTICS_ID
+              value: {{ .Values.edemocracia.googleAnalyticsId }}
+            - name: LOGIN_REDIRECT_URL
+              value: /
+            - name: LOGIN_URL
+              value: /
+            - name: LOGOUT_REDIRECT_URL
+              value: /
+            - name: NOTIFICATION_EMAIL_LIST
+              value: "{{ .Values.edemocracia.admin.email }},{{ .Values.audiencias.notifEmailList }}"
+            - name: OLARK_ID
+              value: {{ .Values.edemocracia.olarkId }}i
+            - name: RECAPTCHA_PRIVATE_KEY
+              value: {{ .Values.edemocracia.recaptcha.privateKey }}
+            - name: RECAPTCHA_SITE_KEY
+              value: {{ .Values.edemocracia.recaptcha.siteKey }}
+            - name: REDIS_SERVER
+              value: (include "redis.fullname" .)
+            - name: SESSION_COOKIE_NAME
+              value: audiencias_session
+            - name: SITE_DOMAIN
+              value: "{{ (index .Values.ingress.hosts 0).host }}"
+            - name: SITE_NAME
+              value: {{ .Values.edemocracia.siteName }}
+            - name: STATIC_URL
+              value: /audiencias/static/
+            - name: URL_PREFIX
+              value: audiencias
+            - name: WEBSERVICE_URL
+              value: {{ .Values.audiencias.webservice.url }}
+            - name: WORDS_BLACK_LIST
+              value: {{ .Values.audiencias.wordsBlacklist }}
+          resources:
+            {{- toYaml .Values.audiencias.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /var/labhacker/audiencias/public/
+              name: {{ include "edemocracia.fullname" . }}-audiencias
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: {{ include "edemocracia.fullname" . }}-audiencias
+          persistentVolumeClaim:
+            claimName: {{ include "edemocracia.fullname" . }}-audiencias
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

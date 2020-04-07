@@ -1,0 +1,118 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "edemocracia.fullname" . }}-discourse
+  labels:
+    {{- include "edemocracia.labels" . | nindent 4 }}
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-discourse
+spec:
+  selector:
+    matchLabels:
+      {{- include "edemocracia.selectorLabels" . | nindent 6 }}
+      io.kompose.service: {{ include "edemocracia.fullname" . }}-discourse
+  strategy:
+      type: Recreate
+  template:
+    metadata:
+      labels:
+        {{- include "edemocracia.selectorLabels" . | nindent 8 }}
+        io.kompose.service: {{ include "edemocracia.fullname" . }}-discourse
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - args:
+          - ./start-web.sh
+          env:
+            - name: ADMIN_EMAIL
+              value: {{ .Values.edemocracia.admin.email }}
+            - name: ADMIN_PASSWORD
+              value: {{ .Values.edemocracia.admin.password }}
+            - name: ADMIN_USERNAME
+              value: admin
+            - name: DISCOURSE_CONTACT_EMAIL
+              value: {{ .Values.edemocracia.admin.email }}
+            - name: DISCOURSE_CONTACT_URL
+              value: {{ (index .Values.ingress.hosts 0).host }}
+            - name: DISCOURSE_DB_HOST
+              value: (include "postgresql.fullname" .)
+            - name: DISCOURSE_DB_NAME
+              value: discourse
+            - name: DISCOURSE_DB_PASSWORD
+              value: {{ .Values.edemocracia.admin.password }}
+            - name: DISCOURSE_DB_PORT
+              value: "5432"
+            - name: DISCOURSE_DB_USERNAME
+              value: root
+            - name: DISCOURSE_DEVELOPER_EMAILS
+            - name: DISCOURSE_FORCE_HOSTNAME
+              value: {{ (index .Values.ingress.hosts 0).host }}\/expressao
+            - name: DISCOURSE_HOSTNAME
+              value: {{ (index .Values.ingress.hosts 0).host }}\/expressao
+            - name: DISCOURSE_NOTIFICATION_EMAIL
+              value: {{ .Values.edemocracia.admin.email }}
+            - name: DISCOURSE_REDIS_HOST
+              value: (include "redis.fullname" .)
+            - name: DISCOURSE_REDIS_PORT
+              value: "6379"
+            - name: DISCOURSE_RELATIVE_URL_ROOT
+              value: /expressao
+            - name: DISCOURSE_SMTP_ADDRESS
+              value: {{ .Values.smtp.host }}
+            - name: DISCOURSE_SMTP_PASSWORD
+              value: {{ .Values.smtp.password }}
+            - name: DISCOURSE_SMTP_PORT
+              value: {{ .Values.smtp.port }}
+            - name: DISCOURSE_SMTP_USER_NAME
+              value: {{ .Values.smtp.username }}
+            - name: DISCOURSE_SSO_SECRET
+              value: {{ .Values.discourse.sso.secret }}
+            - name: DISCOURSE_SSO_URL
+              value: https:\/\/{{ (index .Values.ingress.hosts 0).host }}
+            - name: RAILS_ENV
+              value: production
+          image: {{.Values.discourse.image.repository}}:{{ .Values.discourse.image.tag }}
+          imagePullPolicy: {{ .Values.discourse.image.pullPolicy }}
+          name: {{ include "edemocracia.fullname" . }}-discourse
+          ports:
+            - containerPort: 8080
+          resources:
+            {{- toYaml .Values.discourse.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /var/www/discourse/public/assets/
+              name: {{ include "edemocracia.fullname" . }}-discourse-assets
+            - mountPath: /var/www/discourse/public/javascripts/
+              name: {{ include "edemocracia.fullname" . }}-discourse-js
+            - mountPath: /var/www/discourse/public/images/
+              name: {{ include "edemocracia.fullname" . }}-discourse-img
+            - mountPath: /var/www/discourse/tmp/stylesheet-cache/
+              name: {{ include "edemocracia.fullname" . }}-discourse-cache
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: edemocracia-discourse-assets
+          persistentVolumeClaim:
+            claimName: edemocracia-discourse-assets
+        - name: edemocracia-discourse-js
+          persistentVolumeClaim:
+            claimName: edemocracia-discourse-js
+        - name: edemocracia-discourse-img
+          persistentVolumeClaim:
+            claimName: edemocracia-discourse-img
+        - name: edemocracia-discourse-cache
+          persistentVolumeClaim:
+            claimName: edemocracia-discourse-cache
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

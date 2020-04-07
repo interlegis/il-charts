@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "edemocracia.fullname" . }}-wikilegis
+  labels:
+    {{- include "edemocracia.labels" . | nindent 4 }}
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-wikilegis
+spec:
+  selector:
+    matchLabels:
+      {{- include "edemocracia.selectorLabels" . | nindent 6 }}
+      io.kompose.service: {{ include "edemocracia.fullname" . }}-wikilegis
+  strategy:
+      type: Recreate
+  template:
+    metadata:
+      labels:
+        {{- include "edemocracia.selectorLabels" . | nindent 8 }}
+        io.kompose.service: {{ include "edemocracia.fullname" . }}-wikilegis
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ include "edemocracia.fullname" . }}-wikilegis
+          image: "{{ .Values.wikilegis.image.repository }}:{{ .Values.wikilegis.image.tag }}"
+          imagePullPolicy: {{ .Values.wikilegis.image.pullPolicy }}
+          args:
+            - ./start.sh
+          env:
+            - name: ADMIN_EMAIL
+              value: {{ .Values.edemocracia.admin.email }}
+            - name: ADMIN_PASSWORD
+              value: {{ .Values.edemocracia.admin.password }}
+            - name: ALLOWED_HOSTS
+              value: "{{ (index .Values.ingress.hosts 0).host }},wikilegisweb,wikilegis,localhost,127.0.0.1"
+            - name: API_KEY
+              value: {{ .Values.edemocracia.apikey }}
+            - name: AUTH_USER_MODEL
+              value: accounts.User
+            - name: DATABASE_ENGINE
+              value: postgresql_psycopg2
+            - name: DATABASE_HOST
+              value: (include "postgresql.fullname" .)
+            - name: DATABASE_NAME
+              value: wikilegis
+            - name: DATABASE_PASSWORD
+              value: {{ .Values.edemocracia.admin.password }}
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_USER
+              value: root
+            - name: DEBUG
+              value: "True"
+            - name: DEFAULT_FROM_EMAIL
+              value: '"Portal e-Democracia[Wikilegis]" <{{ .Values.edemocracia.admin.email }}>'
+            - name: EMAIL_HOST
+              value: {{ .Values.smtp.host }}
+            - name: EMAIL_HOST_PASSWORD
+              value: {{ .Values.smtp.password }}
+            - name: EMAIL_HOST_USER
+              value: {{ .Values.smtp.username }}
+            - name: EMAIL_PORT
+              value: {{ .Values.smtp.port }}
+            - name: EMAIL_USE_TLS
+              value: {{ .Values.smtp.tls }}
+            - name: ENABLE_REMOTE_USER
+              value: "True"
+            - name: FORCE_SCRIPT_NAME
+              value: /wikilegis
+            - name: LANGUAGE_CODE
+              value: pt-br
+            - name: LOGIN_REDIRECT_URL
+              value: /
+            - name: LOGIN_URL
+              value: /
+            - name: MEDIA_URL
+              value: /wikilegis/media/
+            - name: SECRET_KEY
+              value: {{ .Values.wikilegis.apikey }}
+            - name: SESSION_COOKIE_NAME
+              value: wikilegis_session
+            - name: SITE_DOMAIN
+              value: {{ (index .Values.ingress.hosts 0).host }}
+            - name: SITE_NAME
+              value: {{ .Values.edemocracia.sitename }}
+            - name: STATIC_URL
+              value: /wikilegis/static/
+            - name: TIME_ZONE
+              value: {{ .Values.edemocracia.timezone }}
+          resources:
+            {{- toYaml .Values.wikilegis.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /var/labhacker/wikilegis/wikilegis/public/
+              name: {{ include "edemocracia.fullname" . }}-wikilegis
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: {{ include "edemocracia.fullname" . }}-wikilegis
+          persistentVolumeClaim:
+            claimName: {{ include "edemocracia.fullname" . }}-wikilegis
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

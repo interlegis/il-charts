@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "edemocracia.fullname" . }}-nginx
+  labels:
+    {{- include "edemocracia.labels" . | nindent 4 }}
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-nginx
+spec:
+  selector:
+    matchLabels:
+      {{- include "edemocracia.selectorLabels" . | nindent 6 }}
+      io.kompose.service: {{ include "edemocracia.fullname" . }}-nginx
+  strategy:
+      type: Recreate
+  template:
+    metadata:
+      labels:
+        {{- include "edemocracia.selectorLabels" . | nindent 8 }}
+        io.kompose.service: {{ include "edemocracia.fullname" . }}-nginx
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}-nginx
+          image: "{{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}"
+          imagePullPolicy: {{ .Values.nginx.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.nginx.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /var/labhacker/edemocracia/src/public/
+              name: {{ include "edemocracia.fullname" . }}-edemocracia
+            - mountPath: /var/labhacker/wikilegis/wikilegis/public/
+              name: {{ include "edemocracia.fullname" . }}-wikilegis
+            - mountPath: /var/labhacker/audiencias/public/
+              name: {{ include "edemocracia.fullname" . }}-audiencias
+            - mountPath: /var/www/discourse/public/assets/
+              name: {{ include "edemocracia.fullname" . }}-discourse-assets
+            - mountPath: /var/www/discourse/public/javascripts/
+              name: {{ include "edemocracia.fullname" . }}-discourse-js
+            - mountPath: /var/www/discourse/public/images/
+              name: {{ include "edemocracia.fullname" . }}-discourse-img
+            - mountPath: /var/www/discourse/tmp/stylesheet-cache/
+              name: {{ include "edemocracia.fullname" . }}-discourse-cache
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: {{ include "edemocracia.fullname" . }}-edemocracia
+          persistentVolumeClaim:
+            claimName: {{ include "edemocracia.fullname" . }}-edemocracia
+        - name: {{ include "edemocracia.fullname" . }}-wikilegis
+          persistentVolumeClaim:
+            claimName: {{ include "edemocracia.fullname" . }}-wikilegis
+        - name: {{ include "edemocracia.fullname" . }}-audiencias
+          persistentVolumeClaim:
+            claimName: {{ include "edemocracia.fullname" . }}-audiencias
+        - name: {{ include "edemocracia.fullname" . }}-discourse-assets
+          persistentVolumeClaim:
+            claimName: {{ include "edemocracia.fullname" . }}-discourse-assets
+        - name: {{ include "edemocracia.fullname" . }}-discourse-js
+          persistentVolumeClaim:
+            claimName: {{ include "edemocracia.fullname" . }}-discourse-js
+        - name: {{ include "edemocracia.fullname" . }}-discourse-img
+          persistentVolumeClaim:
+            claimName: {{ include "edemocracia.fullname" . }}-discourse-img
+        - name: {{ include "edemocracia.fullname" . }}-discourse-cache
+          persistentVolumeClaim:
+            claimName: {{ include "edemocracia.fullname" . }}-discourse-cache
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

@@ -1,0 +1,135 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "edemocracia.fullname" . }}-edemocracia
+  labels:
+    {{- include "edemocracia.labels" . | nindent 4 }}
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-edemocracia
+spec:
+  selector:
+    matchLabels:
+      {{- include "edemocracia.selectorLabels" . | nindent 6 }}
+      io.kompose.service: {{ include "edemocracia.fullname" . }}-edemocracia
+  strategy:
+      type: Recreate
+  template:
+    metadata:
+      labels:
+        {{- include "edemocracia.selectorLabels" . | nindent 8 }}
+        io.kompose.service: {{ include "edemocracia.fullname" . }}-edemocracia
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      containers:
+        - name: {{ include "edemocracia.fullname" . }}-edemocracia
+          image: "{{ .Values.edemocracia.image.repository }}:{{ .Values.edemocracia.image.tag }}"
+          imagePullPolicy: {{ .Values.edemocracia.image.pullPolicy }}
+          args:
+            - ./runserver-production
+          env:
+            - name: ADMIN_EMAIL
+              value: {{ .Values.edemocracia.admin.email }} 
+            - name: ADMIN_PASSWORD
+              value: {{ .Values.edemocracia.admin.password }}
+            - name: ADMIN_USERNAME
+              value: admin
+            - name: ALLOWED_HOSTS
+              value: "{{ (index .Values.ingress.hosts 0).host }}"
+            - name: AUDIENCIAS_API_KEY
+              value: {{ .Values.edemocracia.apikey }}
+            - name: AUDIENCIAS_API_URL
+            - name: AUDIENCIAS_ENABLED
+              value: "True"
+            - name: AUDIENCIAS_UPSTREAM
+              value: http://audienciasweb:8000/audiencias
+            - name: DATABASE_ENGINE
+              value: postgresql_psycopg2
+            - name: DATABASE_HOST
+              value: (include "postgresql.fullname" .)
+            - name: DATABASE_NAME
+              value: edemocracia
+            - name: DATABASE_PASSWORD
+              value: {{ .Values.edemocracia.admin.password }}
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_USER
+              value: root
+            - name: DEBUG
+              value: {{ .Values.edemocracia.debug }}
+            - name: DEFAULT_FROM_EMAIL
+              value: '"Portal e-Democracia" <{{ .Values.edemocracia.admin.email }}>'
+            - name: DISCOURSE_ENABLED
+              value: "True"
+            - name: DISCOURSE_SSO_SECRET
+              value: {{ .Values.discourse.sso.secret }}
+            - name: DISCOURSE_UPSTREAM
+              value: http://discourse:8080/expressao
+            - name: EMAIL_BACKEND
+              value: django.core.mail.backends.smtp.EmailBackend
+            - name: EMAIL_HOST
+              value: {{ .Values.smtp.host }}
+            - name: EMAIL_HOST_PASSWORD
+              value: {{ .Values.smtp.password }}
+            - name: EMAIL_HOST_USER
+              value: {{ .Values.smtp.username }}
+            - name: EMAIL_PORT
+              value: {{ .Values.smtp.port }}
+            - name: EMAIL_USE_TLS
+              value: {{ .Values.smtp.tls }}
+            - name: GOOGLE_ANALYTICS_ID
+              value: {{ .Values.edemocracia.googleAnalyticsId }}
+            - name: OLARK_ID
+              value: {{ .Values.edemocracia.olarkId }}
+            - name: RECAPTCHA_PRIVATE_KEY
+              value: {{ .Values.edemocracia.recaptcha.privateKey }}
+            - name: RECAPTCHA_SITE_KEY
+              value: {{ .Values.edemocracia.recaptcha.siteKey }}
+            - name: SECRET_KEY
+              value: {{ .Values.edemocracia.apiKey }}
+            - name: SITE_NAME
+              value: {{ .Values.edemocracia.siteName }}
+            - name: SITE_URL
+              value: "https://{{ (index .Values.ingress.hosts 0).host }}"
+            - name: SOCIAL_AUTH_FACEBOOK_KEY
+              value: {{ .Values.edemocracia.socialAuth.facebook.key }}
+            - name: SOCIAL_AUTH_FACEBOOK_SECRET
+              value: {{ .Values.edemocracia.socialAuth.facebook.secret }}
+            - name: SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
+              value: {{ .Values.edemocracia.socialAuth.google.key }}
+            - name: SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
+              value: {{ .Values.edemocracia.socialAuth.google.secret }}
+            - name: SOCIAL_AUTH_REDIRECT_IS_HTTPS
+              value: "True"
+            - name: WIKILEGIS_API_KEY
+              value: {{ .Values.edemocracia.apikey }}
+            - name: WIKILEGIS_API_URL
+              value: /api/v1/
+            - name: WIKILEGIS_ENABLED
+              value: "True"
+            - name: WIKILEGIS_UPSTREAM
+              value: http://wikilegis:8000
+          resources:
+            {{- toYaml .Values.edemocracia.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /var/labhacker/edemocracia/src/public/
+              name: {{ include "edemocracia.fullname" . }}-edemocracia
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: {{ include "edemocracia.fullname" . }}-edemocracia
+          persistentVolumeClaim:
+            claimName: {{ include "edemocracia.fullname" . }}-edemocracia
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

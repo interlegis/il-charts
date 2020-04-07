@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "edemocracia.fullname" . }}-edemocracia
+spec:
+  accessModes:
+  - {{ .Values.edemocracia.persistence.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.edemocracia.persistence.size }}
+{{- if .Values.edemocracia.persistence.storageClass }}
+{{- if (eq "-" .Values.edemocracia.persistence.storageClass) }}
+  storageClassName: ""
+{{- else }}
+  storageClassName: "{{ .Values.edemocracia.persistence.storageClass }}"
+{{- end }}
+{{- end }}

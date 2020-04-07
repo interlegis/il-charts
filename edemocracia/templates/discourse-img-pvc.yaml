@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "edemocracia.fullname" . }}-discourse-img
+spec:
+  accessModes:
+  - {{ .Values.discourse.persistence.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.discourse.persistence.size }}
+{{- if .Values.discourse.persistence.storageClass }}
+{{- if (eq "-" .Values.discourse.persistence.storageClass) }}
+  storageClassName: ""
+{{- else }}
+  storageClassName: "{{ .Values.discourse.persistence.storageClass }}"
+{{- end }}
+{{- end }}

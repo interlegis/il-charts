@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "edemocracia.fullname" . }}-wikilegis
+spec:
+  accessModes:
+  - {{ .Values.wikilegis.persistence.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.wikilegis.persistence.size }}
+{{- if .Values.wikilegis.persistence.storageClass }}
+{{- if (eq "-" .Values.wikilegis.persistence.storageClass) }}
+  storageClassName: ""
+{{- else }}
+  storageClassName: "{{ .Values.wikilegis.persistence.storageClass }}"
+{{- end }}
+{{- end }}
