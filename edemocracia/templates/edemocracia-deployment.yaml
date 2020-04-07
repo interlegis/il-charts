@@ -1,3 +1,4 @@
+{{- $edemoUrl := (index .Values.ingress.hosts 0) -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -36,7 +37,7 @@ spec:
             - name: ADMIN_USERNAME
               value: admin
             - name: ALLOWED_HOSTS
-              value: "{{ (index .Values.ingress.hosts 0).host }}"
+              value: "{{ $edemoUrl }}"
             - name: AUDIENCIAS_API_KEY
               value: {{ .Values.edemocracia.apikey }}
             - name: AUDIENCIAS_API_URL
@@ -91,7 +92,7 @@ spec:
             - name: SITE_NAME
               value: {{ .Values.edemocracia.siteName }}
             - name: SITE_URL
-              value: "https://{{ (index .Values.ingress.hosts 0).host }}"
+              value: "https://{{ $edemoUrl }}"
             - name: SOCIAL_AUTH_FACEBOOK_KEY
               value: {{ .Values.edemocracia.socialAuth.facebook.key }}
             - name: SOCIAL_AUTH_FACEBOOK_SECRET

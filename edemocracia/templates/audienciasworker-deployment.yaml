@@ -1,3 +1,4 @@
+{{- $edemoUrl := (index .Values.ingress.hosts 0) -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -36,7 +37,7 @@ spec:
             - name: ADMIN_USERNAME
               value: admin
             - name: ALLOWED_HOSTS
-              value: audienciasweb, audienciasworker, localhost, 127.0.0.1, "{{ (index .Values.ingress.hosts 0).host }}"
+              value: audienciasweb, audienciasworker, localhost, 127.0.0.1, "{{ $edemoUrl }}"
             - name: COMPRESS_OFFLINE
               value: "True"
             - name: DATABASE_ENGINE
@@ -92,7 +93,7 @@ spec:
             - name: SESSION_COOKIE_NAME
               value: audiencias_session
             - name: SITE_DOMAIN
-              value: "{{ (index .Values.ingress.hosts 0).host }}"
+              value: "{{ $edemoUrl }}"
             - name: SITE_NAME
               value: {{ .Values.edemocracia.siteName }}
             - name: STATIC_URL

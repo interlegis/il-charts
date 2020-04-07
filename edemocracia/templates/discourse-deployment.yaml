@@ -1,3 +1,4 @@
+{{- $edemoUrl := (index .Values.ingress.hosts 0) -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -35,7 +36,7 @@ spec:
             - name: DISCOURSE_CONTACT_EMAIL
               value: {{ .Values.edemocracia.admin.email }}
             - name: DISCOURSE_CONTACT_URL
-              value: {{ (index .Values.ingress.hosts 0).host }}
+              value: {{ $edemoUrl }}
             - name: DISCOURSE_DB_HOST
               value: {{ (include "postgresql.fullname" .) }}
             - name: DISCOURSE_DB_NAME
@@ -48,9 +49,9 @@ spec:
               value: root
             - name: DISCOURSE_DEVELOPER_EMAILS
             - name: DISCOURSE_FORCE_HOSTNAME
-              value: {{ (index .Values.ingress.hosts 0).host }}\/expressao
+              value: {{ $edemoUrl }}\/expressao
             - name: DISCOURSE_HOSTNAME
-              value: {{ (index .Values.ingress.hosts 0).host }}\/expressao
+              value: {{ $edemoUrl }}\/expressao
             - name: DISCOURSE_NOTIFICATION_EMAIL
               value: {{ .Values.edemocracia.admin.email }}
             - name: DISCOURSE_REDIS_HOST
@@ -70,7 +71,7 @@ spec:
             - name: DISCOURSE_SSO_SECRET
               value: {{ .Values.discourse.sso.secret }}
             - name: DISCOURSE_SSO_URL
-              value: https:\/\/{{ (index .Values.ingress.hosts 0).host }}
+              value: "https://{{ $edemoUrl }}"
             - name: RAILS_ENV
               value: production
           image: {{.Values.discourse.image.repository}}:{{ .Values.discourse.image.tag }}
