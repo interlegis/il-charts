@@ -42,7 +42,7 @@ spec:
             - name: DATABASE_ENGINE
               value: postgresql_psycopg2
             - name: DATABASE_HOST
-              value: (include "postgresql.fullname" .)
+              value: {{ (include "postgresql.fullname" .) }}
             - name: DATABASE_NAME
               value: audiencias
             - name: DATABASE_PASSWORD
@@ -88,7 +88,7 @@ spec:
             - name: RECAPTCHA_SITE_KEY
               value: {{ .Values.edemocracia.recaptcha.siteKey }}
             - name: REDIS_SERVER
-              value: (include "redis.fullname" .)
+              value: {{ (include "redis.fullname" .) }}
             - name: SESSION_COOKIE_NAME
               value: audiencias_session
             - name: SITE_DOMAIN

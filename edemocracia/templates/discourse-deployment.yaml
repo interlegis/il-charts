@@ -37,7 +37,7 @@ spec:
             - name: DISCOURSE_CONTACT_URL
               value: {{ (index .Values.ingress.hosts 0).host }}
             - name: DISCOURSE_DB_HOST
-              value: (include "postgresql.fullname" .)
+              value: {{ (include "postgresql.fullname" .) }}
             - name: DISCOURSE_DB_NAME
               value: discourse
             - name: DISCOURSE_DB_PASSWORD
@@ -54,7 +54,7 @@ spec:
             - name: DISCOURSE_NOTIFICATION_EMAIL
               value: {{ .Values.edemocracia.admin.email }}
             - name: DISCOURSE_REDIS_HOST
-              value: (include "redis.fullname" .)
+              value: {{ (include "redis.fullname" .) }}
             - name: DISCOURSE_REDIS_PORT
               value: "6379"
             - name: DISCOURSE_RELATIVE_URL_ROOT
