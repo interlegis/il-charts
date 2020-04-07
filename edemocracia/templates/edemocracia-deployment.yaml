@@ -57,7 +57,7 @@ spec:
             - name: DATABASE_USER
               value: root
             - name: DEBUG
-              value: {{ .Values.edemocracia.debug }}
+              value: "{{ .Values.edemocracia.debug }}"
             - name: DEFAULT_FROM_EMAIL
               value: '"Portal e-Democracia" <{{ .Values.edemocracia.admin.email }}>'
             - name: DISCOURSE_ENABLED
