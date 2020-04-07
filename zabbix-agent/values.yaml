@@ -29,6 +29,19 @@ resources: {}
 
 nodeSelector: {}
 
-tolerations: []
-
+tolerations: 
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/controlplane
+    value: "true"
+  - effect: NoExecute
+    key: node-role.kubernetes.io/etcd
+    value: "true"
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/lb
+    operator: Equal
+    value: "true"
+  - effect: NoExecute
+    key: node-role.kubernetes.io/lb
+    operator: Equal
+    value: "true"
 affinity: {}
