@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "edemocracia.fullname" . }}-discourse
+  name: discourse
   labels:
     {{- include "edemocracia.labels" . | nindent 4 }}
-    io.kompose.service: {{ include "edemocracia.fullname" . }}-discourse
+    io.kompose.service: discourse
 spec:
   type: {{ .Values.discourse.service.type }}
   ports:
@@ -14,4 +14,4 @@ spec:
       name: "8080"
   selector:
     {{- include "edemocracia.selectorLabels" . | nindent 4 }}
-    io.kompose.service: {{ include "edemocracia.fullname" . }}-discourse
+    io.kompose.service: discourse

@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "edemocracia.fullname" . }}-nginx
+  name: nginx
   labels:
     {{- include "edemocracia.labels" . | nindent 4 }}
-    io.kompose.service: {{ include "edemocracia.fullname" . }}-nginx 
+    io.kompose.service: nginx 
 spec:
   type: {{ .Values.nginx.service.type }}
   ports:
@@ -14,4 +14,4 @@ spec:
       name: http
   selector:
     {{- include "edemocracia.selectorLabels" . | nindent 4 }}
-    io.kompose.service: {{ include "edemocracia.fullname" . }}-nginx
+    io.kompose.service: nginx
