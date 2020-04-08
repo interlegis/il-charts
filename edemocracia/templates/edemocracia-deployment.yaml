@@ -88,7 +88,7 @@ spec:
             - name: RECAPTCHA_SITE_KEY
               value: {{ .Values.edemocracia.recaptcha.siteKey }}
             - name: SECRET_KEY
-              value: {{ .Values.edemocracia.apiKey }}
+              value: {{ .Values.edemocracia.apikey }}
             - name: SITE_NAME
               value: {{ .Values.edemocracia.siteName }}
             - name: SITE_URL
