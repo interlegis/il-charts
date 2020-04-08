@@ -4,7 +4,7 @@ metadata:
   name: audienciasweb
   labels:
     {{- include "edemocracia.labels" . | nindent 4 }}
-    io.kompose.service: audienciasweb
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-audienciasweb
 spec:
   type: {{ .Values.audiencias.service.type }}
   ports:
@@ -14,4 +14,4 @@ spec:
       name: "8000"
   selector:
     {{- include "edemocracia.selectorLabels" . | nindent 4 }}
-    io.kompose.service: audienciasweb
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-audienciasweb

@@ -4,7 +4,7 @@ metadata:
   name: wikilegis
   labels:
     {{- include "edemocracia.labels" . | nindent 4 }}
-    io.kompose.service: wikilegis
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-wikilegis
 spec:
   type: {{ .Values.wikilegis.service.type }}
   ports:
@@ -14,4 +14,4 @@ spec:
       name: "8000"
   selector:
     {{- include "edemocracia.selectorLabels" . | nindent 4 }}
-    io.kompose.service: wikilegis
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-wikilegis

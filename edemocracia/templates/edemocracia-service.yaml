@@ -4,7 +4,7 @@ metadata:
   name: edemocracia
   labels:
     {{- include "edemocracia.labels" . | nindent 4 }}
-    io.kompose.service: edemocracia
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-edemocracia
 spec:
   type: {{ .Values.edemocracia.service.type }}
   ports:
@@ -14,4 +14,4 @@ spec:
       name: "8000"
   selector:
     {{- include "edemocracia.selectorLabels" . | nindent 4 }}
-    io.kompose.service: edemocracia
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-edemocracia

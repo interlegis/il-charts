@@ -4,7 +4,7 @@ metadata:
   name: nginx
   labels:
     {{- include "edemocracia.labels" . | nindent 4 }}
-    io.kompose.service: nginx 
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-nginx 
 spec:
   type: {{ .Values.nginx.service.type }}
   ports:
@@ -14,4 +14,4 @@ spec:
       name: http
   selector:
     {{- include "edemocracia.selectorLabels" . | nindent 4 }}
-    io.kompose.service: nginx
+    io.kompose.service: {{ include "edemocracia.fullname" . }}-nginx
