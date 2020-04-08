@@ -79,7 +79,7 @@ spec:
             - name: MEDIA_URL
               value: /wikilegis/media/
             - name: SECRET_KEY
-              value: {{ .Values.wikilegis.apikey }}
+              value: {{ .Values.edemocracia.apikey }}
             - name: SESSION_COOKIE_NAME
               value: wikilegis_session
             - name: SITE_DOMAIN
