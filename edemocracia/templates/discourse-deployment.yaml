@@ -93,16 +93,16 @@ spec:
       restartPolicy: Always
       serviceAccountName: ""
       volumes:
-        - name: edemocracia-discourse-assets
+        - name: {{ include "edemocracia.fullname" . }}-discourse-assets
           persistentVolumeClaim:
             claimName: edemocracia-discourse-assets
-        - name: edemocracia-discourse-js
+        - name: {{ include "edemocracia.fullname" . }}-discourse-js
           persistentVolumeClaim:
             claimName: edemocracia-discourse-js
-        - name: edemocracia-discourse-img
+        - name: {{ include "edemocracia.fullname" . }}-discourse-img
           persistentVolumeClaim:
             claimName: edemocracia-discourse-img
-        - name: edemocracia-discourse-cache
+        - name: {{ include "edemocracia.fullname" . }}-discourse-cache
           persistentVolumeClaim:
             claimName: edemocracia-discourse-cache
       {{- with .Values.nodeSelector }}
