@@ -42,11 +42,11 @@ spec:
             - name: DISCOURSE_DB_NAME
               value: discourse
             - name: DISCOURSE_DB_PASSWORD
-              value: {{ .Values.edemocracia.admin.password }}
+              value: {{ .Values.postgresql.postgresqlPassword }}
             - name: DISCOURSE_DB_PORT
               value: "5432"
             - name: DISCOURSE_DB_USERNAME
-              value: root
+              value: {{ .Values.postgresql.postgresqlUsername }}
             - name: DISCOURSE_DEVELOPER_EMAILS
             - name: DISCOURSE_FORCE_HOSTNAME
               value: {{ $edemoUrl }}\/expressao

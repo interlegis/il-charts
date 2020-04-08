@@ -47,11 +47,11 @@ spec:
             - name: DATABASE_NAME
               value: audiencias
             - name: DATABASE_PASSWORD
-              value: {{ .Values.edemocracia.admin.password }}
+              value: {{ .Values.postgresql.postgresqlPassword }}
             - name: DATABASE_PORT
               value: "5432"
             - name: DATABASE_USER
-              value: root
+              value: {{ .Values.postgresql.postgresqlUsername }}
             - name: DEBUG
               value: "False"
             - name: DEFAULT_FROM_EMAIL

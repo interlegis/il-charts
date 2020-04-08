@@ -145,8 +145,8 @@ postgresql:
   persistence:
     enabled: true
     size: 10Gi
-  postgresqlPassword: "{{ tpl .Values.edemocracia.admin.password }}"
-  postgresqlUsername: root
+  postgresqlPassword: DbP@ssw0rd 
+  postgresqlUsername: postgres
   postgresqlDatabase: root
   resources:
     requests:
@@ -169,7 +169,7 @@ fullnameOverride: ""
 
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
