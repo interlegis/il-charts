@@ -70,8 +70,8 @@ edemocracia:
   googleAnalyticsId: ""
   olarkId: ""
   recaptcha:
-    siteKey: ""
-    privateKey: ""
+    siteKey: "altereme"
+    privateKey: "altereme"
   socialAuth:
     facebook:
       key: ""
