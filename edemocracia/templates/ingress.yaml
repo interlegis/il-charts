@@ -34,7 +34,7 @@ spec:
         paths:
           - path: {{ $ingressPath }}
             backend:
-              serviceName: {{ $fullName }}-nginx
+              serviceName: nginx
               servicePort: http
   {{- end }}
 {{- end }}
