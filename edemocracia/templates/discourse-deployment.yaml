@@ -95,16 +95,16 @@ spec:
       volumes:
         - name: {{ include "edemocracia.fullname" . }}-discourse-assets
           persistentVolumeClaim:
-            claimName: edemocracia-discourse-assets
+            claimName: {{ include "edemocracia.fullname" . }}-discourse-assets
         - name: {{ include "edemocracia.fullname" . }}-discourse-js
           persistentVolumeClaim:
-            claimName: edemocracia-discourse-js
+            claimName: {{ include "edemocracia.fullname" . }}-discourse-js
         - name: {{ include "edemocracia.fullname" . }}-discourse-img
           persistentVolumeClaim:
-            claimName: edemocracia-discourse-img
+            claimName: {{ include "edemocracia.fullname" . }}-discourse-img
         - name: {{ include "edemocracia.fullname" . }}-discourse-cache
           persistentVolumeClaim:
-            claimName: edemocracia-discourse-cache
+            claimName: {{ include "edemocracia.fullname" . }}-discourse-cache
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
