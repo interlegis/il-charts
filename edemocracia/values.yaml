@@ -10,13 +10,13 @@ nginx:
   service:
     type: ClusterIP
     port: 80
-  resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  resources:
+    limits:
+      cpu: 200m
+      memory: 150Mi
+    requests:
+      cpu: 50m
+      memory: 50Mi
 
 discourse:
   image:
@@ -32,13 +32,13 @@ discourse:
     #storageClass: ""
     accessMode: ReadWriteOnce
     size: 500Mi
-  resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  resources: 
+   limits:
+     cpu: 500m
+     memory: 1250Mi
+   requests:
+     cpu: 150m
+     memory: 850Mi
 
 wikilegis:
   image:
@@ -52,13 +52,13 @@ wikilegis:
     #storageClass: ""
     accessMode: ReadWriteOnce
     size: 500Mi
-  resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  resources: 
+    limits:
+      cpu: 200m
+      memory: 350Mi
+    requests:
+      cpu: 100m
+      memory: 200Mi
 
 
 edemocracia:
@@ -93,13 +93,13 @@ edemocracia:
     #storageClass: ""
     accessMode: ReadWriteOnce
     size: 500Mi
-  resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  resources: 
+    limits:
+      cpu: 500m
+      memory: 1250Mi
+    requests:
+      cpu: 200m
+      memory: 850Mi
 
 audiencias:
   image:
@@ -117,13 +117,13 @@ audiencias:
   service:
     type: ClusterIP
     port: 8000
-  resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  resources: 
+    limits:
+      cpu: 200m
+      memory: 160Mi
+    requests:
+      cpu: 50m
+      memory: 80Mi
 
 
 smtp:
@@ -161,6 +161,10 @@ redis:
   cluster:
     enabled: false
   usePassword: false
+  resources:
+    requests:
+      cpu: 50m
+      memory: 48Mi
 
 
 imagePullSecrets: []
