@@ -3,7 +3,26 @@ entries:
   edemocracia:
   - apiVersion: v2
     appVersion: 1.3.3
-    created: "2020-04-08T16:16:07.26216-03:00"
+    created: "2020-04-13T11:13:28.893801-03:00"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.6.13
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.6.3
+    description: Portal que visa ampliar a participação social no processo legislativo
+      e aproximar cidadãos e seus representantes por meio da interação digital.
+    digest: 769bb88aada8e5fcd5bd16902edeb0f48bb47f8f1d5dc9ba06abb26c9b37aee4
+    icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/edemocracia.png
+    name: edemocracia
+    type: application
+    urls:
+    - https://interlegis.github.io/il-charts/edemocracia-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.3.3
+    created: "2020-04-13T11:13:28.888224-03:00"
     dependencies:
     - name: postgresql
       repository: https://charts.bitnami.com/bitnami
@@ -22,7 +41,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 1.3.3
-    created: "2020-04-08T16:16:07.255789-03:00"
+    created: "2020-04-13T11:13:28.881168-03:00"
     dependencies:
     - name: postgresql
       repository: https://charts.bitnami.com/bitnami
@@ -41,7 +60,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.3.3
-    created: "2020-04-08T16:16:07.250623-03:00"
+    created: "2020-04-13T11:13:28.874553-03:00"
     dependencies:
     - name: postgresql
       repository: https://charts.bitnami.com/bitnami
@@ -60,7 +79,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.3.3
-    created: "2020-04-08T16:16:07.244302-03:00"
+    created: "2020-04-13T11:13:28.867449-03:00"
     dependencies:
     - name: postgresql
       repository: https://charts.bitnami.com/bitnami
@@ -80,7 +99,7 @@ entries:
   external-dns:
   - apiVersion: v1
     appVersion: 0.5.9
-    created: "2020-04-08T16:16:07.263058-03:00"
+    created: "2020-04-13T11:13:28.895322-03:00"
     description: Configure external DNS servers (AWS Route53, Google CloudDNS and
       others) for Kubernetes Ingresses and Services
     digest: bc29d77acf578b12959c5ef9a41aa2527b3dca7ffce8e44c5872a9bd0a39671e
@@ -97,7 +116,7 @@ entries:
   keepalived:
   - apiVersion: v1
     appVersion: 2.0.16
-    created: "2020-04-08T16:16:07.266708-03:00"
+    created: "2020-04-13T11:13:28.898192-03:00"
     description: Highly available IP addresses with VRRP
     digest: 7289c988c8828ece41b769ae61f882a23100b957c932ffae2d9e5850fcd4d125
     icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
@@ -107,7 +126,7 @@ entries:
     version: 0.2.2
   - apiVersion: v1
     appVersion: 2.0.16
-    created: "2020-04-08T16:16:07.265846-03:00"
+    created: "2020-04-13T11:13:28.897539-03:00"
     description: Highly available IP addresses with VRRP
     digest: 3cbaacae3f66e0d13da87bf41d62632a191b833cde0da8376d38e08ef8360a84
     icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
@@ -117,7 +136,7 @@ entries:
     version: 0.2.1
   - apiVersion: v1
     appVersion: 2.0.16
-    created: "2020-04-08T16:16:07.264875-03:00"
+    created: "2020-04-13T11:13:28.896631-03:00"
     description: Highly available IP addresses with VRRP
     digest: 8a1d4e357f9d579447be5cfe1ee62719935ab64351ec72e5b423e8611d26d8e7
     icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
@@ -127,7 +146,7 @@ entries:
     version: 0.2.0
   - apiVersion: v1
     appVersion: 1.2.24
-    created: "2020-04-08T16:16:07.263946-03:00"
+    created: "2020-04-13T11:13:28.895942-03:00"
     description: Highly available IP addresses with VRRP
     digest: 994dc73475e1293935f33f92277c3cd871737dc226e342a91025161074265418
     icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
@@ -138,7 +157,7 @@ entries:
   local-path-provisioner:
   - apiVersion: v1
     appVersion: 0.0.2
-    created: "2020-04-08T16:16:07.26774-03:00"
+    created: "2020-04-13T11:13:28.898935-03:00"
     description: Provisions hostPath based persistent volumes on the nodes automatically.
     digest: bcf09db18c57948724f5c439f6deecf81478a16b0fd0c1e8067cd6abb6dc466b
     name: local-path-provisioner
@@ -147,7 +166,7 @@ entries:
     version: 0.1.0
   local-volume-provisioner:
   - apiVersion: v1
-    created: "2020-04-08T16:16:07.270653-03:00"
+    created: "2020-04-13T11:13:28.900967-03:00"
     description: Provisioner for local machine volumes
     digest: eb406a7db6877c5547936f4c34620c2ae4455fc0e1c700a1b60d5dc6173f5c21
     keywords:
@@ -158,7 +177,7 @@ entries:
     - https://interlegis.github.io/il-charts/local-volume-provisioner-2.3.1.tgz
     version: 2.3.1
   - apiVersion: v1
-    created: "2020-04-08T16:16:07.269337-03:00"
+    created: "2020-04-13T11:13:28.899913-03:00"
     description: Provisioner for local machine volumes
     digest: f0d67b6247024e923a466c975ec0a6c0a4e62f0f0e47a3ec98e9d364119f9afe
     keywords:
@@ -171,7 +190,7 @@ entries:
   oscm:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-04-08T16:16:07.276141-03:00"
+    created: "2020-04-13T11:13:28.909141-03:00"
     dependencies:
     - name: postgresql
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -185,7 +204,7 @@ entries:
     version: 0.1.9
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-04-08T16:16:07.274392-03:00"
+    created: "2020-04-13T11:13:28.906416-03:00"
     dependencies:
     - name: postgresql
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -199,7 +218,7 @@ entries:
     version: 0.1.8
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2020-04-08T16:16:07.27252-03:00"
+    created: "2020-04-13T11:13:28.903683-03:00"
     dependencies:
     - name: postgresql
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -214,7 +233,7 @@ entries:
   osticket:
   - apiVersion: v1
     appVersion: 1.12.2
-    created: "2020-04-08T16:16:07.28577-03:00"
+    created: "2020-04-13T11:13:28.921002-03:00"
     dependencies:
     - condition: mysql.internal
       name: mysql
@@ -233,7 +252,7 @@ entries:
     version: 0.1.7
   - apiVersion: v1
     appVersion: 1.12.2
-    created: "2020-04-08T16:16:07.283955-03:00"
+    created: "2020-04-13T11:13:28.91735-03:00"
     dependencies:
     - condition: mysql.internal
       name: mysql
@@ -252,7 +271,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: 1.12.2
-    created: "2020-04-08T16:16:07.281551-03:00"
+    created: "2020-04-13T11:13:28.914628-03:00"
     dependencies:
     - condition: mysql.internal
       name: mysql
@@ -271,7 +290,7 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: 1.12.2
-    created: "2020-04-08T16:16:07.27906-03:00"
+    created: "2020-04-13T11:13:28.912087-03:00"
     dependencies:
     - condition: mysql.internal
       name: mysql
@@ -291,7 +310,7 @@ entries:
   portalmodelo:
   - apiVersion: v1
     appVersion: 3.0-21
-    created: "2020-04-08T16:16:07.292521-03:00"
+    created: "2020-04-13T11:13:28.930425-03:00"
     description: Portal Modelo para Casas Legislativas
     digest: 4b4232a630198c6eb6d38fbcd9b99d16f48129d9da1c32675f74ad24447df90e
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -301,7 +320,7 @@ entries:
     version: 0.4.3
   - apiVersion: v1
     appVersion: 3.0-21
-    created: "2020-04-08T16:16:07.291992-03:00"
+    created: "2020-04-13T11:13:28.92947-03:00"
     description: Portal Modelo para Casas Legislativas
     digest: edbc1a26ecf1b7e3120f638b03502de3892ebb9d83e86f0d230521a47c0983f3
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -311,7 +330,7 @@ entries:
     version: 0.4.2
   - apiVersion: v1
     appVersion: 3.0-17
-    created: "2020-04-08T16:16:07.291461-03:00"
+    created: "2020-04-13T11:13:28.928471-03:00"
     description: Portal Modelo para Casas Legislativas
     digest: 9b9a80c34ae25b8167789c5995c7fb86360392d288ea1979b3c98198308cfe06
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -321,7 +340,7 @@ entries:
     version: 0.4.1
   - apiVersion: v1
     appVersion: 3.0-17
-    created: "2020-04-08T16:16:07.290948-03:00"
+    created: "2020-04-13T11:13:28.9276-03:00"
     description: Portal Modelo para Casas Legislativas
     digest: adf231035217cf226b0fab4f98931d95e723c1f2e702e3f5141e872b8ca4aebf
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -331,7 +350,7 @@ entries:
     version: 0.4.0
   - apiVersion: v1
     appVersion: 3.0-17
-    created: "2020-04-08T16:16:07.290437-03:00"
+    created: "2020-04-13T11:13:28.926714-03:00"
     description: Portal Modelo para Casas Legislativas
     digest: 4138d7ff901849282ef893f1d099bc1a27b42d4cdbcb93bf1d9a5b3e9b33dc8a
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -341,7 +360,7 @@ entries:
     version: 0.3.0
   - apiVersion: v1
     appVersion: 3.0-17
-    created: "2020-04-08T16:16:07.289923-03:00"
+    created: "2020-04-13T11:13:28.925801-03:00"
     description: Portal Modelo para Casas Legislativas
     digest: 8229600ce6a65585df3467fd4b3102963952526a8afa99d4a8911d1c4fd0e0b7
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -351,7 +370,7 @@ entries:
     version: 0.2.0
   - apiVersion: v1
     appVersion: 3.0-17
-    created: "2020-04-08T16:16:07.289425-03:00"
+    created: "2020-04-13T11:13:28.924919-03:00"
     description: Portal Modelo para Casas Legislativas
     digest: 1cdf7d36a21c44d5a1bf158381479802c97a79a22704deebf751f99a12640dea
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -361,7 +380,7 @@ entries:
     version: 0.1.9
   - apiVersion: v1
     appVersion: 3.0-17
-    created: "2020-04-08T16:16:07.28894-03:00"
+    created: "2020-04-13T11:13:28.924177-03:00"
     description: Portal Modelo para Casas Legislativas
     digest: 59d017226429746d97f07f5c967b3da029cf8547bb56233d8b1174b5bf315622
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -371,7 +390,7 @@ entries:
     version: 0.1.8
   - apiVersion: v1
     appVersion: 3.0-17
-    created: "2020-04-08T16:16:07.288454-03:00"
+    created: "2020-04-13T11:13:28.923442-03:00"
     description: Portal Modelo para Casas Legislativas
     digest: 5bfe1b297e798ef0dd0b977e194ec7fa18c7f01d6a423f05ec776bd81d627a7a
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -381,7 +400,7 @@ entries:
     version: 0.1.7
   - apiVersion: v1
     appVersion: 3.0-17
-    created: "2020-04-08T16:16:07.287956-03:00"
+    created: "2020-04-13T11:13:28.922695-03:00"
     description: Portal Modelo para Casas Legislativas
     digest: d652d421b4c2ef03867fa14a3142966f95690c7c05f528388301075d2567fa5e
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -391,7 +410,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: 3.0-17
-    created: "2020-04-08T16:16:07.287284-03:00"
+    created: "2020-04-13T11:13:28.921987-03:00"
     description: Portal Modelo para Casas Legislativas
     digest: ee52a8909e49182d28507478818d88352302587718079c42055da876ccd73cc6
     icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
@@ -402,7 +421,7 @@ entries:
   sapl:
   - apiVersion: v1
     appVersion: 3.1.159
-    created: "2020-04-08T16:16:07.309249-03:00"
+    created: "2020-04-13T11:13:28.94801-03:00"
     dependencies:
     - condition: postgresql.internal
       name: postgresql
@@ -417,7 +436,7 @@ entries:
     version: 0.1.8
   - apiVersion: v1
     appVersion: 3.1.158
-    created: "2020-04-08T16:16:07.307037-03:00"
+    created: "2020-04-13T11:13:28.94577-03:00"
     dependencies:
     - condition: postgresql.internal
       name: postgresql
@@ -432,7 +451,7 @@ entries:
     version: 0.1.7
   - apiVersion: v1
     appVersion: 3.1.158
-    created: "2020-04-08T16:16:07.30533-03:00"
+    created: "2020-04-13T11:13:28.944002-03:00"
     dependencies:
     - condition: postgresql.internal
       name: postgresql
@@ -447,7 +466,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: 3.1.153
-    created: "2020-04-08T16:16:07.303772-03:00"
+    created: "2020-04-13T11:13:28.941913-03:00"
     dependencies:
     - condition: postgresql.internal
       name: postgresql
@@ -462,7 +481,7 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: 3.1.146
-    created: "2020-04-08T16:16:07.301071-03:00"
+    created: "2020-04-13T11:13:28.939578-03:00"
     dependencies:
     - condition: postgresql.internal
       name: postgresql
@@ -477,7 +496,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: 3.1.146
-    created: "2020-04-08T16:16:07.299598-03:00"
+    created: "2020-04-13T11:13:28.937791-03:00"
     dependencies:
     - condition: postgresql.internal
       name: postgresql
@@ -492,7 +511,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: 3.1.146
-    created: "2020-04-08T16:16:07.298045-03:00"
+    created: "2020-04-13T11:13:28.936015-03:00"
     dependencies:
     - condition: postgresql.internal
       name: postgresql
@@ -507,7 +526,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 3.1.140
-    created: "2020-04-08T16:16:07.296469-03:00"
+    created: "2020-04-13T11:13:28.93429-03:00"
     dependencies:
     - condition: postgresql.internal
       name: postgresql
@@ -522,7 +541,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 3.1.140
-    created: "2020-04-08T16:16:07.294778-03:00"
+    created: "2020-04-13T11:13:28.932636-03:00"
     dependencies:
     - name: postgresql
       repository: https://kubernetes-charts.storage.googleapis.com/
@@ -537,7 +556,7 @@ entries:
   solr:
   - apiVersion: v1
     appVersion: 7.5.0
-    created: "2020-04-08T16:16:07.312305-03:00"
+    created: "2020-04-13T11:13:28.950726-03:00"
     dependencies:
     - name: zookeeper
       repository: https://kubernetes-charts-incubator.storage.googleapis.com/
@@ -560,7 +579,7 @@ entries:
   zabbix-agent:
   - apiVersion: v1
     appVersion: "4"
-    created: "2020-04-08T16:16:07.314581-03:00"
+    created: "2020-04-13T11:13:28.953237-03:00"
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: 453b53cce12cbd6c6c33c038aefe205cf15555f2b788e35a05ae82addb82a98a
     icon: https://assets.zabbix.com/img/logo.svg
@@ -570,7 +589,7 @@ entries:
     version: 0.2.1
   - apiVersion: v1
     appVersion: "4"
-    created: "2020-04-08T16:16:07.31419-03:00"
+    created: "2020-04-13T11:13:28.952566-03:00"
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: 3896cf1fe17619100570c782e8bfdbce73e1b3db413f5de145ff759d232acc3d
     icon: https://assets.zabbix.com/img/logo.svg
@@ -580,7 +599,7 @@ entries:
     version: 0.2.0
   - apiVersion: v1
     appVersion: "4"
-    created: "2020-04-08T16:16:07.313585-03:00"
+    created: "2020-04-13T11:13:28.951938-03:00"
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: 45c096000ed57ef8de7433d796d0d1d881afac631a7bc12a7daa43c97119973b
     icon: https://assets.zabbix.com/img/logo.svg
@@ -590,7 +609,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: "4"
-    created: "2020-04-08T16:16:07.31299-03:00"
+    created: "2020-04-13T11:13:28.951319-03:00"
     description: Zabbix monitoring agent for cluster-wide deployment
     digest: c1eebb05c6843f26ee127aca2682c2a6177bb6995d8b1ce0fb79362ba850f871
     icon: https://assets.zabbix.com/img/logo.svg
@@ -598,4 +617,4 @@ entries:
     urls:
     - https://interlegis.github.io/il-charts/zabbix-agent-0.1.1.tgz
     version: 0.1.1
-generated: "2020-04-08T16:16:07.237724-03:00"
+generated: "2020-04-13T11:13:28.859222-03:00"
