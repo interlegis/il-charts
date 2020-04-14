@@ -34,14 +34,14 @@ spec:
         - mountPath: /var/labhacker/edemocracia/src/public/
           name: {{ include "edemocracia.fullname" . }}-edemocracia
       - image: "{{ .Values.edemocracia.image.repository }}:{{ .Values.edemocracia.image.tag }}"
-        name: {{ include "edemocracia.fullname" . }}-edemocracia-cplogo
+        name: {{ include "edemocracia.fullname" . }}-edemocracia-cpmedia
         command:
         - "cp"
-        - "-u"
-        - "/var/labhacker/edemocracia/src/public/static/img/logo-camara-color.svg"
-        - "/var/labhacker/edemocracia/src/public/media/"
+        - "-a"
+        - "/var/labhacker/edemocracia/src/public/media/*"
+        - "/srcpublic/media/"
         volumeMounts:
-        - mountPath: /var/labhacker/edemocracia/src/public/
+        - mountPath: /srcpublic
           name: {{ include "edemocracia.fullname" . }}-edemocracia
       containers:
         - name: {{ include "edemocracia.fullname" . }}-edemocracia

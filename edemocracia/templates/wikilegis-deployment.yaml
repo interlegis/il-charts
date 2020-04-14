@@ -23,6 +23,26 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      initContainers:
+        - image: "{{ .Values.wikilegis.image.repository }}:{{ .Values.wikilegis.image.tag }}"
+          name: {{ include "edemocracia.fullname" . }}-wikilegis-mkdirmedia
+          command:
+            - "mkdir"
+            - "-p"
+            - "/var/labhacker/wikilegis/wikilegis/public/media"
+          volumeMounts:
+            - mountPath: /var/labhacker/wikilegis/wikilegis/public/
+              name: {{ include "edemocracia.fullname" . }}-wikilegis
+        - image: "{{ .Values.wikilegis.image.repository }}:{{ .Values.wikilegis.image.tag }}"
+          name: {{ include "edemocracia.fullname" . }}-wikilegis-cpmedia
+          command:
+            - "cp"
+            - "-a"
+            - "/var/labhacker/wikilegis/wikilegis/public/media/*"
+            - "/wlpublic/media/"
+          volumeMounts:
+            - mountPath: /wlpublic
+              name: {{ include "edemocracia.fullname" . }}-wikilegis
       containers:
         - name: {{ include "edemocracia.fullname" . }}-wikilegis
           image: "{{ .Values.wikilegis.image.repository }}:{{ .Values.wikilegis.image.tag }}"
