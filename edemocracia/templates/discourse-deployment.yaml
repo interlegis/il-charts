@@ -23,6 +23,17 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      initContainers:
+        - image: "{{ .Values.discourse.image.repository }}:{{ .Values.discourse.image.tag }}"
+          name: {{ include "edemocracia.fullname" . }}-discourse-cpimgs
+          command:
+            - "cp"
+            - "-au"
+            - "/var/www/discourse/public/images/."
+            - "/publicimgs/"
+          volumeMounts:
+            - mountPath: /publicimgs/
+              name: {{ include "edemocracia.fullname" . }}-discourse-img
       containers:
         - args:
           - ./start-web.sh
