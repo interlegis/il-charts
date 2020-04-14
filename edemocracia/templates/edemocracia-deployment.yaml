@@ -25,24 +25,15 @@ spec:
     {{- end }}
       initContainers:
       - image: "{{ .Values.edemocracia.image.repository }}:{{ .Values.edemocracia.image.tag }}"
-        name: {{ include "edemocracia.fullname" . }}-edemocracia-mkdirmedia
-        command:
-        - "mkdir"
-        - "-p"
-        - "/var/labhacker/edemocracia/src/public/media"
-        volumeMounts:
-        - mountPath: /var/labhacker/edemocracia/src/public/
-          name: {{ include "edemocracia.fullname" . }}-edemocracia
-      - image: "{{ .Values.edemocracia.image.repository }}:{{ .Values.edemocracia.image.tag }}"
         name: {{ include "edemocracia.fullname" . }}-edemocracia-cpmedia
         command:
-        - "cp"
-        - "-a"
-        - "/var/labhacker/edemocracia/src/public/media/*"
-        - "/srcpublic/media/"
+          - "cp"
+          - "-au"
+          - "/var/labhacker/edemocracia/src/public/media/"
+          - "/srcpublic/"
         volumeMounts:
-        - mountPath: /srcpublic
-          name: {{ include "edemocracia.fullname" . }}-edemocracia
+          - mountPath: /srcpublic
+            name: {{ include "edemocracia.fullname" . }}-edemocracia
       containers:
         - name: {{ include "edemocracia.fullname" . }}-edemocracia
           image: "{{ .Values.edemocracia.image.repository }}:{{ .Values.edemocracia.image.tag }}"
