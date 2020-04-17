@@ -4,7 +4,7 @@ replicaCount: 1
 
 image:
   repository: interlegis/nginx-staticmsg
-  tag: 1.0
+  tag: "1.0"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -27,6 +27,10 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+messages:
+  main: "Hello World!"
+  secondary: "Alô mundo!"
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
