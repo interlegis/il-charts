@@ -51,7 +51,6 @@ spec:
               value: "{{ $edemoUrl }}"
             - name: AUDIENCIAS_API_KEY
               value: {{ .Values.edemocracia.apikey }}
-            - name: AUDIENCIAS_API_URL
             - name: AUDIENCIAS_ENABLED
               value: "True"
             - name: AUDIENCIAS_UPSTREAM
