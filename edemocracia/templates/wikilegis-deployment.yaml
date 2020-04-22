@@ -100,7 +100,7 @@ spec:
             - name: STATIC_URL
               value: /wikilegis/static/
             - name: TIME_ZONE
-              value: {{ .Values.edemocracia.timezone }}
+              value: {{ .Values.edemocracia.timeZone }}
           resources:
             {{- toYaml .Values.wikilegis.resources | nindent 12 }}
           volumeMounts:
