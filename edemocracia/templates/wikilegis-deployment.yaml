@@ -42,13 +42,13 @@ spec:
             - ./start.sh
           env:
             - name: ADMIN_EMAIL
-              value: {{ .Values.edemocracia.admin.email }}
+              value: {{ .Values.edemocracia.admin.email | quote }}
             - name: ADMIN_PASSWORD
-              value: {{ .Values.edemocracia.admin.password }}
+              value: {{ .Values.edemocracia.admin.password | quote }}
             - name: ALLOWED_HOSTS
               value: "{{ $edemoUrl }},wikilegisweb,wikilegis,localhost,127.0.0.1"
             - name: API_KEY
-              value: {{ .Values.edemocracia.apikey }}
+              value: {{ .Values.edemocracia.apikey | quote }}
             - name: AUTH_USER_MODEL
               value: accounts.User
             - name: DATABASE_ENGINE
@@ -58,25 +58,25 @@ spec:
             - name: DATABASE_NAME
               value: wikilegis
             - name: DATABASE_PASSWORD
-              value: {{ .Values.postgresql.postgresqlPassword }}
+              value: {{ .Values.postgresql.postgresqlPassword | quote }}
             - name: DATABASE_PORT
               value: "5432"
             - name: DATABASE_USER
-              value: {{ .Values.postgresql.postgresqlUsername }}
+              value: {{ .Values.postgresql.postgresqlUsername | quote }}
             - name: DEBUG
               value: "True"
             - name: DEFAULT_FROM_EMAIL
               value: '"Portal e-Democracia[Wikilegis]" <{{ .Values.edemocracia.admin.email }}>'
             - name: EMAIL_HOST
-              value: "{{ .Values.smtp.host }}"
+              value: {{ .Values.smtp.host | quote }}
             - name: EMAIL_HOST_PASSWORD
-              value: "{{ .Values.smtp.password }}"
+              value: {{ .Values.smtp.password | quote }}
             - name: EMAIL_HOST_USER
-              value: "{{ .Values.smtp.username }}"
+              value: {{ .Values.smtp.username | quote }}
             - name: EMAIL_PORT
-              value: "{{ .Values.smtp.port }}"
+              value: {{ .Values.smtp.port | quote }}
             - name: EMAIL_USE_TLS
-              value: "{{ .Values.smtp.tls }}"
+              value: {{ .Values.smtp.tls | quote }}
             - name: ENABLE_REMOTE_USER
               value: "True"
             - name: FORCE_SCRIPT_NAME
@@ -90,17 +90,17 @@ spec:
             - name: MEDIA_URL
               value: /wikilegis/media/
             - name: SECRET_KEY
-              value: {{ .Values.edemocracia.apikey }}
+              value: {{ .Values.edemocracia.apikey | quote }}
             - name: SESSION_COOKIE_NAME
               value: wikilegis_session
             - name: SITE_DOMAIN
               value: {{ $edemoUrl }}
             - name: SITE_NAME
-              value: {{ .Values.edemocracia.sitename }}
+              value: {{ .Values.edemocracia.sitename | quote }}
             - name: STATIC_URL
               value: /wikilegis/static/
             - name: TIME_ZONE
-              value: {{ .Values.edemocracia.timeZone }}
+              value: {{ .Values.edemocracia.timeZone | quote }}
           resources:
             {{- toYaml .Values.wikilegis.resources | nindent 12 }}
           volumeMounts:

@@ -42,15 +42,15 @@ spec:
             - ./runserver-production
           env:
             - name: ADMIN_EMAIL
-              value: {{ .Values.edemocracia.admin.email }} 
+              value: {{ .Values.edemocracia.admin.email | quote }} 
             - name: ADMIN_PASSWORD
-              value: {{ .Values.edemocracia.admin.password }}
+              value: {{ .Values.edemocracia.admin.password | quote }}
             - name: ADMIN_USERNAME
               value: admin
             - name: ALLOWED_HOSTS
               value: "{{ $edemoUrl }}"
             - name: AUDIENCIAS_API_KEY
-              value: {{ .Values.edemocracia.apikey }}
+              value: {{ .Values.edemocracia.apikey | quote }}
             - name: AUDIENCIAS_ENABLED
               value: "True"
             - name: AUDIENCIAS_UPSTREAM
@@ -62,11 +62,11 @@ spec:
             - name: DATABASE_NAME
               value: edemocracia
             - name: DATABASE_PASSWORD
-              value: {{ .Values.postgresql.postgresqlPassword }}
+              value: {{ .Values.postgresql.postgresqlPassword | quote }}
             - name: DATABASE_PORT
               value: "5432"
             - name: DATABASE_USER
-              value: {{ .Values.postgresql.postgresqlUsername }}
+              value: {{ .Values.postgresql.postgresqlUsername | quote }}
             - name: DEBUG
               value: "{{ .Values.edemocracia.debug }}"
             - name: DEFAULT_FROM_EMAIL
@@ -74,47 +74,47 @@ spec:
             - name: DISCOURSE_ENABLED
               value: "True"
             - name: DISCOURSE_SSO_SECRET
-              value: {{ .Values.discourse.sso.secret }}
+              value: {{ .Values.discourse.sso.secret | quote }}
             - name: DISCOURSE_UPSTREAM
               value: http://discourse:8080/expressao
             - name: EMAIL_BACKEND
               value: django.core.mail.backends.smtp.EmailBackend
             - name: EMAIL_HOST
-              value: "{{ .Values.smtp.host }}"
+              value: {{ .Values.smtp.host | quote }}
             - name: EMAIL_HOST_PASSWORD
-              value: "{{ .Values.smtp.password }}"
+              value: {{ .Values.smtp.password | quote }}
             - name: EMAIL_HOST_USER
-              value: "{{ .Values.smtp.username }}"
+              value: {{ .Values.smtp.username | quote }}
             - name: EMAIL_PORT
-              value: "{{ .Values.smtp.port }}"
+              value: {{ .Values.smtp.port | quote }}
             - name: EMAIL_USE_TLS
-              value: "{{ .Values.smtp.tls }}"
+              value: {{ .Values.smtp.tls | quote }}
             - name: GOOGLE_ANALYTICS_ID
-              value: {{ .Values.edemocracia.googleAnalyticsId }}
+              value: {{ .Values.edemocracia.googleAnalyticsId | quote }}
             - name: OLARK_ID
-              value: {{ .Values.edemocracia.olarkId }}
+              value: {{ .Values.edemocracia.olarkId | quote }}
             - name: RECAPTCHA_PRIVATE_KEY
-              value: {{ .Values.edemocracia.recaptcha.privateKey }}
+              value: {{ .Values.edemocracia.recaptcha.privateKey | quote }}
             - name: RECAPTCHA_SITE_KEY
-              value: {{ .Values.edemocracia.recaptcha.siteKey }}
+              value: {{ .Values.edemocracia.recaptcha.siteKey | quote }}
             - name: SECRET_KEY
-              value: {{ .Values.edemocracia.apikey }}
+              value: {{ .Values.edemocracia.apikey | quote }}
             - name: SITE_NAME
-              value: {{ .Values.edemocracia.siteName }}
+              value: {{ .Values.edemocracia.siteName | quote }}
             - name: SITE_URL
               value: "https://{{ $edemoUrl }}"
             - name: SOCIAL_AUTH_FACEBOOK_KEY
-              value: {{ .Values.edemocracia.socialAuth.facebook.key }}
+              value: {{ .Values.edemocracia.socialAuth.facebook.key | quote }}
             - name: SOCIAL_AUTH_FACEBOOK_SECRET
-              value: {{ .Values.edemocracia.socialAuth.facebook.secret }}
+              value: {{ .Values.edemocracia.socialAuth.facebook.secret | quote }}
             - name: SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
-              value: {{ .Values.edemocracia.socialAuth.google.key }}
+              value: {{ .Values.edemocracia.socialAuth.google.key | quote }}
             - name: SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
-              value: {{ .Values.edemocracia.socialAuth.google.secret }}
+              value: {{ .Values.edemocracia.socialAuth.google.secret | quote }}
             - name: SOCIAL_AUTH_REDIRECT_IS_HTTPS
               value: "True"
             - name: WIKILEGIS_API_KEY
-              value: {{ .Values.edemocracia.apikey }}
+              value: {{ .Values.edemocracia.apikey | quote }}
             - name: WIKILEGIS_API_URL
               value: /api/v1/
             - name: WIKILEGIS_ENABLED

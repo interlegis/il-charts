@@ -39,13 +39,13 @@ spec:
           - ./start-web.sh
           env:
             - name: ADMIN_EMAIL
-              value: {{ .Values.edemocracia.admin.email }}
+              value: {{ .Values.edemocracia.admin.email | quote }}
             - name: ADMIN_PASSWORD
-              value: {{ .Values.edemocracia.admin.password }}
+              value: {{ .Values.edemocracia.admin.password | quote }}
             - name: ADMIN_USERNAME
               value: admin
             - name: DISCOURSE_CONTACT_EMAIL
-              value: {{ .Values.edemocracia.admin.email }}
+              value: {{ .Values.edemocracia.admin.email | quote }}
             - name: DISCOURSE_CONTACT_URL
               value: {{ $edemoUrl }}
             - name: DISCOURSE_DB_HOST
@@ -53,11 +53,11 @@ spec:
             - name: DISCOURSE_DB_NAME
               value: discourse
             - name: DISCOURSE_DB_PASSWORD
-              value: {{ .Values.postgresql.postgresqlPassword }}
+              value: {{ .Values.postgresql.postgresqlPassword | quote }}
             - name: DISCOURSE_DB_PORT
               value: "5432"
             - name: DISCOURSE_DB_USERNAME
-              value: {{ .Values.postgresql.postgresqlUsername }}
+              value: {{ .Values.postgresql.postgresqlUsername | quote}}
             - name: DISCOURSE_DEVELOPER_EMAILS
             - name: DISCOURSE_FORCE_HOSTNAME
               value: {{ $edemoUrl }}\/expressao
@@ -72,15 +72,15 @@ spec:
             - name: DISCOURSE_RELATIVE_URL_ROOT
               value: /expressao
             - name: DISCOURSE_SMTP_ADDRESS
-              value: "{{ .Values.smtp.host }}"
+              value: {{ .Values.smtp.host | quote }}
             - name: DISCOURSE_SMTP_PASSWORD
-              value: "{{ .Values.smtp.password }}"
+              value: {{ .Values.smtp.password | quote }}
             - name: DISCOURSE_SMTP_PORT
-              value: "{{ .Values.smtp.port }}"
+              value: {{ .Values.smtp.port | quote }}
             - name: DISCOURSE_SMTP_USER_NAME
-              value: "{{ .Values.smtp.username }}"
+              value: {{ .Values.smtp.username | quote }}
             - name: DISCOURSE_SSO_SECRET
-              value: {{ .Values.discourse.sso.secret }}
+              value: {{ .Values.discourse.sso.secret | quote }}
             - name: DISCOURSE_SSO_URL
               value: "https://{{ $edemoUrl }}"
             - name: RAILS_ENV

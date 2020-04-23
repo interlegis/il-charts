@@ -31,9 +31,9 @@ spec:
             - ./start-web.sh
           env:
             - name: ADMIN_EMAIL
-              value: {{ .Values.edemocracia.admin.email }}
+              value: {{ .Values.edemocracia.admin.email | quote }}
             - name: ADMIN_PASSWORD
-              value: {{ .Values.edemocracia.admin.password }}
+              value: {{ .Values.edemocracia.admin.password | quote }}
             - name: ADMIN_USERNAME
               value: admin
             - name: ALLOWED_HOSTS
@@ -47,33 +47,33 @@ spec:
             - name: DATABASE_NAME
               value: audiencias
             - name: DATABASE_PASSWORD
-              value: {{ .Values.postgresql.postgresqlPassword }}
+              value: {{ .Values.postgresql.postgresqlPassword | quote }}
             - name: DATABASE_PORT
               value: "5432"
             - name: DATABASE_USER
-              value: {{ .Values.postgresql.postgresqlUsername }}
+              value: {{ .Values.postgresql.postgresqlUsername | quote }}
             - name: DEBUG
               value: "False"
             - name: DEFAULT_FROM_EMAIL
               value: '"Portal e-Democracia[audiencias]" <{{ .Values.edemocracia.admin.email }}>'
             - name: DJANGO_SECRET_KEY
-              value: {{ .Values.edemocracia.apikey }}
+              value: {{ .Values.edemocracia.apikey | quote }}
             - name: EMAIL_HOST
-              value: "{{ .Values.smtp.host }}"
+              value: {{ .Values.smtp.host | quote }}
             - name: EMAIL_HOST_PASSWORD
-              value: "{{ .Values.smtp.password }}"
+              value: {{ .Values.smtp.password | quote }}
             - name: EMAIL_HOST_USER
-              value: "{{ .Values.smtp.username }}"
+              value: {{ .Values.smtp.username | quote }}
             - name: EMAIL_PORT
-              value: "{{ .Values.smtp.port }}"
+              value: {{ .Values.smtp.port | quote }}
             - name: EMAIL_USE_TLS
-              value: "{{ .Values.smtp.tls }}"
+              value: {{ .Values.smtp.tls | quote}}
             - name: ENABLE_REMOTE_USER
               value: "True"
             - name: FORCE_SCRIPT_NAME
               value: /audiencias
             - name: GOOGLE_ANALYTICS_ID
-              value: {{ .Values.edemocracia.googleAnalyticsId }}
+              value: {{ .Values.edemocracia.googleAnalyticsId | quote }}
             - name: LOGIN_REDIRECT_URL
               value: /
             - name: LOGIN_URL
@@ -83,11 +83,11 @@ spec:
             - name: NOTIFICATION_EMAIL_LIST
               value: "{{ .Values.edemocracia.admin.email }},{{ .Values.audiencias.notifEmailList }}"
             - name: OLARK_ID
-              value: {{ .Values.edemocracia.olarkId }}i
+              value: {{ .Values.edemocracia.olarkId | quote }}
             - name: RECAPTCHA_PRIVATE_KEY
-              value: {{ .Values.edemocracia.recaptcha.privateKey }}
+              value: {{ .Values.edemocracia.recaptcha.privateKey | quote }}
             - name: RECAPTCHA_SITE_KEY
-              value: {{ .Values.edemocracia.recaptcha.siteKey }}
+              value: {{ .Values.edemocracia.recaptcha.siteKey | quote }}
             - name: REDIS_SERVER
               value: {{ (include "redis.fullname" .) }}-master
             - name: SESSION_COOKIE_NAME
@@ -95,15 +95,15 @@ spec:
             - name: SITE_DOMAIN
               value: "{{ $edemoUrl }}"
             - name: SITE_NAME
-              value: {{ .Values.edemocracia.siteName }}
+              value: {{ .Values.edemocracia.siteName | quote }}
             - name: STATIC_URL
               value: /audiencias/static/
             - name: URL_PREFIX
               value: audiencias
             - name: WEBSERVICE_URL
-              value: {{ .Values.audiencias.webservice.url }}
+              value: {{ .Values.audiencias.webservice.url | quote }}
             - name: WORDS_BLACK_LIST
-              value: {{ .Values.audiencias.wordsBlacklist }}
+              value: {{ .Values.audiencias.wordsBlacklist | quote }}
           resources:
             {{- toYaml .Values.audiencias.resources | nindent 12 }}
           volumeMounts:
