@@ -16,7 +16,7 @@ nginx:
       memory: 150Mi
     requests:
       cpu: 50m
-      memory: 50Mi
+      memory: 10Mi
 
 discourse:
   image:
@@ -34,11 +34,11 @@ discourse:
     size: 500Mi
   resources: 
    limits:
-     cpu: 500m
-     memory: 1250Mi
+     cpu: 800m
+     memory: 1200Mi
    requests:
-     cpu: 150m
-     memory: 850Mi
+     cpu: 100m
+     memory: 650Mi
 
 wikilegis:
   image:
@@ -54,11 +54,11 @@ wikilegis:
     size: 500Mi
   resources: 
     limits:
-      cpu: 500m
+      cpu: 800m
       memory: 350Mi
     requests:
-      cpu: 200m
-      memory: 200Mi
+      cpu: 100m
+      memory: 180Mi
 
 
 edemocracia:
@@ -98,8 +98,8 @@ edemocracia:
       cpu: 500m
       memory: 1250Mi
     requests:
-      cpu: 200m
-      memory: 850Mi
+      cpu: 100m
+      memory: 650Mi
 
 audiencias:
   image:
@@ -151,7 +151,7 @@ postgresql:
   resources:
     requests:
       cpu: 50m
-      memory: 64Mi
+      memory: 35Mi
 
 # Redis definitions
 redis:
@@ -164,7 +164,7 @@ redis:
   resources:
     requests:
       cpu: 50m
-      memory: 48Mi
+      memory: 25Mi
 
 
 imagePullSecrets: []
