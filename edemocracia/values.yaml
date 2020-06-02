@@ -96,10 +96,10 @@ edemocracia:
   resources: 
     limits:
       cpu: 500m
-      memory: 1250Mi
+      memory: 1350Mi
     requests:
       cpu: 100m
-      memory: 650Mi
+      memory: 800Mi
 
 audiencias:
   image:
