@@ -75,8 +75,13 @@ spec:
               value: {{ .Values.discourse.enabled | quote }}
             - name: DISCOURSE_SSO_SECRET
               value: {{ .Values.discourse.sso.secret | quote }}
+            # Workaround for a bug in runserver-production script, which does not check for DISCOURSE_ENABLED variable
             - name: DISCOURSE_UPSTREAM
+              {{- if eq .Values.discourse.enabled "True" }}
               value: http://discourse:8080/expressao
+              {{- else }}
+              value: "--version"
+              {{- end }}
             - name: EMAIL_BACKEND
               value: django.core.mail.backends.smtp.EmailBackend
             - name: EMAIL_HOST
