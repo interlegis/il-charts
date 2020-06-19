@@ -52,7 +52,7 @@ spec:
             - name: AUDIENCIAS_API_KEY
               value: {{ .Values.edemocracia.apikey | quote }}
             - name: AUDIENCIAS_ENABLED
-              value: "True"
+              value: {{ .Values.audiencias.enabled | quote }}
             - name: AUDIENCIAS_UPSTREAM
               value: http://audienciasweb:8000/audiencias
             - name: DATABASE_ENGINE
@@ -72,7 +72,7 @@ spec:
             - name: DEFAULT_FROM_EMAIL
               value: '"Portal e-Democracia" <{{ .Values.edemocracia.admin.email }}>'
             - name: DISCOURSE_ENABLED
-              value: "True"
+              value: {{ .Values.discourse.enabled | quote }}
             - name: DISCOURSE_SSO_SECRET
               value: {{ .Values.discourse.sso.secret | quote }}
             - name: DISCOURSE_UPSTREAM
@@ -118,7 +118,7 @@ spec:
             - name: WIKILEGIS_API_URL
               value: /api/v1/
             - name: WIKILEGIS_ENABLED
-              value: "True"
+              value: {{ .Values.wikilegis.enabled | quote }}
             - name: WIKILEGIS_UPSTREAM
               value: http://wikilegis:8000
           resources:

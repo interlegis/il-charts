@@ -19,6 +19,7 @@ nginx:
       memory: 10Mi
 
 discourse:
+  enabled: "True"
   image:
     repository: labhackercd/discourse-docker
     tag: 2.0.20180703
@@ -41,6 +42,7 @@ discourse:
      memory: 650Mi
 
 wikilegis:
+  enabled: "True"
   image:
     repository: labhackercd/wikilegis
     tag: 2.3.0
@@ -102,6 +104,7 @@ edemocracia:
       memory: 800Mi
 
 audiencias:
+  enabled: "True"
   image:
     repository: labhackercd/audiencias-publicas
     tag: 3.3.1

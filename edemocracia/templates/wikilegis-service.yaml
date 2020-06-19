@@ -1,3 +1,4 @@
+{{- if eq .Values.wikilegis.enabled "True" }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -15,3 +16,4 @@ spec:
   selector:
     {{- include "edemocracia.selectorLabels" . | nindent 4 }}
     io.kompose.service: {{ include "edemocracia.fullname" . }}-wikilegis
+{{- end }}
