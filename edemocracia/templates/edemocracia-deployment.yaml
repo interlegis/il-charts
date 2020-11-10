@@ -118,6 +118,8 @@ spec:
               value: {{ .Values.edemocracia.socialAuth.google.secret | quote }}
             - name: SOCIAL_AUTH_REDIRECT_IS_HTTPS
               value: "True"
+            - name: TIME_ZONE
+              value: {{ .Values.edemocracia.timeZone | quote }}
             - name: WIKILEGIS_API_KEY
               value: {{ .Values.edemocracia.apikey | quote }}
             - name: WIKILEGIS_API_URL

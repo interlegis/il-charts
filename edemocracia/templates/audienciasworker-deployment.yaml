@@ -99,6 +99,8 @@ spec:
               value: {{ .Values.edemocracia.siteName | quote }}
             - name: STATIC_URL
               value: /audiencias/static/
+            - name: TIME_ZONE
+              value: {{ .Values.edemocracia.timeZone | quote }}
             - name: URL_PREFIX
               value: audiencias
             - name: WEBSERVICE_URL

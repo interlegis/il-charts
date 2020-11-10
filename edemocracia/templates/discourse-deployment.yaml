@@ -84,6 +84,8 @@ spec:
               value: {{ .Values.discourse.sso.secret | quote }}
             - name: DISCOURSE_SSO_URL
               value: "https://{{ $edemoUrl }}"
+            - name: TZ
+              value: {{ .Values.edemocracia.timeZone | quote }}
             - name: RAILS_ENV
               value: production
           image: {{.Values.discourse.image.repository}}:{{ .Values.discourse.image.tag }}
