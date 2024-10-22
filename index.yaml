@@ -1,5 +1,58 @@
 apiVersion: v1
 entries:
+  keepalived:
+  - apiVersion: v1
+    appVersion: 2.0.16
+    created: "2024-10-22T19:35:25.288892971Z"
+    description: Highly available IP addresses with VRRP
+    digest: 0d5aeb7ea084bc04413dca3a0328b041edf1363550faadc15b4663fb8afd8107
+    icon: https://beopen.bplaced.net/wp-content/uploads/2016/11/Keepalived-logo.png
+    name: keepalived
+    urls:
+    - https://github.com/interlegis/il-charts/releases/download/keepalived-0.2.2/keepalived-0.2.2.tgz
+    version: 0.2.2
+  local-path-provisioner:
+  - apiVersion: v1
+    appVersion: 0.0.2
+    created: "2024-10-22T19:35:25.431113603Z"
+    description: Provisions hostPath based persistent volumes on the nodes automatically.
+    digest: 698fd073e83417c725b8d77fc190b31a8cf79c870bad9c6ac33a70e3eba282da
+    name: local-path-provisioner
+    urls:
+    - https://github.com/interlegis/il-charts/releases/download/local-path-provisioner-0.1.0/local-path-provisioner-0.1.0.tgz
+    version: 0.1.0
+  local-volume-provisioner:
+  - apiVersion: v1
+    created: "2024-10-22T19:35:25.540463653Z"
+    description: Provisioner for local machine volumes
+    digest: 00f8d78b35b685aa43ac6ff0762f35d2469ebf2c00c5b96f00aab93c4a1f2983
+    keywords:
+    - storage
+    - local
+    name: local-volume-provisioner
+    urls:
+    - https://github.com/interlegis/il-charts/releases/download/local-volume-provisioner-2.3.1/local-volume-provisioner-2.3.1.tgz
+    version: 2.3.1
+  osticket:
+  - apiVersion: v2
+    appVersion: 1.14.1
+    created: "2024-10-22T19:35:25.660002982Z"
+    dependencies:
+    - condition: mariadb.internal
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.0.10
+    - condition: memcached.internal
+      name: memcached
+      repository: https://charts.bitnami.com/bitnami
+      version: 6.1.1
+    description: OSTicket Open Source Ticket System
+    digest: 7457dcea630b0a7ace471f12005c3a7e8e59dd31e581bac263ea2a9d9f3a3c85
+    icon: https://osticket.com/wp-content/uploads/2021/03/osticket-supsys-new-1-e1616621912452.png
+    name: osticket
+    urls:
+    - https://github.com/interlegis/il-charts/releases/download/osticket-0.2.0/osticket-0.2.0.tgz
+    version: 0.2.0
   portalmodelo:
   - apiVersion: v2
     appVersion: 3.0-21
@@ -33,4 +86,27 @@ entries:
     urls:
     - https://github.com/interlegis/il-charts/releases/download/sapl-0.2.0/sapl-0.2.0.tgz
     version: 0.2.0
-generated: "2024-10-22T19:16:00.422503484Z"
+  staticmsg:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-10-22T19:35:25.879260671Z"
+    description: A Helm chart for Kubernetes
+    digest: a1d6ee972e18bc091578ef0d201e74619e5c85c7e902400d413426cac1c85bc7
+    name: staticmsg
+    type: application
+    urls:
+    - https://github.com/interlegis/il-charts/releases/download/staticmsg-0.1.1/staticmsg-0.1.1.tgz
+    version: 0.1.1
+  zabbix-agent:
+  - apiVersion: v2
+    appVersion: ubuntu-4.0-latest
+    created: "2024-10-22T19:35:26.010164552Z"
+    description: Zabbix monitoring agent for cluster-wide deployment
+    digest: f368f16d70db65dd7aa62306f8a1fd4d523c603bb668bbb13875019f90e30feb
+    icon: https://assets.zabbix.com/img/logo.svg
+    name: zabbix-agent
+    type: application
+    urls:
+    - https://github.com/interlegis/il-charts/releases/download/zabbix-agent-0.3.0/zabbix-agent-0.3.0.tgz
+    version: 0.3.0
+generated: "2024-10-22T19:35:26.010172116Z"
