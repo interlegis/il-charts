@@ -1,0 +1,247 @@
+labels:
+  io.cattle.role: project
+categories:
+- CMS
+questions:
+# Informações Básicas
+- variable: portal.title
+  default: "Câmara Municipal"
+  description: "Título na página inicial do Portal (imutável)"
+  label: Título
+  type: enum
+  options:
+    - "Câmara Municipal"
+    - "Assembleia Legislativa"
+    - "Tribunal de Contas"
+    - "Congresso Nacional"
+  group: Básico
+  required: true
+- variable: portal.description
+  default: "Cidade - UF"
+  description: "Descrição na página incial do Portal (imutável)"
+  label: Descrição
+  type: string
+  group: Básico
+  required: true
+- variable: portal.adminEmail
+  default: "contato@admin.email"
+  description: "E-mail do contato do Portal (imutável)"
+  label: Contato
+  type: string
+  group: Básico
+  required: true
+- variable: portal.hostname
+  default: "teste.df.leg.br"
+  description: "URL de acesso do Portal"
+  label: Hostname
+  type: string
+  group: Básico
+  required: true
+- variable: portal.hostprefix
+  default: "www"
+  description: "Prefixo da URL do Portal"
+  label: Prefixo do Host
+  type: string
+  group: Básico
+  required: false
+- variable: portal.addprefix
+  default: ""
+  description: "Prefixo adicional para a URL do Portal (opcional)"
+  label: Prefixo adicional do Host
+  type: string
+  group: Básico
+  required: false
+- variable: portal.rootPassword
+  default: "altereme"
+  description: "Senha de Admin do Zope (raiz, imutável)"
+  label: Senha Admin
+  type: password
+  group: Básico
+  required: true
+- variable: portal.adminPassword
+  default: "altereme"
+  description: "Senha do usuário adm do Plone (imutável)"
+  label: Senha Adm
+  type: password
+  group: Básico
+  required: true
+
+# Ingress
+- variable: ingress.tls.enabled
+  default: true
+  type: boolean
+  description: "Habilitar criptografia do protocolo HTTP (HTTPS)?"
+  label: "Habilitar TLS?"
+  required: false
+  group: Ingress
+  show_subquestion_if: true
+  subquestions:
+    - variable: ingress.tls.provider
+      default: letsencrypt
+      type: enum
+      description: "Qual provedor de certificados utilizar?"
+      label: "Provedor de certificados"
+      required: false
+      group: Ingress
+      options: 
+        - letsencrypt
+        - aws
+
+- variable: ingress.class
+  default: nginx
+  type: enum
+  description: "Qual o Ingress Controller?"
+  label: "Classe Ingress"
+  required: false
+  group: Ingress
+  options:
+    - nginx
+    - alb
+
+- variable: ingress.vhostmonster
+  default: true
+  type: boolean
+  description: "Habilitar reescrita de URL para o VirtualHostMonster no Ingress?"
+  label: "VHostMonster no Ingress"
+  required: true
+  group: Ingress
+
+# Configurações de Armazenamento
+- variable: persistence.accessMode
+  default: ReadWriteOnce
+  type: enum
+  label: "Modo de acesso do volume (imutável)"
+  description: "ReadWriteOnce para volumes de bloco, ReadWriteMany para volumes de arquivo (NFS)."
+  options:
+    - "ReadWriteOnce"
+    - "ReadWriteMany"
+  required: true
+  group: Armazenamento
+- variable: persistence.size
+  default: 2Gi
+  type: string
+  required: false
+  label: "Tamanho do volume"
+  description: "Espaço em disco disponível para o portal."
+  group: Armazenamento
+- variable: velero.backup.enabled
+  default: true
+  type: boolean
+  label: "Habilitar backup com Velero?"
+  description: "Criar ou não os objetos para backup com o Velero."
+  required: false
+  group: Armazenamento
+- variable: repozo.enabled
+  default: false
+  type: boolean
+  label: "Habilitar backup com Repozo?"
+  description: "Habilitar ou não backup com repozo em volumes NFS."
+  required: false
+  group: Armazenamento
+  show_subquestion_if: true
+  subquestions:
+    - variable: repozo.storageClass
+      default: nfs-backup
+      type: string
+      description: "StorageClass na qual criar os volumes para backup."
+      label: "StorageClass do Backup"
+      required: false
+    - variable: repozo.keep
+      default: 1
+      type: int
+      label: "Backups a guardar"
+      description: "Número de backups full que o repozo deve guardar."
+      required: false
+    - variable: repozo.keepblobdays
+      default: 30
+      type: int
+      label: "Número de dias de backups de blobs a guardar."
+      description: "Recomendado utilizar a fórmula 'keep * days_between_zeopack = keep_blob_days'."
+      required: false
+    - variable: repozo.backupblobs
+      default: false
+      type: boolean
+      label: "Backup Blobs"
+      description: "Fazer ou não o backup dos blobs com o repozo."
+      required: false
+
+# Configurações Avançadas
+- variable: portal.timeZone
+  default: "America/Sao_Paulo"
+  description: "Fuso Horário do Portal"
+  type: enum
+  label: "Fuso"
+  options:
+    - "America/Sao_Paulo"
+    - "America/Fortaleza"
+    - "America/Belem"
+    - "America/Araguaina"
+    - "America/Bahia"
+    - "America/Boa_Vista"
+    - "America/Campo_Grande"
+    - "America/Cuiaba"
+    - "America/Maceio"
+    - "America/Manaus"
+    - "America/Porto_Velho"
+    - "America/Recife"
+    - "America/Rio_Branco"
+    - "America/Sao_Paulo"
+  required: true
+  group: Avançado
+
+- variable: portal.createAndUpgrade
+  default: true
+  type: boolean
+  description: "Habilita o configurador/atualizador de Portais?"
+  label: "Criar e Atualizar"
+  required: false
+  group: Avançado
+
+- variable: portal.zopefolder
+  default: "/"
+  type: string
+  description: "Diretório no Zope onde está armazenado o portal. Precisa terminar com barra '/'."
+  label: "Zope Folder"
+  required: false
+  group: Avançado
+
+- variable: instance.zeoclient
+  default: true
+  type: boolean
+  description: "Separar ZEO Server e Cliente?"
+  label: "Cliente ZEO?"
+  required: false
+  group: Avançado
+
+- variable: instance.zodbCacheSize
+  default: 1000
+  description: "Tamanho do Cache do ZODB (em número de objetos)"
+  type: int
+  label: "ZODB Cache"  
+  required: false
+  group: Avançado
+
+- variable: instance.zeopack.enabled
+  default: true
+  type: boolean
+  description: "Habilitar o Pack periódico do ZODB?"
+  label: "ZEO Pack?"
+  required: false
+  group: Avançado
+
+- variable: instance.zeopack.schedule
+  default: "0 1 * * SUN"
+  type: string
+  description: "Agendamento do ZEO Pack (String do Cron)"
+  label: "ZEO Pack Cron"
+  required: false
+  group: Avançado
+
+- variable: instance.zeopack.keepDays
+  default: 30
+  type: int
+  description: "Dias de operações a manter após o Pack do ZODB"
+  label: "ZEO Pack Keep Days"
+  required: false
+  group: Avançado
+  

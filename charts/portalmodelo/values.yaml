@@ -6,18 +6,32 @@ replicaCount: 1
 
 image:
   repository: interlegis/portalmodelo
-  tag: 3.0-21
   pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
-service:
-  type: ClusterIP
-  port: 80
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
 
 persistence:
   enabled: true
   #storageClass: ""
   accessMode: ReadWriteOnce
-  size: 500Mi
+  size: 5Gi
+
+velero:
+  namespace: velero
+  backup:
+    enabled: false
+    # cert-manager objects are usually blocked during backup
+    useSnapshotBackup: false
+    snapshotMoveData: false
+    excludedResources: 
+      - certificates.cert-manager.io
+      - orders.acme.cert-manager.io
+      - certificaterequests.cert-manager.io
+      - challenges.acme.cert-manager.io
 
 portal:
   adminPassword: altereme
@@ -26,44 +40,74 @@ portal:
   title: Câmara Municipal
   description: Cidade - UF
   hostname: teste.df.leg.br
+  hostprefix: www
+  addprefix: ''
   timeZone: America/Sao_Paulo
   createAndUpgrade: true
-  zodbCacheSize: 2000
+  zopefolder: '/'
 
 instance:
-  zeoclient: false
+  zodbCacheSize: 1000
+  zeoclient: true
+  zeopack:
+    enabled: true
+    schedule: "0 1 * * SUN" # Every Sunday at 1AM
+    keepDays: 30
+
+repozo:
+  enabled: false
+  storageClass: nfs-backup
+  keep: 1
+  keepblobdays: 30
+  backupblobs: true
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
 
 ingress:
   enabled: true
-  hosts:
-   - teste.df.leg.br
-   - www.teste.df.leg.br
-  path: /
-  tls: []
-  #  - secretName: teste-df-tls
-  #    hosts:
-  #      - teste.df.leg.br
-  #      - www.teste.df.leg.br
+  class: nginx
+  # nginx - for default nginx ingress controller
+  # alb - for AWS ALB Load Balancer controller 
+  tls: 
+    enabled: true
+    provider: letsencrypt
+  vhostmonster: true
+  # extra annotations only
   annotations: {}
-  #  kubernetes.io/ingress.class: nginx
-  #  kubernetes.io/tls-acme: "true"
-  #  certmanager.k8s.io/cluster-issuer: letsencrypt-staging # your cluerissuer name
 
 resources:
   plone:
     limits:
       cpu: 1000m
-      memory: 1500Mi
+      memory: 1600Mi
     requests:
       cpu: 100m
-      memory: 650Mi
+      memory: 750Mi
   zeo:
     limits:
       cpu: 1000m
       memory: 512Mi
     requests:
-      cpu: 100m
-      memory: 64Mi
+      cpu: 50m
+      memory: 112Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 

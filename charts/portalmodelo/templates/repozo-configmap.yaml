@@ -1,0 +1,70 @@
+{{- if and .Values.persistence.enabled (or .Values.repozo.enabled .Values.velero.backup.enabled )}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "portalmodelo.fullname" . }}-backupscript 
+data:
+  backup: |-
+    #!/plone/Python-2.7/bin/python
+
+    import sys
+    sys.path[0:0] = [
+      '/plone/buildout-cache/eggs/collective.recipe.backup-2.17-py2.7.egg',
+      '/plone/buildout-cache/eggs/zc.buildout-2.2.5-py2.7.egg',
+      '/plone/buildout-cache/eggs/zc.recipe.egg-1.3.2-py2.7.egg',
+      '/plone/buildout-cache/eggs/setuptools-7.0-py2.7.egg',
+    ]
+
+
+    import logging
+    loglevel = logging.INFO
+    from optparse import OptionParser
+    parser = OptionParser()
+    parser.add_option("-q", "--quiet",
+                    action="store_false", dest="verbose", default=True,
+                    help="don't print status messages to stdout")
+    parser.add_option("-n", "--no-prompt",
+                  action="store_true", dest="no_prompt", default=False,
+                  help="don't ask for any user confirmation")
+    (options, args) = parser.parse_args()
+    # Allow the user to make the script more quiet (say in a cronjob):
+    if not options.verbose:
+        loglevel = logging.WARN
+    logging.basicConfig(level=loglevel,
+        format='%(levelname)s: %(message)s')
+
+    import collective.recipe.backup.main
+    
+    {{- $bkpLocation := "/backup" -}}
+    {{- if .Values.velero.backup.enabled -}}
+    {{-   $bkpLocation = "/data" -}}
+    {{- end }}
+
+    if __name__ == '__main__':
+        sys.exit(collective.recipe.backup.main.backup_main(
+            bin_dir='/plone/instance/bin',
+            storages=[{'backup_location': '{{ $bkpLocation }}/backups',
+      'blob_backup_location': '{{ $bkpLocation }}/blobstoragebackups',
+      'blob_snapshot_location': '{{ $bkpLocation }}/blobstoragesnapshots',
+      'blobdir': '/data/blobstorage',
+      'datafs': '/data/filestorage/Data.fs',
+      'snapshot_location': '{{ $bkpLocation }}/snapshotbackups',
+      'storage': '1'}],
+            keep={{ .Values.repozo.keep }},
+            keep_blob_days={{ .Values.repozo.keepblobdays }},
+            full=False,
+            verbose=False,
+            gzip=True,
+            only_blobs=False,
+          {{- if .Values.repozo.backupblobs }}
+            backup_blobs=True,
+          {{- else }}
+            backup_blobs=False,
+          {{- end }}
+            use_rsync=True,
+            gzip_blob=False,
+            pre_command='',
+            post_command='',
+            no_prompt=options.no_prompt,
+            ))
+{{- end }}

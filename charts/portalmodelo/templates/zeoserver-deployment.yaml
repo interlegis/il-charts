@@ -1,73 +1,131 @@
-{{- if .Values.instance.zeoclient -}}
-apiVersion: apps/v1beta2
+{{- if .Values.instance.zeoclient }}
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "portalmodelo.fullname" . }}-zeoserver
+  name: {{ include "portalmodelo.fullname" . }}-zeoserver
   labels:
-    app: {{ template "portalmodelo.name" . }}-zeoserver
-    chart: {{ template "portalmodelo.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    {{- include "portalmodelo.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: {{ template "portalmodelo.name" . }}
-      release: {{ .Release.Name }}
+      {{- include "portalmodelo.zeoserverSelectorLabels" . | nindent 6 }}
   template:
     metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
       labels:
-        app: {{ template "portalmodelo.name" . }}
-        release: {{ .Release.Name }}
+        {{- include "portalmodelo.zeoserverSelectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
-      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        name: {{ .Release.Name }}-rmlock
-        command:
-        - "rm"
-        - "-f"
-        - "/data/filestorage/Data.fs.lock"
-        volumeMounts:
-        - mountPath: /data
-          name: {{ .Release.Name }}-data
-      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        name: {{ .Release.Name }}-initzeo
-        command: 
-        - "mkdir"
-        - "-p"
-        - "/data/filestorage"
-        - "/data/blobstorage"
-        - "/data/zeoserver"
-        - "/data/log"
-        volumeMounts:
-        - mountPath: /data
-          name: {{ .Release.Name }}-data
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          name: {{ .Release.Name }}-chownplone
+          command:
+            - "chown"
+            - "plone:plone"
+            - "/data"
+          securityContext:
+            runAsNonRoot: false
+            runAsUser: 0
+          volumeMounts:
+            - mountPath: /data
+              name: data
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          name: {{ .Release.Name }}-rmlock
+          command:
+            - "rm"
+            - "-f"
+            - "/data/filestorage/Data.fs.lock"
+          volumeMounts:
+            - mountPath: /data
+              name: data
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          name: {{ .Release.Name }}-initzeo
+          command:
+            - "mkdir"
+            - "-p"
+            - "/data/filestorage"
+            - "/data/blobstorage"
+            - "/data/zeoserver"
+            - "/data/log"
+          volumeMounts:
+            - mountPath: /data
+              name: data
       containers:
-      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        args:
-        - zeoserver
-        env:
-        - name: ZEO_SHARED_BLOB_DIR
-          value: "on"
-        - name: TZ
-          value: {{ .Values.portal.timeZone }}
-        name: {{ .Release.Name }}-zeoserver
-        volumeMounts:
-        - mountPath: /data
-          name: {{ .Release.Name }}-data
-        ports:
-        - containerPort: 8100
-        resources:
-{{ toYaml .Values.resources.zeo | indent 10 }}
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          args:
+            - zeoserver
+          env:
+          {{- if eq .Values.persistence.accessMode "ReadWriteMany"}}
+            - name: ZEO_SHARED_BLOB_DIR
+              value: "on"
+          {{- end }}
+            - name: TZ
+              value: {{ .Values.portal.timeZone }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          name: {{ .Release.Name }}-zeoserver
+          ports:
+            - containerPort: 8100
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          {{- if .Values.velero.backup.enabled }}
+            - mountPath: /plone/instance/bin/backup
+              subPath: backup
+              name: backupscript
+          {{- end }}
+          livenessProbe:
+            tcpSocket:
+              port: 8100
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            failureThreshold: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: 8100
+            initialDelaySeconds: 90
+            periodSeconds: 5
+            failureThreshold: 5
+            successThreshold: 1
+            timeoutSeconds: 3
+          resources:
+            {{- toYaml .Values.resources.zeo | nindent 12 }}
       restartPolicy: Always
       volumes:
-      - name: {{ .Release.Name }}-data
-      {{- if .Values.persistence.enabled }}
-        persistentVolumeClaim:
-          claimName: {{ .Release.Name }}-data
-      {{- else }}
-        emptyDir: {}
+        - name: data
+        {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "portalmodelo.fullname" . }}-data
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
+        {{- if .Values.velero.backup.enabled }}
+        - name: backupscript
+          configMap:
+            name: {{ include "portalmodelo.fullname" . }}-backupscript
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
       {{- end }}
-{{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end}}

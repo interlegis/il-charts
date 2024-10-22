@@ -1,0 +1,65 @@
+{{- if .Values.instance.zeoclient }}
+{{- if .Values.instance.zeopack.enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "portalmodelo.fullname" . }}-zeopack
+  labels:
+    {{- include "portalmodelo.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.instance.zeopack.schedule | quote }} 
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "portalmodelo.labels" . | nindent 12 }}
+        spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          containers:
+            - name: {{ .Release.Name }}-zeopack
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              command:
+                - "/bin/bash"
+                - "-c"
+              args:
+                - "sleep \"$[ ( $RANDOM % 90 )  + 1 ]m\" && python /docker-initialize.py && /plone/instance/bin/zeopack -D {{ .Values.instance.zeopack.keepDays }}"
+              env:
+                - name: ZEO_ADDRESS
+                  value: {{ template "portalmodelo.fullname" . }}-zeoserver:8100
+                - name: TZ
+                  value: {{ .Values.portal.timeZone }}
+              {{- if eq .Values.persistence.accessMode "ReadWriteMany" }} 
+              volumeMounts:
+                - mountPath: /data
+                  name: data
+              {{- end }}
+              resources:
+                {{- toYaml .Values.resources.zeo | nindent 16 }}
+          restartPolicy: OnFailure
+          {{- if and .Values.persistence.enabled (eq .Values.persistence.accessMode "ReadWriteMany") }} 
+          volumes:
+            - name: data
+              persistentVolumeClaim:
+                claimName: {{ include "portalmodelo.fullname" . }}-data
+          {{- end }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+{{- end}}
+{{- end}}

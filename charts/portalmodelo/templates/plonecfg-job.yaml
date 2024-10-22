@@ -1,0 +1,88 @@
+{{- if .Values.portal.createAndUpgrade }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "portalmodelo.fullname" . }}-plonecfg
+  labels:
+    {{- include "portalmodelo.labels" . | nindent 4 }}
+spec: 
+  template: 
+    metadata:
+      annotations:
+        "helm.sh/hook": post-install,post-upgrade
+        "helm.sh/hook-weight": "-1"
+        "helm.sh/hook-delete-policy": "hook-succeeded"
+      labels:
+        {{- include "portalmodelo.ploneSelectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      restartPolicy: Never
+      initContainers:
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          name: {{ .Release.Name }}-chownplone
+          command:
+            - "chown"
+            - "plone:plone"
+            - "/data"
+          securityContext:
+            runAsNonRoot: false
+            runAsUser: 0
+          {{- if eq .Values.persistence.accessMode "ReadWriteMany" }}
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          {{- end }}
+      containers:
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          name: {{ .Release.Name }}-plonecfg
+          command: [ "/bin/sh", "-c" ]
+          args: 
+            - >-
+                sleep 20 &&
+                sed -i "s/%SHARED_BLOB%/${ZEO_SHARED_BLOB_DIR}/g" /plone/instance/configure.cfg &&
+                sed -i "s/%SHARED_BLOB%/${ZEO_SHARED_BLOB_DIR}/g" /plone/instance/upgrades.cfg &&
+                /configure.sh
+          env:
+          {{- if .Values.instance.zeoclient }}
+            - name: ZEO_ADDRESS
+              value: {{ template "portalmodelo.fullname" . }}-zeoserver:8100
+            {{- if eq .Values.persistence.accessMode "ReadWriteMany" -}}
+            - name: ZEO_SHARED_BLOB_DIR
+              value: "on"
+            {{- else }}
+            - name: ZEO_SHARED_BLOB_DIR
+              value: "off"
+            {{- end }}
+          {{- else }}
+            - name: ZEO_ADDRESS
+              value: ""
+          {{- end }}
+            - name: EMAIL
+              value: {{ .Values.portal.adminEmail }}
+            - name: PASSWORD
+              value: {{ .Values.portal.adminPassword }}
+            - name: TITLE
+              value: {{ .Values.portal.title }}
+            - name: DESCR
+              value: {{ .Values.portal.description }}
+            - name: HOSTNAME
+              value: "leg.br"
+            - name: ROOTPWD
+              value: {{ .Values.portal.rootPassword }}
+    {{- if eq .Values.persistence.accessMode "ReadWriteMany" }}
+          volumeMounts:
+            - mountPath: /data
+              name: data
+      {{- if .Values.persistence.enabled }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "portalmodelo.fullname" . }}-data
+      {{- end }}
+    {{- end }}
+{{- end }}

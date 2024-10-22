@@ -1,13 +1,10 @@
-{{- if .Values.instance.zeoclient -}}
+{{- if .Values.instance.zeoclient }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "portalmodelo.fullname" . }}-zeoserver
+  name: {{ include "portalmodelo.fullname" . }}-zeoserver
   labels:
-    app: {{ template "portalmodelo.name" . }}
-    chart: {{ template "portalmodelo.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    {{- include "portalmodelo.labels" . | nindent 4 }}
 spec:
   ports:
     - port: 8100
@@ -15,6 +12,6 @@ spec:
       protocol: TCP
       name: "8100"
   selector:
-    app: {{ template "portalmodelo.name" . }}
-    release: {{ .Release.Name }}
-{{- end -}}
+    {{- include "portalmodelo.zeoserverSelectorLabels" . | nindent 4 }}
+{{- end }}
+

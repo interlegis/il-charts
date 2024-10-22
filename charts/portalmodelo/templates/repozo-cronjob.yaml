@@ -1,0 +1,87 @@
+{{- if .Values.instance.zeoclient }}
+{{- if and .Values.persistence.enabled .Values.repozo.enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "portalmodelo.fullname" . }}-repozo
+  labels:
+    {{- include "portalmodelo.labels" . | nindent 4 }}
+spec:
+  # generate a random backup time between 1 and 5 AM
+  schedule: {{ mod (randNumeric 2) 60 }} {{ mod (randNumeric 1) 6 }} * * *
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "portalmodelo.labels" . | nindent 12 }}
+        spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          containers:
+            - name: {{ .Release.Name }}-repozo
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              securityContext:
+                runAsNonRoot: false
+                runAsUser: 0
+              command:
+                - "/bin/bash"
+                - "-c"
+              args:
+                - "/plone/Python-2.7/bin/python /plone/instance/bin/backup"
+              env:
+                - name: TZ
+                  value: {{ .Values.portal.timeZone }}
+              volumeMounts:
+                - mountPath: /plone/instance/bin/backup
+                  subPath: backup
+                  name: backupscript
+                - mountPath: /data
+                  name: data
+                - mountPath: /backup
+                  name: backupvol
+          restartPolicy: OnFailure
+          volumes:
+            - name: data
+              persistentVolumeClaim:
+                claimName: {{ include "portalmodelo.fullname" . }}-data
+            - name: backupvol
+              persistentVolumeClaim:
+                claimName: {{ include "portalmodelo.fullname" . }}-backupvol
+            - name: backupscript
+              configMap:
+                name: {{ include "portalmodelo.fullname" . }}-backupscript
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                    - {{ include "portalmodelo.name" . }}
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                    - {{ .Release.Name }}
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                    - zeoserver 
+                topologyKey: kubernetes.io/hostname
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+{{- end}}
+{{- end}}

@@ -1,6 +1,7 @@
-apiVersion: v1
-appVersion: "3.0-21"
-description: Portal Modelo para Casas Legislativas
+apiVersion: v2
 name: portalmodelo
-icon: https://raw.githubusercontent.com/interlegis/il-charts/master/images/portalmodelo.png
-version: 0.4.3
+description: Portal Modelo para Casas Legislativas
+type: application
+version: 0.5.0
+appVersion: 3.0-21
+icon: https://git.interlegis.leg.br/SEIT/rancher-charts/raw/5a821368fe0244ae9017878dd2aae3173328816c/images/portalmodelo.png
