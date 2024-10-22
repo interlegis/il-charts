@@ -1,6 +1,7 @@
 # OSTicket support ticket system Helm chart
 
-This is a Helm chart to install OSTicket with MySQL as database and memcached as session storage. 
+This is a Helm chart to install OSTicket with MySQL as database and memcached as session storage.
+ 
 Requirements:
 
  - Default persistent storage class (StorageClass)

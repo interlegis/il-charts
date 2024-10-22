@@ -1,6 +1,6 @@
 # Zabbix Agent Helm Chart
 
-This helm chart provides Zabbix Agent as a DaemonSet for all your Kubernetes hosts.
+This Helm chart provides Zabbix Agent as a DaemonSet for all your Kubernetes hosts.
 
 ## Default Values
 

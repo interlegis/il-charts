@@ -1,4 +1,4 @@
-# Provisioner's helm chart
+# Local Volume Provisioner's helm chart
 
 Helm templating is used to generate the provisioner's DaemonSet and ConfigMap specs.
 The generated specs can be further customized as needed (usually not necessary), and then deployed using kubectl.

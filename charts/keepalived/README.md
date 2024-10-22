@@ -1,6 +1,6 @@
 # Keepalived Helm Chart
 
-This helm chart provides Keepalived as a DaemonSet for hosts with a specific nodeSelector (default role=ingress).
+This Helm chart provides Keepalived as a DaemonSet for hosts with a specific nodeSelector (default role=ingress).
 
 ## Parameters and Default Values
 
