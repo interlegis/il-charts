@@ -1,6 +1,16 @@
-apiVersion: v1
-appVersion: "1.12.2"
+apiVersion: v2
+appVersion: "1.14.1"
 description: OSTicket Open Source Ticket System
 name: osticket
-icon: https://osticket.com/wp-content/uploads/2017/03/osticket-supsys.png
-version: 0.1.7
+icon: https://osticket.com/wp-content/uploads/2021/03/osticket-supsys-new-1-e1616621912452.png
+version: 0.2.0
+
+dependencies:
+- name: mariadb
+  version: 10.4.4
+  repository: https://charts.bitnami.com/bitnami
+  condition: mariadb.internal
+- name: memcached
+  version: 6.0.10
+  repository: https://charts.bitnami.com/bitnami
+  condition: memcached.internal 

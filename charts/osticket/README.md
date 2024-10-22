@@ -11,7 +11,7 @@ Requirements:
 | Parametro                 | Description                                | Default                  |
 |---------------------------|--------------------------------------------|--------------------------|
 | image.repository          | Repository of docker image                 | `interlegis/osticket`    |
-| image.tag                 | Docker image version                       | `1.12.2`                 |
+| image.tag                 | Docker image version                       | `1.14.1`                 |
 | image.pullPolicy          | Docker image Pull Policy                   | `IfNotPresent`           |
 | replicaCount              | Number of OSTicket replicas                | `1`                      |
 | persistence.enabled       | Enable persistent volumes                  | `true`                   |
@@ -19,6 +19,6 @@ Requirements:
 | persistence.accessMode    | Persistent volume acces mode               | `ReadWriteOnce`          |
 | persistence.size          | Persistent volume size                     | `10Gi `                  |
 | installSecret             | OSTicket install secret                    | ``                       |
-| mysql.mysqlDatabase       | OSTicket database name                     | `osticket`               |
-| mysql.mysqlUser           | OSTicket database user name                | `osticket`               |
-| mysql.mysqlPassword       | OSTicket database user password            | `mysecretpw`             |
+| mariadb.auth.database     | OSTicket database name                     | `osticket`               |
+| mariadb.auth.username     | OSTicket database user name                | `osticket`               |
+| mariadb.auth.password     | OSTicket database user password            | `mysecretpw`             |

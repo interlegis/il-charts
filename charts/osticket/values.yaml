@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: interlegis/osticket
-  tag: 1.12.2
+  tag: 1.14.1
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -20,6 +20,19 @@ persistence:
   #storageClass: ""
   accessMode: ReadWriteOnce
   size: 10Gi
+
+velero:
+  namespace: velero
+  backup:
+    enabled: true
+    snapshotVolumes: false
+    defaultVolumesToRestic: true
+    # cert-manager objects are usually blocked during backup
+    excludedResources: 
+      - certificates.cert-manager.io
+      - orders.acme.cert-manager.io
+      - certificaterequests.cert-manager.io
+      - challenges.acme.cert-manager.io
 
 service:
   type: ClusterIP
@@ -51,26 +64,36 @@ resources:
      cpu: 100m
      memory: 128Mi
 
-mysql:
+mariadb:
   internal: true
-  image: mysql
-  imageTag: 5.7.14
-  mysqlDatabase: osticket
-  mysqlUser: osticket
-  mysqlPassword: mysecretpw
-  persistence:
-    enabled: true
-  resources:
-    requests:
-      memory: 700Mi
-      cpu: 100m 
+  image:
+    tag: 10.5.13-debian-10-r58
+  architecture: standalone
+  auth:
+    database: osticket
+    username: osticket
+    password: mysecretpw
+  primary:
+    persistence:
+      enabled: true
+      accessModes: 
+      - ReadWriteOnce
+      size: 20Gi
+    resources:
+      requests:
+        memory: 700Mi
+        cpu: 100m
+    service:
+      type: ClusterIP
 
 memcached:
   internal: true
-  image: memcached:1.5.12-alpine
+  image: 
+    tag: 1.6.13-debian-10-r0
+  architecture: standalone
   replicaCount: 1
-  pdbMinAvailable: 1
-
+  pdb:
+    minAvailable: 1
 
 nodeSelector: {}
 
