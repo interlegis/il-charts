@@ -1,0 +1,53 @@
+labels:
+  io.cattle.role: project
+categories:
+- Monitoring
+questions:
+- variable: zabbix.serverHost
+  default: ""
+  description: "IP Address of your Zabbix Server"
+  label: Server IP
+  type: string
+  required: true
+  group: Essential
+- variable: zabbix.enableRemoteCommands
+  default: "0"
+  description: "Whether to allow remote commands from the Zabbix Server to the agent."
+  type: enum
+  options:
+    - "0"
+    - "1"
+  required: false
+  group: Essential
+- variable: zabbix.debugLevel
+  default: 3
+  label: Agent Debug Level
+  description: "0-basic info, 1-critical info, 2-error info, 3-warnings, 4-debug, 5-extended debug"
+  type: int
+  min: 0
+  max: 5
+  group: Advanced
+- variable: zabbix.refreshActiveChecks
+  default: 120
+  label: Refresh Active Checks
+  description: "Interval to refresh list of active checks (in seconds)."
+  type: int
+  min: 60
+  max: 3600
+  group: Advanced
+- variable: zabbix.startAgents
+  default: 10
+  label: Start Agents
+  description: "Number of pre-allocated instances of zabbix_agentd for passive checks."
+  type: int
+  min: 0
+  max: 99
+  group: Advanced
+- variable: zabbix.timeout
+  default: 30
+  label: "Timeout"
+  description: "Timeout when fetching values (in seconds). The agent will not abort user parameters execution when reaching this limit!"
+  type: int
+  min: 1
+  max: 255 
+  group: Advanced

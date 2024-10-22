@@ -3,35 +3,35 @@ kind: DaemonSet
 metadata:
   name: {{ include "zabbix-agent.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "zabbix-agent.name" . }}
-    helm.sh/chart: {{ include "zabbix-agent.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
-
+    {{- include "zabbix-agent.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "zabbix-agent.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- include "zabbix-agent.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
       labels:
-        app.kubernetes.io/name: {{ include "zabbix-agent.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+        {{- include "zabbix-agent.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       hostPID: true
       hostIPC: true
       hostNetwork: true
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - resources:
-            limits:
-              cpu: 100m
-              memory: 54Mi
-            requests:
-              cpu: 100m
-              memory: 54Mi
+        - name: {{ .Chart.Name }}
           securityContext:
-            privileged: true
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
           - containerPort: 10050
           env:
@@ -51,8 +51,6 @@ spec:
               value: "{{ .Values.zabbix.startAgents }}"
             - name: ZBX_TIMEOUT
               value: "{{ .Values.zabbix.timeout }}"
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          name: {{ .Chart.Name }}
           volumeMounts:
             - name: proc
               mountPath: /data/proc
@@ -62,13 +60,23 @@ spec:
               mountPath: /data/dev
             - name: dockersock
               mountPath: /var/run/docker.sock
-    {{- with .Values.tolerations }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
-    {{- end }}
+      {{- end }}
       volumes:
         - name: proc
-          hostPath: 
+          hostPath:
               path: /proc
         - name: sys
           hostPath:
