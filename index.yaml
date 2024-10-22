@@ -12,4 +12,25 @@ entries:
     urls:
     - https://github.com/interlegis/il-charts/releases/download/portalmodelo-0.5.0/portalmodelo-0.5.0.tgz
     version: 0.5.0
-generated: "2024-10-22T19:07:29.535667506Z"
+  sapl:
+  - apiVersion: v2
+    appVersion: 3.1.163-RC23
+    created: "2024-10-22T19:16:00.422493696Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.26
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 20.2.0
+    description: Sistema de Apoio ao Processo Legislativo (SAPL)
+    digest: 0bc263aa3f4558f0eb178b67d6e2b843e786b21722074d222da23437ca3cb9fd
+    icon: https://git.interlegis.leg.br/SEIT/rancher-charts/raw/master/images/sapl.png
+    name: sapl
+    type: application
+    urls:
+    - https://github.com/interlegis/il-charts/releases/download/sapl-0.2.0/sapl-0.2.0.tgz
+    version: 0.2.0
+generated: "2024-10-22T19:16:00.422503484Z"
