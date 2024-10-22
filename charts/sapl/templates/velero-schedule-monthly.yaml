@@ -1,0 +1,39 @@
+{{- if .Values.velero.backup.enabled }}
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: {{ include "sapl.fullname" . }}-monthly
+  namespace: {{ .Values.velero.namespace }}
+spec:
+  # generate a random backup time between 1 and 5 AM on first day of every month
+  schedule: {{ mod (randNumeric 2) 60 }} {{ mod (randNumeric 1) 6 }} 1 * *
+  template:
+    includedNamespaces:
+    - {{ .Release.Namespace }}
+    {{- with .Values.velero.backup.excludedResources }}
+    excludedResources:
+      {{- toYaml . | nindent 8 }}
+    {{- end }}
+    snapshotVolumes: false
+    # every monthly backup is good for the 6 months (~180 days)
+    ttl: 4380h0m0s
+    defaultVolumesToFsBackup: true
+    hooks:
+      resources:
+      - name: pgdump
+        includedResources:
+          - pods
+        labelSelector:
+          matchLabels:
+              app.kubernetes.io/instance: {{ .Release.Name }}
+              app.kubernetes.io/name: postgresql
+        pre:
+          - exec:
+              command: 
+                - "/bin/bash"
+                - "-c"
+                - "PGPASSWORD=$POSTGRES_PASSWORD /opt/bitnami/postgresql/bin/pg_dump -U sapl -d sapl > /bitnami/postgresql/sapl.dump" 
+              timeout: 360s
+              onError: Continue
+  useOwnerReferencesInBackup: false
+{{- end }}

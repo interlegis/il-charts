@@ -5,12 +5,36 @@
 replicaCount: 1
 
 image:
-  repository: interlegis/sapl
-  tag: latest
+  repository: porto.interlegis.leg.br/spdt/sapl
   pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
 
 service:
   type: ClusterIP
@@ -20,7 +44,7 @@ persistence:
   enabled: true
   #storageClass: ""
   accessMode: ReadWriteOnce
-  size: 500Mi
+  size: 2Gi
 
 sapl:
   adminPassword: altereme
@@ -37,51 +61,75 @@ sapl:
   solrNumShards: 1
   solrReplFactor: 2
   solrMaxShardsPerNode: 1
+  hostname: 'sapl.domain.net'
 
 ingress:
   enabled: true
+  class: nginx
+  # nginx - for default nginx ingress controller
+  # alb - for AWS ALB Load Balancer controller
+  tls:
+    enabled: true
+    provider: letsencrypt
+  # extra annotations only
   annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  path: /
-  hosts:
-    - chart-example.local
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+
+velero:
+  namespace: velero
+  backup:
+    enabled: true
+    # cert-manager objects are usually blocked during backup
+    excludedResources: 
+      - certificates.cert-manager.io
+      - orders.acme.cert-manager.io
+      - certificaterequests.cert-manager.io
+      - challenges.acme.cert-manager.io
 
 postgresql:
   internal: true
   image:
-    tag: 9.6.12-r66
+    repository: porto.interlegis.leg.br/bitnami/postgresql
+    tag: 9.6.23-debian-10-r61
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
     port: 5432
   persistence:
     enabled: true
-    size: 10Gi
-  postgresqlPassword: altereme
-  postgresqlUsername: sapl
-  postgresqlDatabase: sapl
+    size: 1Gi
+  auth:
+    postgresPassword: altereme
+    password: altereme
+    username: sapl
+    database: sapl
   resources:
     requests:
-      cpu: 50m
+      cpu: 40m
       memory: 64Mi
 
-kubedb:
+redis:
   enabled: false
-  postgresVersion: "9.6.7-v1"
-  terminationPolicy: WipeOut
+  architecture: standalone
+  auth:
+    password: altereme
+  master:
+    persistence:
+      enabled: false
 
 resources:
-  # limits:
-  #  cpu: 100m
-  #  memory: 128Mi
+  limits:
+    cpu: 1000m
+    memory: 1Gi
   requests:
-    cpu: 100m
-    memory: 330Mi
+    cpu: 35m
+    memory: 500Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 

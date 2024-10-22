@@ -1,31 +1,36 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "sapl.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "sapl.name" . }}
-    helm.sh/chart: {{ include "sapl.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "sapl.labels" . | nindent 4 }}
 spec:
+{{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
+{{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "sapl.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      {{- include "sapl.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
       labels:
-        app.kubernetes.io/name: {{ include "sapl.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+        {{- include "sapl.selectorLabels" . | nindent 8 }}
     spec:
-      dnsConfig:
-        options:
-        - name: ndots
-          value: "1"
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
@@ -64,9 +69,9 @@ spec:
               value: "{{ .Values.sapl.solrMaxShardsPerNode }}"
           volumeMounts:
             - mountPath: /var/interlegis/sapl/data
-              name: {{ .Release.Name }}-data
+              name: data
             - mountPath: /var/interlegis/sapl/media
-              name: {{ .Release.Name }}-media
+              name: media
           livenessProbe:
             httpGet:
               path: /
@@ -84,33 +89,60 @@ spec:
             failureThreshold: 3
             periodSeconds: 30
             successThreshold: 1
-            timeoutSeconds: 5
+            timeoutSeconds: 5      
           resources:
-{{ toYaml .Values.resources | indent 12 }}
+            {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-      - name: {{ .Release.Name }}-data
+      - name: data
+        secret:
+          defaultMode: 440
+          secretName: {{ include "sapl.fullname" . }}-secretkey
+      - name: media
       {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
-          claimName: {{ .Release.Name }}-data
+          claimName: {{ include "sapl.fullname" . }}-media
       {{- else }}
         emptyDir: {}
       {{- end }}
-      - name: {{ .Release.Name }}-media
-      {{- if .Values.persistence.enabled }}
-        persistentVolumeClaim:
-          claimName: {{ .Release.Name }}-media
-      {{- else }}
-        emptyDir: {}
-      {{- end }}
-    {{- with .Values.nodeSelector }}
+      {{- with .Values.nodeSelector }}
       nodeSelector:
-{{ toYaml . | indent 8 }}
-    {{- end }}
-    {{- with .Values.affinity }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       affinity:
-{{ toYaml . | indent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          {{- if eq .Values.persistence.accessMode "ReadWriteOnce" }}
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                    - {{ include "sapl.name" . }}
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                    - {{ .Release.Name }}
+                topologyKey: kubernetes.io/hostname
+          {{- end }}
+            - weight: 50
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                    - postgresql
+                  - key: app.kubernetes.io/instance
+                    operator: In
+                    values:
+                    - {{ .Release.Name }}
+                topologyKey: kubernetes.io/hostname
+      {{- with .Values.affinity }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
       tolerations:
-{{ toYaml . | indent 8 }}
-    {{- end }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

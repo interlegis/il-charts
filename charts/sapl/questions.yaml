@@ -1,0 +1,196 @@
+labels:
+  io.cattle.role: project
+categories:
+- Processo Legislativo
+questions:
+# Informações Básicas
+- variable: sapl.hostname
+  default: "sapl.teste.df.leg.br"
+  description: "Endereço para acesso ao SAPL"
+  label: "URL do SAPL"
+  type: string
+  group: Básico
+  required: true
+- variable: sapl.adminEmail
+  default: "contato@admin.email"
+  description: "E-mail de contato do SAPL"
+  label: Contato
+  type: string
+  group: Básico
+  required: true
+- variable: sapl.adminPassword
+  default: "altereme"
+  description: "Senha do usuário administrativo do SAPL"
+  label: Senha Admin
+  type: password
+  group: Básico
+  required: true
+
+# Ingress
+- variable: ingress.tls.enabled
+  default: true
+  type: boolean
+  description: "Habilitar criptografia do protocolo HTTP (HTTPS)?"
+  label: "Habilitar TLS?"
+  required: false
+  group: Ingress
+  show_subquestion_if: true
+  subquestions:
+    - variable: ingress.tls.provider
+      default: letsencrypt
+      type: enum
+      description: "Qual provedor de certificados utilizar?"
+      label: "Provedor de certificados"
+      required: false
+      group: Ingress
+      options:
+        - letsencrypt
+        - aws
+
+- variable: ingress.class
+  default: nginx
+  type: enum
+  description: "Qual o Ingress Controller?"
+  label: "Classe Ingress"
+  required: false
+  group: Ingress
+  options:
+    - nginx
+    - alb
+
+# Correio
+- variable: sapl.emailSendUser
+  default: "no-reply@interlegis.leg.br"
+  description: "Remetente dos e-mails enviados pelo SAPL"
+  label: "Remetente"
+  type: string
+  group: Correio
+  required: false
+- variable: sapl.useTls
+  default: "False"
+  description: "Usar TLS ao conectar no servidor SMTP?"
+  label: "Usar TLS"
+  type: enum
+  group: Correio
+  options: 
+    - "True"
+    - "False"
+  required: false
+- variable: sapl.emailPort
+  default: 25
+  description: "Porta de envio de E-mail (SMTP)"
+  type: int
+  label: "Porta SMTP"
+  required: false
+  group: Correio
+- variable: sapl.emailHost
+  default: "smtp.interlegis.leg.br"
+  description: "Servidor de envio de e-mail (SMTP)"
+  label: "Servidor SMTP"
+  type: string
+  group: Correio
+  required: false
+
+# Solr
+- variable: sapl.useSolr
+  default: "True"
+  description: "Usar Solr para indexação de documentos?"
+  label: "Usar Solr?"
+  type: enum
+  group: Solr
+  options:
+    - "True"
+    - "False"
+  required: true
+- variable: sapl.solrCollection
+  default: "sapl"
+  description: "Nome da coleção do Solr"
+  label: "Coleção"
+  type: string
+  group: Solr
+  required: false
+- variable: sapl.solrUrl
+  default: "http://solr:8983"
+  description: "URL de conexão ao Solr"
+  label: "URL Solr"
+  type: string
+  group: Solr
+  required: true
+- variable: sapl.solrNumShards
+  default: 1
+  description: "Número de Shards do Solr"
+  label: "Shards"
+  type: int
+  group: Solr
+  required: false
+- variable: sapl.solrReplFactor
+  default: 2
+  description: "Fator de replicação do Solr"
+  label: "ReplFactor"
+  type: int
+  group: Solr
+  required: false
+- variable: sapl.solrMaxShardsPerNode
+  default: 1
+  description: "Número máximo de Shards por nó Solr"
+  label: "MaxShardsPerNode"
+  type: int
+  group: Solr
+  required: false
+
+# PostgreSQL
+- variable: postgresql.internal
+  default: true
+  description: "Fazer o deploy do Postgres?"
+  label: "Postgres Interno?"
+  type: boolean
+  group: PostgreSQL
+  required: false
+- variable: postgresql.postgresqlPassword
+  default: "altereme"
+  description: "Senha do banco de dados Postgres"
+  label: "Senha do Postgres"
+  type: password
+  group: PostgreSQL
+  required: true 
+
+# Avançado
+- variable: sapl.debug
+  default: "False"
+  description: "Habilitar mensagens de Debug?"
+  label: "Debug?"
+  type: enum
+  group: Avançado
+  options:
+    - "True"
+    - "False"
+- variable: sapl.timeZone
+  default: "America/Sao_Paulo"
+  description: "Fuso Horário do SAPL"
+  type: enum
+  label: "Fuso"
+  options:
+    - "America/Sao_Paulo"
+    - "America/Fortaleza"
+    - "America/Belem"
+    - "America/Araguaina"
+    - "America/Bahia"
+    - "America/Boa_Vista"
+    - "America/Campo_Grande"
+    - "America/Cuiaba"
+    - "America/Maceio"
+    - "America/Manaus"
+    - "America/Porto_Velho"
+    - "America/Recife"
+    - "America/Rio_Branco"
+    - "America/Sao_Paulo"
+  required: true
+  group: Avançado
+
+- variable: velero.backup.enabled
+  default: true
+  type: boolean
+  label: "Habilitar backup com Velero?"
+  description: "Criar ou não os objetos para backup com o Velero."
+  required: false
+  group: Avançado

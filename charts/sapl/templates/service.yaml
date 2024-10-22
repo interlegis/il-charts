@@ -3,10 +3,7 @@ kind: Service
 metadata:
   name: {{ include "sapl.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "sapl.name" . }}
-    helm.sh/chart: {{ include "sapl.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- include "sapl.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -15,5 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app.kubernetes.io/name: {{ include "sapl.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "sapl.selectorLabels" . | nindent 4 }}
